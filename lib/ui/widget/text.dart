@@ -1,0 +1,54 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class TextBold extends StatelessWidget {
+  final String text;
+  final double textSize;
+  const TextBold({super.key, required this.text, required this.textSize});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: GoogleFonts.poppins(
+        fontSize: textSize,
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+      ),
+    );
+  }
+}
+class TextNormal extends StatelessWidget {
+  final String text;
+  final double textSize;
+  const TextNormal({super.key, required this.text, required this.textSize});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: GoogleFonts.poppins(
+        fontSize: textSize,
+        fontWeight: FontWeight.normal,
+        color: Colors.black45,
+      ),
+    );
+  }
+}class TextEEEE extends StatelessWidget {
+  final String text;
+  final double textSize;
+  const TextEEEE({super.key, required this.text, required this.textSize});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: GoogleFonts.poppins(
+        fontSize: textSize,
+        fontWeight: FontWeight.normal,
+        color: Colors.black38,
+      ),
+    );
+  }
+}
+
