@@ -212,8 +212,7 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 10, horizontal: 20),
+
                                       decoration: const BoxDecoration(
                                           color: Color(0xffeeeeee),
                                           borderRadius: BorderRadius.all(
@@ -225,23 +224,27 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                             onTap: () {
                                               productDetailCubit.decrement();
                                             },
-                                            child: SvgPicture.asset(
-                                              AppImages.icMinus,
-                                              width: 2,
-                                              height: 2,
+                                            child: Padding(
+                                              padding:  EdgeInsets.symmetric(horizontal: 13.0, vertical: 13),
+                                              child: SvgPicture.asset(
+                                                AppImages.icMinus,
+                                                width: 2,
+                                                height: 2,
+                                              ),
                                             ),
                                           ),
-                                          const SizedBox(width: 13),
                                           TextBold(text: '${state.quantity}', textSize: 16),
-                                          const SizedBox(width: 13),
                                           GestureDetector(
                                             onTap: () {
                                               productDetailCubit.increment();
                                             },
-                                            child: SvgPicture.asset(
-                                              AppImages.icPlus,
-                                              width: 10,
-                                              height: 10,
+                                            child: Padding(
+                                              padding:  EdgeInsets.symmetric(horizontal: 13.0, vertical: 13),
+                                              child: SvgPicture.asset(
+                                                AppImages.icPlus,
+                                                width: 10,
+                                                height: 10,
+                                              ),
                                             ),
                                           ),
                                         ],
