@@ -3,6 +3,7 @@ part of 'product_detail_cubit.dart';
 class ProductDetailState extends Equatable {
   final LoadStatus productDetailStatus;
   final ProductEntity? productEntity;
+  final CartEntity? cartEntity;
   final int curlIndex;
   final int quantity;
   final int price;
@@ -12,6 +13,7 @@ class ProductDetailState extends Equatable {
   List<Object?> get props => [
     productDetailStatus,
     productEntity,
+    cartEntity,
     curlIndex,
     quantity,
     price,
@@ -21,6 +23,7 @@ class ProductDetailState extends Equatable {
   const ProductDetailState({
     this.productDetailStatus = LoadStatus.initial,
     this.productEntity,
+    this.cartEntity,
     this.curlIndex = 1,
     this.quantity = 1,
     this.price = 0,
@@ -30,6 +33,7 @@ class ProductDetailState extends Equatable {
   ProductDetailState copyWith({
     LoadStatus? productDetailStatus,
     ProductEntity? productEntity,
+    CartEntity? cartEntity,
     int? curlIndex,
     int? quantity,
     int? price,
@@ -38,6 +42,7 @@ class ProductDetailState extends Equatable {
     return ProductDetailState(
       productDetailStatus: productDetailStatus ?? this.productDetailStatus,
       productEntity: productEntity ?? this.productEntity,
+      cartEntity: cartEntity ?? this.cartEntity,
       curlIndex: curlIndex ?? this.curlIndex,
       quantity: quantity ?? this.quantity,
       price: price ?? this.price,

@@ -133,7 +133,7 @@ class _ProductListScreenBodyState extends State<ProductListScreenBody> {
                               },
                               child: ItemProduct(
                                 imageProduct:
-                                    state.listProduct?[index].images?[1] ?? '',
+                                    state.listProduct?[index].images?[0] ?? '',
                                 nameProduct:
                                     state.listProduct?[index].title ?? '',
                                 priceProduct:

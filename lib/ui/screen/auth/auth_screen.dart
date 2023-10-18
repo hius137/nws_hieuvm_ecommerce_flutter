@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/database/firebase_firestore_service.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/auth/auth_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/button.dart';
 
@@ -26,7 +25,6 @@ class LoginOrSignUpScreenBody extends StatefulWidget {
 }
 
 class _LoginOrSignUpScreenBodyState extends State<LoginOrSignUpScreenBody> {
-  late FireStoreService fireStoreService = FireStoreService();
   late AuthCubit authCubit;
 
   @override
@@ -84,7 +82,6 @@ class _LoginOrSignUpScreenBodyState extends State<LoginOrSignUpScreenBody> {
                     InkWell(
                       onTap: () {
                         authCubit.navSignUp(context);
-                        fireStoreService.addUser();
                       },
                       child: const BorderButton(textButton: 'Sign up'),
                     ),

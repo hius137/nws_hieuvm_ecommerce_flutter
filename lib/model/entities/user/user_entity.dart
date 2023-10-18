@@ -24,7 +24,7 @@ class UserEntity {
   String? name;
   String? avatar;
   String? role;
-  String? id;
+  int? id;
   String? creationAt;
   String? updatedAt;
 UserEntity copyWith({  String? email,
@@ -32,7 +32,7 @@ UserEntity copyWith({  String? email,
   String? name,
   String? avatar,
   String? role,
-  String? id,
+  int? id,
   String? creationAt,
   String? updatedAt,
 }) => UserEntity(  email: email ?? this.email,

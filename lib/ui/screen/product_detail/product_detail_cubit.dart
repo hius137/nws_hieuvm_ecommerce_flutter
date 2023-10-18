@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/model/entities/cart_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/product_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/network/api_service.dart';
@@ -30,6 +31,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
     }
   }
 
+
   void increment(){
     emit(state.copyWith(
       quantity: state.quantity + 1,
@@ -51,7 +53,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
     }
   }
 
-  void getQuanAndTotalPrice(int price){
+  void getQuantityAndTotalPrice(int price){
     emit(state.copyWith(
       price: price,
       totalPrice: price

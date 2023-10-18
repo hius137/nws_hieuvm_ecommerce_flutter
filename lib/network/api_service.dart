@@ -53,13 +53,16 @@ Future<UserEntity?> signUpRequest(
 Future<List<CategoriesEntity>?> requestCategories() async {
   try {
     final dio = Dio();
-    final response = await dio.get('https://api.escuelajs.co/api/v1/categories/?offset=0&limit=20');
+    final response = await dio
+        .get('https://api.escuelajs.co/api/v1/categories/?offset=0&limit=20');
     if (response.statusCode == 200) {
       final List<dynamic> responseData = response.data;
-      List<CategoriesEntity> listCategories = responseData.map((json) => CategoriesEntity.fromJson(json)).toList();
-      final totalProduct = listCategories.map((e) => requestTotalProduct(e.id!));
+      List<CategoriesEntity> listCategories =
+          responseData.map((json) => CategoriesEntity.fromJson(json)).toList();
+      final totalProduct =
+          listCategories.map((e) => requestTotalProduct(e.id!));
       final waitGetTotal = await Future.wait(totalProduct);
-      for(int i =0 ; i<listCategories.length;i++){
+      for (int i = 0; i < listCategories.length; i++) {
         listCategories[i].totalProducts = waitGetTotal[i];
       }
       return listCategories;
@@ -75,10 +78,12 @@ Future<List<CategoriesEntity>?> requestCategories() async {
 Future<int?> requestTotalProduct(int idCategory) async {
   try {
     final dio = Dio();
-    final response = await dio.get('https://api.escuelajs.co/api/v1/categories/$idCategory/products?offset=0&limit=50');
+    final response = await dio.get(
+        'https://api.escuelajs.co/api/v1/categories/$idCategory/products?offset=0&limit=50');
     if (response.statusCode == 200) {
       final List<dynamic> responseData = response.data;
-      List<ProductEntity> listProduct = responseData.map((json) => ProductEntity.fromJson(json)).toList();
+      List<ProductEntity> listProduct =
+          responseData.map((json) => ProductEntity.fromJson(json)).toList();
       return listProduct.length;
     } else {
       return null;
@@ -92,10 +97,12 @@ Future<int?> requestTotalProduct(int idCategory) async {
 Future<List<ProductEntity>?> requestListProduct(int idCategory) async {
   try {
     final dio = Dio();
-    final response = await dio.get('https://api.escuelajs.co/api/v1/categories/$idCategory/products?offset=0&limit=50');
+    final response = await dio.get(
+        'https://api.escuelajs.co/api/v1/categories/$idCategory/products?offset=0&limit=50');
     if (response.statusCode == 200) {
       final List<dynamic> responseData = response.data;
-      List<ProductEntity> listProduct = responseData.map((json) => ProductEntity.fromJson(json)).toList();
+      List<ProductEntity> listProduct =
+          responseData.map((json) => ProductEntity.fromJson(json)).toList();
       return listProduct;
     } else {
       return null;
@@ -104,11 +111,13 @@ Future<List<ProductEntity>?> requestListProduct(int idCategory) async {
     print('err $e');
     return null;
   }
+}
 
-}Future<ProductEntity?> requestProduct(int idProduct) async {
+Future<ProductEntity?> requestProduct(int idProduct) async {
   try {
     final dio = Dio();
-    final response = await dio.get('https://api.escuelajs.co/api/v1/products/$idProduct');
+    final response =
+        await dio.get('https://api.escuelajs.co/api/v1/products/$idProduct');
     if (response.statusCode == 200) {
       ProductEntity product = ProductEntity.fromJson(response.data);
       return product;
@@ -118,5 +127,26 @@ Future<List<ProductEntity>?> requestListProduct(int idCategory) async {
   } catch (e) {
     print('err $e');
     return null;
+  }
+}
+
+Future<UserEntity> getProfileUser(String authToken) async {
+  final dio = Dio();
+  const baseUrl = 'https://api.escuelajs.co/api/v1/auth';
+
+  try {
+    final options = Options(headers: {
+      'Authorization': 'Bearer $authToken',
+    });
+    final response = await dio.get('$baseUrl/profile', options: options);
+
+    if (response.statusCode == 200) {
+      return UserEntity.fromJson(response.data);
+    } else {
+      throw Exception('Failed to load profile data');
+    }
+  } catch (e) {
+    print('Error: $e');
+    rethrow;
   }
 }

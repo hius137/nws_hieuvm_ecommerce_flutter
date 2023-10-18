@@ -45,13 +45,12 @@ class _MyAppState extends State<MyApp> {
       child: MultiBlocProvider(
         providers: [
           BlocProvider<AppCubit>(create: (context) {
-            // final firebaseStoreHelper = RepositoryProvider.of<FireStoreService>(context);
             return AppCubit();
           }),
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: MainScreen(),
+          home: SplashScreen(),
         ),
       ),
     );

@@ -3,7 +3,15 @@ import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
 
 class ItemCart extends StatelessWidget {
-  const ItemCart({super.key});
+  final String nameProduct;
+  final String imageProduct;
+  final int totalProduct;
+
+  const ItemCart(
+      {super.key,
+      required this.nameProduct,
+      required this.totalProduct,
+      required this.imageProduct});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +43,7 @@ class ItemCart extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
                 child: Image(
                   width: 80,
-                  image: const AssetImage(AppImages.imgOnboarding1),
+                  image:  NetworkImage(imageProduct),
                   fit: BoxFit.cover,
                   errorBuilder: (BuildContext context, Object exception,
                       StackTrace? stackTrace) {
@@ -47,14 +55,14 @@ class ItemCart extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 10),
-              const Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  TextBold(text: 'Name Product', textSize: 14),
-                  TextNormal(text: 'Name Product', textSize: 11),
+                  TextBold(text: nameProduct, textSize: 14),
+                  TextNormal(text: nameProduct, textSize: 11),
                   Spacer(),
-                  TextBold(text: '\$Price', textSize: 14),
+                  TextBold(text: '$totalProduct', textSize: 14),
                 ],
               )
             ],
@@ -65,7 +73,7 @@ class ItemCart extends StatelessWidget {
           right: 10,
           child: Container(
             width: 80,
-            padding: EdgeInsets.symmetric(vertical: 5,horizontal: 5),
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(30)),
               color: Color(0xffeeeeee),

@@ -12,9 +12,8 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) {
-          return SplashCubit(
-            appCubit: RepositoryProvider.of<AppCubit>(context),
-          );
+          final appCubit = context.read<AppCubit>();
+          return SplashCubit(appCubit: appCubit);
         },
         child: const SplashScreenBody());
   }
@@ -33,7 +32,7 @@ class _SplashScreenBodyState extends State<SplashScreenBody> {
   @override
   void initState() {
     super.initState();
-    splashCubit = BlocProvider.of(context);
+    splashCubit = BlocProvider.of<SplashCubit>(context);
     splashCubit.checkLogin(context);
   }
 
@@ -43,14 +42,8 @@ class _SplashScreenBodyState extends State<SplashScreenBody> {
       body: BlocBuilder<SplashCubit, SplashState>(builder: (context, state) {
         return Image(
           image: const AssetImage(AppImages.imgSplash),
-          width: MediaQuery
-              .of(context)
-              .size
-              .width,
-          height: MediaQuery
-              .of(context)
-              .size
-              .height,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
           fit: BoxFit.cover,
         );
       }),

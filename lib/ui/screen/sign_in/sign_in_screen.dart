@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/database/firebase_firestore_service.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_in/sign_in_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/button.dart';
@@ -16,6 +16,7 @@ class SignInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<SignInCubit>(
       create: (context) => SignInCubit(
+        appCubit: RepositoryProvider.of<AppCubit>(context),
       ),
       child: const SignInScreenBody(),
     );

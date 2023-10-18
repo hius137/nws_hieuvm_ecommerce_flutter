@@ -1,33 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/services.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/model/entities/user/user_entity.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/model/entities/cart_entity.dart';
+
+// .set là ghi đè một field còn .add là thêm một document mới cho collection
 
 class FireStoreService{
-  // final CollectionReference _usersCollectionReference =
-  // FirebaseFirestore.instance.collection('users');
+  final CollectionReference cartCollectionReference = FirebaseFirestore.instance.collection('cart');
 
-  final db = FirebaseFirestore.instance;
-
-  void addUser(){
-    final user = <String, dynamic>{
-      "email": "hieu@gmail.com",
-      "password": "123456",
-      "name": 'hieu'
-    };
-    // Add a new document with a generated ID
-    db.collection("users").add(user).then((DocumentReference doc) =>
-        print('DocumentSnapshot added with ID: ${doc.id}'));
+  Future<void> addToCart(CartEntity cartEntity)async {
+    try{
+      await cartCollectionReference.add(cartEntity.toJson());
+    }catch(e){
+      debugPrint('err =>>> $e');
+    }
   }
 
-  // Future createUser(UserEntity user) async {
-  //   try {
-  //     await _usersCollectionReference.doc(user.id).set(user.toJson());
-  //   } catch (e) {
-  //     if (e is PlatformException) {
-  //       return e.message;
-  //     }
-  //
-  //     return e.toString();
-  //   }
-  // }
+  Future<List<CartEntity>> getCart(int id) async {
+    final db = FirebaseFirestore.instance;
+    List<CartEntity> cartList = [];
+    await Future.delayed(const Duration(seconds: 2));
+    await db.collection('cart').where('idUser', isEqualTo: id).get().then((value) {
+      value.docs.map((e) {
+        final cart = CartEntity.fromJson(e.data());
+        cartList.add(cart);
+      }).toList();
+    },);
+    return cartList;
+  }
 }

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/user/user_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,7 +8,6 @@ class SharedPreferencesHelper {
   static const _userEntity = '_userEntity';  // luu thong tin nguoi dung
 
   static const _didOnboardKey = '_didOnboardKey'; // check xem no da xem onboard chua / true: da xem , false: chua
-
 
   //Get onboard
   static Future<bool> getOnboard() async {
@@ -26,7 +24,6 @@ class SharedPreferencesHelper {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_didOnboardKey, onBoard ?? true);
   }
-
 
   //Get accessToken
   static Future<String?> getAccessToken() async {
@@ -46,14 +43,16 @@ class SharedPreferencesHelper {
     await prefs.remove(_accessToken);
   }
 
-  //Set _accessToken
   static void setUserEntity(UserEntity userEntity) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String tmp =  json.encode(userEntity.toJson());
-    await prefs.setString(_userEntity, tmp);
+    try{
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String tmp =  json.encode(userEntity.toJson());
+      await prefs.setString(_userEntity, tmp);
+    }catch(e){
+      print("setUser Error $e");
+    }
   }
 
-  //delete access token
   static Future<UserEntity> getUserEntity() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
    var tmp =   prefs.getString(_userEntity);

@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/database/firebase_firestore_service.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/model/entities/cart_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/product_detail/product_detail_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/button.dart';
@@ -13,7 +16,8 @@ class ProductDetailScreen extends StatelessWidget {
   final int idProduct;
   final int price;
 
-  const ProductDetailScreen({super.key, required this.idProduct, required this.price});
+  const ProductDetailScreen(
+      {super.key, required this.idProduct, required this.price});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +32,8 @@ class ProductDetailScreenBody extends StatefulWidget {
   final int idProduct;
   final int price;
 
-  const ProductDetailScreenBody({super.key, required this.idProduct, required this.price});
+  const ProductDetailScreenBody(
+      {super.key, required this.idProduct, required this.price});
 
   @override
   State<ProductDetailScreenBody> createState() =>
@@ -37,18 +42,24 @@ class ProductDetailScreenBody extends StatefulWidget {
 
 class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
   late ProductDetailCubit productDetailCubit;
+  late FireStoreService fireStoreService = FireStoreService();
+  late CartEntity cartEntity;
+  late AppCubit _appCubit;
 
   @override
   void initState() {
     super.initState();
+    _appCubit = context.read<AppCubit>();
     productDetailCubit = BlocProvider.of(context);
     productDetailCubit.getProduct(widget.idProduct);
-    productDetailCubit.getQuanAndTotalPrice(widget.price);
+    productDetailCubit.getQuantityAndTotalPrice(widget.price);
   }
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery
+        .of(context)
+        .size;
     return Scaffold(
       body: BlocBuilder<ProductDetailCubit, ProductDetailState>(
         builder: (context, state) {
@@ -82,7 +93,10 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 20),
-                    width: MediaQuery.of(context).size.width,
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width,
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
@@ -113,7 +127,7 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
                       3,
-                      (index) => buildDot(index, state.curlIndex, context),
+                          (index) => buildDot(index, state.curlIndex, context),
                     ),
                   ),
                 ),
@@ -174,7 +188,7 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                   width: 250,
                                   child: Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                                    MainAxisAlignment.spaceEvenly,
                                     children: [
                                       SizeButton(textButton: 'S'),
                                       SizeButton(textButton: 'M'),
@@ -190,14 +204,14 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                 const SizedBox(height: 10),
                                 TextNormal(
                                     text:
-                                        state.productEntity?.description ?? '',
+                                    state.productEntity?.description ?? '',
                                     textSize: 11),
                                 const Spacer(),
                                 const TextNormal(
                                     text: 'Total Price', textSize: 9),
                                 TextBold(
                                     text:
-                                        '\$${state.totalPrice}.00',
+                                    '\$${state.totalPrice}.00',
                                     textSize: 18),
                               ],
                             ),
@@ -209,46 +223,54 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
+                                  MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Container(
 
-                                      decoration: const BoxDecoration(
-                                          color: Color(0xffeeeeee),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(30))),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () {
-                                              productDetailCubit.decrement();
-                                            },
-                                            child: Padding(
-                                              padding:  EdgeInsets.symmetric(horizontal: 13.0, vertical: 13),
-                                              child: SvgPicture.asset(
-                                                AppImages.icMinus,
-                                                width: 2,
-                                                height: 2,
+                                        decoration: const BoxDecoration(
+                                            color: Color(0xffeeeeee),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(30))),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment
+                                              .spaceEvenly,
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                productDetailCubit.decrement();
+                                              },
+                                              child: Padding(
+                                                padding: const EdgeInsets
+                                                    .symmetric(
+                                                    horizontal: 13.0,
+                                                    vertical: 13),
+                                                child: SvgPicture.asset(
+                                                  AppImages.icMinus,
+                                                  width: 2,
+                                                  height: 2,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          TextBold(text: '${state.quantity}', textSize: 16),
-                                          GestureDetector(
-                                            onTap: () {
-                                              productDetailCubit.increment();
-                                            },
-                                            child: Padding(
-                                              padding:  EdgeInsets.symmetric(horizontal: 13.0, vertical: 13),
-                                              child: SvgPicture.asset(
-                                                AppImages.icPlus,
-                                                width: 10,
-                                                height: 10,
+                                            TextBold(text: '${state.quantity}',
+                                                textSize: 16),
+                                            GestureDetector(
+                                              onTap: () {
+                                                productDetailCubit.increment();
+                                              },
+                                              child: Padding(
+                                                padding: const EdgeInsets
+                                                    .symmetric(
+                                                    horizontal: 13.0,
+                                                    vertical: 13),
+                                                child: SvgPicture.asset(
+                                                  AppImages.icPlus,
+                                                  width: 10,
+                                                  height: 10,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      )
+                                          ],
+                                        )
                                     ),
                                     const TextBold(
                                         text: 'Avalible in stok', textSize: 14),
@@ -262,7 +284,7 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                           boxShadow: [
                                             BoxShadow(
                                               color:
-                                                  Colors.grey.withOpacity(0.1),
+                                              Colors.grey.withOpacity(0.1),
                                               spreadRadius: 5,
                                               blurRadius: 7,
                                               offset: const Offset(0, 4),
@@ -270,7 +292,7 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                           ]),
                                       child: const Column(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                         children: [
                                           SelectColorButton(
                                               colorButton: 0xffffffff),
@@ -305,12 +327,25 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                   children: [
                                     SvgPicture.asset(AppImages.icBagBlack),
                                     const SizedBox(width: 10),
-                                    Text(
-                                      'Add to cart',
-                                      style: GoogleFonts.poppins(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          color: const Color(0xffffffff)),
+                                    InkWell(
+                                      onTap: () {
+                                        cartEntity = CartEntity(
+                                          idUser: _appCubit.state.userEntity?.id,
+                                          nameProduct: state.productEntity
+                                              ?.title ?? '',
+                                          totalPrice: state.price,
+                                          quantity: state.quantity,
+                                          imageProduct: state.productEntity!
+                                              .images![0],);
+                                        fireStoreService.addToCart(cartEntity);
+                                      },
+                                      child: Text(
+                                        'Add to cart',
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: const Color(0xffffffff)),
+                                      ),
                                     ),
                                   ],
                                 ),
