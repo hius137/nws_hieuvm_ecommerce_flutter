@@ -30,6 +30,7 @@ class CartScreenBody extends StatefulWidget {
 class _CartScreenBodyState extends State<CartScreenBody> {
   late CartCubit cartCubit;
   late AppCubit appCubit;
+
   @override
   void initState() {
     super.initState();
@@ -51,7 +52,7 @@ class _CartScreenBodyState extends State<CartScreenBody> {
             return Column(
               children: [
                 SizedBox(
-                  height: size.height * 0.6,
+                  height: size.height * 0.7,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -71,24 +72,34 @@ class _CartScreenBodyState extends State<CartScreenBody> {
                       ),
                       const SizedBox(height: 24),
                       Container(
-                        alignment: Alignment.topLeft,
+                          alignment: Alignment.topLeft,
                           child: const TextBold(text: 'My Cart', textSize: 18)),
                       const SizedBox(height: 10),
                       state.listCart != null && state.listCart!.isNotEmpty
                           ? Expanded(
-                              child: ListView.builder(
-                                itemCount: state.listCart?.length,
+                              child: ListView.separated(
+                                itemCount: state.listCart!.length,
+                                addAutomaticKeepAlives: true,
                                 itemBuilder: (context, index) {
-                                  return ItemCart(
-                                    nameProduct:
-                                        state.listCart?[index].nameProduct ??
-                                            '',
-                                    imageProduct:
-                                        state.listCart?[index].imageProduct ??
-                                            '',
-                                    totalProduct:
-                                        state.listCart?[index].totalPrice ?? 0,
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10.0, vertical: 10),
+                                    child: ItemCart(
+                                      nameProduct:
+                                          state.listCart?[index].nameProduct ??
+                                              '',
+                                      imageProduct:
+                                          state.listCart?[index].imageProduct ??
+                                              '',
+                                      totalProduct:
+                                          state.listCart?[index].totalPrice ??
+                                              0,
+                                    ),
                                   );
+                                },
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return const SizedBox();
                                 },
                               ),
                             )
@@ -100,7 +111,8 @@ class _CartScreenBodyState extends State<CartScreenBody> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextBold(text: 'Total ${state.listCart?.length}', textSize: 11),
+                    TextBold(
+                        text: 'Total ${state.listCart?.length}', textSize: 11),
                     TextBold(text: '\$500', textSize: 18),
                   ],
                 ),

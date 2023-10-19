@@ -4,6 +4,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/cart/cart_screen.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/home/home_screen.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/main/main_cubit.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/notification/notification_screen.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/profile/profile_screen.dart';
 
 class MainScreen extends StatelessWidget {
@@ -47,7 +48,7 @@ class _MainScreenBodyState extends State<MainScreenBody> {
             children: const [
               HomeScreen(),
               CartScreen(),
-              HomeScreen(),
+              NotificationScreen(),
               ProfileScreen(),
             ],
           );

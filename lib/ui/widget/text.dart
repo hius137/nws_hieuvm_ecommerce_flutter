@@ -34,7 +34,9 @@ class TextNormal extends StatelessWidget {
       ),
     );
   }
-}class TextEEEE extends StatelessWidget {
+}
+
+class TextEEEE extends StatelessWidget {
   final String text;
   final double textSize;
   const TextEEEE({super.key, required this.text, required this.textSize});
@@ -46,6 +48,23 @@ class TextNormal extends StatelessWidget {
       style: GoogleFonts.poppins(
         fontSize: textSize,
         fontWeight: FontWeight.normal,
+        color: Colors.black38,
+      ),
+    );
+  }
+}
+class TextBoldEEEE extends StatelessWidget {
+  final String text;
+  final double textSize;
+  const TextBoldEEEE({super.key, required this.text, required this.textSize});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: GoogleFonts.poppins(
+        fontSize: textSize,
+        fontWeight: FontWeight.bold,
         color: Colors.black38,
       ),
     );

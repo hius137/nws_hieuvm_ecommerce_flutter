@@ -28,6 +28,9 @@ class AppImages {
   static const icBagBlack= 'assets/icons/ic_bag_black.svg';
   static const icStar= 'assets/icons/ic_star.svg';
   static const icCheckOut= 'assets/icons/ic_check_out.svg';
+  static const icLogOut= 'assets/icons/ic_logout.svg';
+  static const icPen= 'assets/icons/ic_pen.svg';
+  static const icRight= 'assets/icons/ic_right.svg';
   static const icCheck= 'assets/icons/ic_check.png';
   static const icApple= 'assets/icons/ic_apple.png';
   static const icGoogle= 'assets/icons/ic_google.png';

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/database/firebase_firestore_service.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/firebase_options.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/main/main_screen.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/profile/profile_screen.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/splash/splash_screen.dart';
 
 
@@ -50,24 +50,10 @@ class _MyAppState extends State<MyApp> {
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: SplashScreen(),
+          home: ProfileScreen(),
         ),
       ),
     );
   }
 }
 
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocProvider(
-//       create: (context) => AppCubit(),
-//       child: const MaterialApp(
-//         debugShowCheckedModeBanner: false,
-//         home: SplashScreen(),
-//       ),
-//     );
-//   }
-// }
