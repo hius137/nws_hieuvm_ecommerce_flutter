@@ -24,7 +24,6 @@ class _CustomSwitchState extends State<CustomSwitch> {
       toggleColor: Colors.black,
       value: status,
       borderRadius: 30.0,
-      activeIcon: Icon(Icons.ac_unit_sharp),
       padding: 8.0,
       showOnOff: true,
       onToggle: (val) {
