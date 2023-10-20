@@ -6,12 +6,11 @@ class NormalTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      autovalidateMode: AutovalidateMode.onUserInteraction,
+
       initialValue: 'hieu',
       decoration: const InputDecoration(
-        contentPadding: EdgeInsets.symmetric(vertical: 10),
-        border: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.black12, width: 1)),
+        isDense: true,
+        contentPadding:  EdgeInsets.symmetric(vertical: 10),
       ),
       keyboardType: TextInputType.text,
     );

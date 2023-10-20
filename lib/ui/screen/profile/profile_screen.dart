@@ -88,9 +88,8 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const TextBoldEEEE(text: 'Name', textSize: 16),
-                Container(
-                  padding: const EdgeInsets.all(5),
-                  height: 30,
+                SizedBox(
+                  // height: 30,
                   width: MediaQuery.of(context).size.width * 0.6,
                   child: const NormalTextField(),
                 ),
@@ -114,7 +113,6 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> {
               children: [
                 const TextBoldEEEE(text: 'Age', textSize: 16),
                 Container(
-                  padding: const EdgeInsets.all(5),
                   height: 30,
                   width: MediaQuery.of(context).size.width * 0.6,
                   child: const NormalTextField(),
@@ -126,7 +124,6 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> {
               children: [
                 const TextBoldEEEE(text: 'Email', textSize: 16),
                 Container(
-                  padding: const EdgeInsets.all(5),
                   height: 30,
                   width: MediaQuery.of(context).size.width * 0.6,
                   child: const NormalTextField(),
