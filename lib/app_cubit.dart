@@ -6,13 +6,14 @@ class AppCubit extends Cubit<AppState> {
   AppCubit() : super(const AppState());
 
   void setProfileUser(UserEntity userEntity) {
-    try{
-      emit(state.copyWith(
-        userEntity: userEntity,
-      ));
-    }catch(e){
+    try {
+      emit(
+        state.copyWith(
+          userEntity: userEntity,
+        ),
+      );
+    } catch (e) {
       print('err setProfile =>> $e');
     }
   }
-
 }

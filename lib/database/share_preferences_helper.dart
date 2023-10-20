@@ -43,21 +43,21 @@ class SharedPreferencesHelper {
     await prefs.remove(_accessToken);
   }
 
-  static void setUserEntity(UserEntity userEntity) async {
-    try{
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String tmp =  json.encode(userEntity.toJson());
-      await prefs.setString(_userEntity, tmp);
-    }catch(e){
-      print("setUser Error $e");
-    }
-  }
-
-  static Future<UserEntity> getUserEntity() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-   var tmp =   prefs.getString(_userEntity);
-   var user = json.decode(tmp ?? '');
-   return UserEntity.fromJson(user);
-  }
+  // static void setUserEntity(UserEntity userEntity) async {
+  //   try{
+  //     SharedPreferences prefs = await SharedPreferences.getInstance();
+  //     String tmp =  json.encode(userEntity.toJson());
+  //     await prefs.setString(_userEntity, tmp);
+  //   }catch(e){
+  //     print("setUser Error $e");
+  //   }
+  // }
+  //
+  // static Future<UserEntity> getUserEntity() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //  var tmp =   prefs.getString(_userEntity);
+  //  var user = json.decode(tmp ?? '');
+  //  return UserEntity.fromJson(user);
+  // }
 
 }

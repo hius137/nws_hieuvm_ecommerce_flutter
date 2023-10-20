@@ -1,11 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/profile/profile_cubit.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/item/item_gender.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/switch.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/textfield/normal_textfield.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -27,6 +31,14 @@ class ProfileScreenBody extends StatefulWidget {
 }
 
 class _ProfileScreenBodyState extends State<ProfileScreenBody> {
+  late AppCubit appCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    appCubit = context.read<AppCubit>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,94 +48,89 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SizedBox(
-              width: 90,
-              height: 90,
-              child: SizedBox(
-                width: 80,
-                height: 80,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    AppImages.imgOnboarding1,
-                    fit: BoxFit.cover,
+            Stack(
+              children: [
+                const SizedBox(
+                  width: 90,
+                  height: 90,
+                ),
+                SizedBox(
+                  width: 80,
+                  height: 80,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset(
+                      AppImages.imgOnboarding1,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-              ),
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: Container(
+                      padding: const EdgeInsets.all(10),
+                      width: 28,
+                      height: 28,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: SvgPicture.asset(
+                        AppImages.icPen,
+                        width: 5,
+                        height: 5,
+                      )),
+                )
+              ],
             ),
             const TextBold(text: 'Upload image', textSize: 16),
-            const Row(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TextBoldEEEE(text: 'Name', textSize: 16),
+                const TextBoldEEEE(text: 'Name', textSize: 16),
+                Container(
+                  padding: const EdgeInsets.all(5),
+                  height: 30,
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  child: const NormalTextField(),
+                ),
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  right: MediaQuery.of(context).size.width * 0.16),
+              child: const Row(
+                children: [
+                  TextBoldEEEE(text: 'Gender', textSize: 16),
+                  Spacer(),
+                  CustomGender(text: 'Male'),
+                  SizedBox(width: 10),
+                  CustomGender(text: 'Female'),
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const TextBoldEEEE(text: 'Age', textSize: 16),
+                Container(
+                  padding: const EdgeInsets.all(5),
+                  height: 30,
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  child: const NormalTextField(),
+                ),
               ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const TextBoldEEEE(text: 'Gender', textSize: 16),
+                const TextBoldEEEE(text: 'Email', textSize: 16),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 12,
-                        width: 12,
-                        padding: const EdgeInsets.all(2),
-                        margin: const EdgeInsets.only(right: 2),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(width: 1, color: Colors.white),
-                            color: Colors.black),
-                        child: Container(
-                          height: 6,
-                          width: 6,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      const TextEEEE(text: 'Male', textSize: 16),
-                    ],
-                  ),
+                  padding: const EdgeInsets.all(5),
+                  height: 30,
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  child: const NormalTextField(),
                 ),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 12,
-                        width: 12,
-                        padding: const EdgeInsets.all(2),
-                        margin: const EdgeInsets.only(right: 2),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(width: 1, color: Colors.white),
-                            color: Colors.black),
-                        child: Container(
-                          height: 6,
-                          width: 6,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      const TextEEEE(text: 'Female', textSize: 16),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const Row(
-              children: [
-                TextBoldEEEE(text: 'Age', textSize: 16),
-              ],
-            ),
-            const Row(
-              children: [
-                TextBoldEEEE(text: 'Email', textSize: 16),
               ],
             ),
             const Row(
@@ -133,7 +140,7 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> {
               ],
             ),
             Container(
-              height: MediaQuery.of(context).size.height * 1/3,
+              height: MediaQuery.of(context).size.height * 1 / 3,
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
@@ -209,7 +216,7 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> {
                       const TextBold(text: 'Dark Mood', textSize: 16),
                       const Spacer(),
                       const TextEEEE(text: 'off', textSize: 12),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       const CustomSwitch(),
                     ],
                   ),
@@ -243,28 +250,32 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> {
             ),
             Container(
               alignment: Alignment.bottomCenter,
-              padding: const EdgeInsets.symmetric(vertical:  10),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               width: double.infinity,
               height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.black,
               ),
-              child:
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.center, children: [
-                SvgPicture.asset(
-                  AppImages.icLogOut,
-                  height: 30,
-                  width: 30,
-                ),
-                const SizedBox(width: 10),
-                Text("Log Out",
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    AppImages.icLogOut,
+                    height: 30,
+                    width: 30,
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    'Log out',
                     style: GoogleFonts.poppins(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold)),
-              ]),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
             )
           ],
         ),

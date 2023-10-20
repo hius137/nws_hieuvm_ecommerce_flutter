@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_switch/flutter_switch.dart';
+
 
 class CustomSwitch extends StatefulWidget {
   const CustomSwitch({super.key});
@@ -9,28 +9,44 @@ class CustomSwitch extends StatefulWidget {
 }
 
 class _CustomSwitchState extends State<CustomSwitch> {
-  bool status = false;
+  bool isSwitch = false;
 
   @override
   Widget build(BuildContext context) {
-    return FlutterSwitch(
-      width: 45,
-      height: 25,
-      valueFontSize: 25.0,
-      toggleSize: 45.0,
-      activeColor: Colors.black,
-      activeToggleColor: Colors.white,
-      inactiveColor: Colors.black12,
-      toggleColor: Colors.black,
-      value: status,
-      borderRadius: 30.0,
-      padding: 8.0,
-      showOnOff: true,
-      onToggle: (val) {
-        setState(() {
-          status = val;
-        });
+    return GestureDetector(
+      onTap: () {
+        setState(() => isSwitch = !isSwitch);
+        // widget.onToggled(isSwitch);
       },
+      onPanEnd: (b) {
+        setState(() => isSwitch = !isSwitch);
+        // widget.onToggled(isSwitch);
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        curve:  Curves.decelerate,
+        width: 50,
+        decoration: BoxDecoration(
+          borderRadius:  BorderRadius.circular(50),
+          color: isSwitch ? const Color(0xff000000) : const Color(0xffeeeeee)
+        ),
+        child: AnimatedAlign(
+          duration: const Duration(milliseconds: 300),
+          alignment: isSwitch ? Alignment.centerRight : Alignment.centerLeft,
+          curve: Curves.decelerate,
+          child: Padding(
+            padding: const EdgeInsets.all(5),
+            child: Container(
+              width: 20,
+              height: 20,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

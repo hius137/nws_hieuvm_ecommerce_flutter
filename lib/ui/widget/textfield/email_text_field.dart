@@ -60,18 +60,5 @@ class _EmailTextFieldState extends State<EmailTextField> {
     );
   }
 }
-class NormalTextField extends StatelessWidget {
-  const NormalTextField({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      decoration: const InputDecoration(
-        border: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.black12, width: 1)),
-      ),
-      keyboardType: TextInputType.text,
-    );
-  }
-}
 
