@@ -72,11 +72,11 @@ class _SignInScreenBodyState extends State<SignInScreenBody> {
                     child: const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextBold(text: 'Welcome!', textSize: 20),
+                        TextBold(text: 'Welcome!', textSize: 18),
                         SizedBox(height: 10),
                         TextNormal(
                             text: 'please login or sign up to continue our app',
-                            textSize: 18),
+                            textSize: 16),
                       ],
                     ),
                   ),

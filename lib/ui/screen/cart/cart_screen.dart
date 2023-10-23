@@ -115,7 +115,7 @@ class _CartScreenBodyState extends State<CartScreenBody> {
                   children: [
                     TextBold(
                         text: 'Total ${state.listCart?.length}', textSize: 11),
-                    const TextBold(text: '\$500', textSize: 18),
+                    const TextBold(text: 'tổng tiền tất cả', textSize: 18),
                   ],
                 ),
                 const SizedBox(

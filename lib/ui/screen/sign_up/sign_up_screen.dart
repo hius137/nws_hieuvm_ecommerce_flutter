@@ -63,9 +63,9 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
               child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextBold(text: 'Sign Up', textSize: 20),
+                  TextBold(text: 'Sign Up', textSize: 18),
                   SizedBox(height: 10),
-                  TextNormal(text: 'Create an new account', textSize: 18)
+                  TextNormal(text: 'Create an new account', textSize: 16)
                 ],
               ),
             ),

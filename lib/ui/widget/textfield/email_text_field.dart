@@ -21,13 +21,21 @@ class _EmailTextFieldState extends State<EmailTextField> {
   bool isEmailValid = false;
 
   @override
+  void initState() {
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
       child: Builder(builder: (context) {
         return TextFormField(
-          // key: formKey,
+          onChanged: (value) {
+            setState(() {
+              isEmailValid = Utils.isEmail(value);
+            });
+          },
           controller: widget.textEditingController,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
+          autovalidateMode: AutovalidateMode.always,
           decoration: InputDecoration(
             labelText: widget.labelText,
             labelStyle: GoogleFonts.poppins(
@@ -37,20 +45,17 @@ class _EmailTextFieldState extends State<EmailTextField> {
             ),
             suffixIcon: isEmailValid
                 ? Image.asset(AppImages.icCheck, height: 4, width: 4)
-                : const Icon(null),
+                : const Icon(Icons.cancel),
             border: const UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.black12, width: 1)),
           ),
           keyboardType: TextInputType.emailAddress,
           validator: (value) {
-            if (value == null || value.isEmpty) {
-              isEmailValid = false;
+            if (value == null || value.isEmpty){
               return 'Please enter email';
             } else if (!Utils.isEmail(value)) {
-              isEmailValid = false;
               return "Email invalid";
             } else {
-              isEmailValid = true;
               return null;
             }
           },
