@@ -16,7 +16,7 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
         color: Color(colorButton),
         borderRadius: BorderRadius.circular(25),
@@ -43,7 +43,7 @@ class BorderButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.white,
@@ -57,7 +57,7 @@ class BorderButton extends StatelessWidget {
           style: GoogleFonts.poppins(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Color(0xffffffff),
+            color: const Color(0xffffffff),
           ),
         ),
       ),
@@ -85,7 +85,7 @@ class IconBorderButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
         border: Border.all(
           color: Color(colorBorderButton),

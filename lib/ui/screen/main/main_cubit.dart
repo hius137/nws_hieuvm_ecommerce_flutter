@@ -11,7 +11,7 @@ class MainCubit extends Cubit<MainState> {
   void switchTap(int index) {
     pageController.animateToPage(
       index,
-      duration: Duration(milliseconds: 100),
+      duration: const Duration(milliseconds: 100),
       curve: Curves.linear,
     );
     emit(state.copyWith(curlIndex: index));

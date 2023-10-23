@@ -16,4 +16,14 @@ class AppCubit extends Cubit<AppState> {
       print('err setProfile =>> $e');
     }
   }
+
+  void signOut() async {
+    try{
+      await Future.delayed(const Duration(seconds: 1));
+      emit(state.removeUser());
+    }catch(e){
+      print('err sign out ===> $e');
+    }
+
+  }
 }

@@ -332,7 +332,7 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                               _appCubit.state.userEntity?.id,
                                           nameProduct:
                                               state.productEntity?.title ?? '',
-                                          totalPrice: state.price,
+                                          totalPrice: state.totalPrice,
                                           quantity: state.quantity,
                                           imageProduct:
                                               state.productEntity!.images![0],
@@ -350,14 +350,16 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                                 'Bạn đã đặt hàng thành công sản phẩm ${state.productEntity?.title ?? ''}');
 
                                         fireStoreService.addToCart(cartEntity);
-                                        fireStoreService.setNotification(notificationEntity);
+                                        fireStoreService.setNotification(
+                                            notificationEntity);
                                       },
                                       child: Text(
                                         'Add to cart',
                                         style: GoogleFonts.poppins(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                            color: const Color(0xffffffff)),
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: const Color(0xffffffff),
+                                        ),
                                       ),
                                     ),
                                   ],

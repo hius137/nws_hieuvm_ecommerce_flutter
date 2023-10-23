@@ -51,26 +51,36 @@ class ItemCategories extends StatelessWidget {
           left: 0,
           right: 0,
           child: Container(
-            height: size.height * 0.065,
+            // height: size.height * 0.065,
             width: size.width,
             decoration: BoxDecoration(
               color: Colors.white70,
               borderRadius: BorderRadius.circular(15),
             ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 25),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  TextBold(text: nameCategories, textSize: 16),
+                  TextBold(text: '$lenghtCategories Product', textSize: 14),
+                ],
+              ),
+            ),
           ),
         ),
-        Positioned(
-          bottom: 3,
-          left: 0,
-          right: 0,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              TextBold(text: nameCategories, textSize: 20),
-              TextBold(text: '$lenghtCategories Product', textSize: 16),
-            ],
-          ),
-        ),
+        // Positioned(
+        //   bottom: 3,
+        //   left: 0,
+        //   right: 0,
+        //   child: Column(
+        //     crossAxisAlignment: CrossAxisAlignment.center,
+        //     children: [
+        //       TextBold(text: nameCategories, textSize: 20),
+        //       TextBold(text: '$lenghtCategories Product', textSize: 16),
+        //     ],
+        //   ),
+        // ),
       ],
     );
   }

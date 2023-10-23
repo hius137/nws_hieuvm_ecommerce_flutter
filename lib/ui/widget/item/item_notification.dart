@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
 
@@ -40,20 +39,19 @@ class ItemNotification extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 20),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SizedBox(
-                  width: 200,
-                  child: TextNormal(
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextNormal(
                       text: message,
                       textSize: 14),
-                ),
-                TextBold(text: timeOrder, textSize: 14),
-              ],
+                  TextBold(text: timeOrder, textSize: 14),
+                ],
+              ),
             ),
           )
         ],

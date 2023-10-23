@@ -7,12 +7,13 @@ class ItemCart extends StatelessWidget {
   final String nameProduct;
   final String imageProduct;
   final int totalProduct;
+  final int quantity;
 
   const ItemCart(
       {super.key,
       required this.nameProduct,
       required this.totalProduct,
-      required this.imageProduct});
+      required this.imageProduct, required this.quantity,});
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +62,7 @@ class ItemCart extends StatelessWidget {
                   children: [
                     TextBold(text: nameProduct, textSize: 14),
                     TextNormal(text: nameProduct, textSize: 11),
-                    Spacer(),
+                    const Spacer(),
                     TextBold(text: '$totalProduct', textSize: 14),
                   ],
                 )
@@ -96,7 +97,7 @@ class ItemCart extends StatelessWidget {
                         ),
                       ),
                     ),
-                    TextBold(text: '1',
+                    TextBold(text: '$quantity',
                         textSize: 16),
                     GestureDetector(
                       onTap: () {

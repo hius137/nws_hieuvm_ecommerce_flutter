@@ -56,75 +56,77 @@ class _OnboardingScreenBodyState extends State<OnboardingScreenBody> {
       builder: (context, state) {
         Size size = MediaQuery.of(context).size;
         return Scaffold(
-          body: Stack(
-            fit: StackFit.expand,
-            children: [
-              SizedBox(
-                height: size.height,
-                width: size.width,
-              ),
-              Positioned(
-                top: 10,
-                left: 10,
-                right: 10,
-                height: size.height * 0.8,
-                child: PageView(
-                  controller: controller,
-                  children: const [
-                    ItemOnboarding(
-                      text1: '20% Discount New Arrival Product',
-                      text2:
-                          'Publish up your selfies to make yourself more beautiful with this app',
-                      image: AppImages.imgOnboarding1,
-                    ),
-                    ItemOnboarding(
-                      text1: 'Take Advantage Of The Offer Shopping',
-                      text2:
-                          'Publish up your selfies to make yourself more beautiful with this app',
-                      image: AppImages.imgOnboarding2,
-                    ),
-                    ItemOnboarding(
-                      text1: 'All Types Offers Within Your Reach',
-                      text2:
-                          'Publish up your selfies to make yourself more beautiful with this app',
-                      image: AppImages.imgOnboarding3,
-                    ),
-                  ],
+          body: SafeArea(
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                SizedBox(
+                  height: size.height,
+                  width: size.width,
                 ),
-              ),
-              Positioned(
-                bottom: 10,
-                left: 10,
-                right: 10,
-                child: Row(
-                  children: [
-                    dot(),
-                    const Spacer(),
-                    BlocBuilder<OnboardingCubit, OnboardingState>(
-                      builder: (context, state) {
-                        return InkWell(
-                          onTap: () {
-                            controller.nextPage(
-                              duration: const Duration(milliseconds: 500),
-                              curve: Curves.ease,
-                            );
-                            if (controller.page == 2) {
-                              onboardingCubit.navLogin(context);
-                              SharedPreferencesHelper.setOnboard();
-                            }
-                          },
-                          child: SvgPicture.asset(
-                            AppImages.icNext,
-                            width: 50,
-                            height: 50,
-                          ),
-                        );
-                      },
-                    ),
-                  ],
+                Positioned(
+                  top: 10,
+                  left: 15,
+                  right: 15,
+                  height: size.height * 0.8,
+                  child: PageView(
+                    controller: controller,
+                    children: const [
+                      ItemOnboarding(
+                        text1: '20% Discount New Arrival Product',
+                        text2:
+                            'Publish up your selfies to make yourself more beautiful with this app',
+                        image: AppImages.imgOnboarding1,
+                      ),
+                      ItemOnboarding(
+                        text1: 'Take Advantage Of The Offer Shopping',
+                        text2:
+                            'Publish up your selfies to make yourself more beautiful with this app',
+                        image: AppImages.imgOnboarding2,
+                      ),
+                      ItemOnboarding(
+                        text1: 'All Types Offers Within Your Reach',
+                        text2:
+                            'Publish up your selfies to make yourself more beautiful with this app',
+                        image: AppImages.imgOnboarding3,
+                      ),
+                    ],
+                  ),
                 ),
-              )
-            ],
+                Positioned(
+                  bottom: 10,
+                  left: 15,
+                  right: 15,
+                  child: Row(
+                    children: [
+                      dot(),
+                      const Spacer(),
+                      BlocBuilder<OnboardingCubit, OnboardingState>(
+                        builder: (context, state) {
+                          return InkWell(
+                            onTap: () {
+                              controller.nextPage(
+                                duration: const Duration(milliseconds: 500),
+                                curve: Curves.ease,
+                              );
+                              if (controller.page == 2) {
+                                onboardingCubit.navLogin(context);
+                                SharedPreferencesHelper.setOnboard();
+                              }
+                            },
+                            child: SvgPicture.asset(
+                              AppImages.icNext,
+                              width: 50,
+                              height: 50,
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         );
       },

@@ -5,7 +5,7 @@ import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_in/sign_in_screen.da
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_up/sign_up_state.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
-  SignUpCubit() : super(SignUpState());
+  SignUpCubit() : super(const SignUpState());
 
   void signUp(String name, String email, String password) async{
     try{

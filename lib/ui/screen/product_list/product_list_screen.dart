@@ -145,8 +145,10 @@ class _ProductListScreenBodyState extends State<ProductListScreenBody> {
                       ),
                     );
                   } else {
-                    return const Center(
-                      child: CircularProgressIndicator(),
+                    return const Expanded(
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
                     );
                   }
                 },

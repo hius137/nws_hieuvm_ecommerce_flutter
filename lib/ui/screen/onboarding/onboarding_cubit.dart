@@ -5,7 +5,7 @@ import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/auth/auth_screen.dart';
 part 'onboarding_state.dart';
 
 class OnboardingCubit extends Cubit<OnboardingState> {
-  OnboardingCubit() : super(OnboardingState());
+  OnboardingCubit() : super(const OnboardingState());
 
   // PageController pageController = PageController();
   // void onChangedPage(value){

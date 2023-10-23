@@ -85,6 +85,8 @@ class _CartScreenBodyState extends State<CartScreenBody> {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 10.0, vertical: 10),
                                     child: ItemCart(
+                                      quantity: state.listCart?[index].quantity ??
+                                          0,
                                       nameProduct:
                                           state.listCart?[index].nameProduct ??
                                               '',
@@ -103,7 +105,7 @@ class _CartScreenBodyState extends State<CartScreenBody> {
                                 },
                               ),
                             )
-                          : const SizedBox(),
+                          : const Expanded(child: Center(child: CircularProgressIndicator())),
                     ],
                   ),
                 ),
@@ -113,7 +115,7 @@ class _CartScreenBodyState extends State<CartScreenBody> {
                   children: [
                     TextBold(
                         text: 'Total ${state.listCart?.length}', textSize: 11),
-                    TextBold(text: '\$500', textSize: 18),
+                    const TextBold(text: '\$500', textSize: 18),
                   ],
                 ),
                 const SizedBox(

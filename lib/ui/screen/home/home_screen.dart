@@ -43,7 +43,6 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -61,7 +60,7 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
                       height: 50,
                     ),
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   Container(
                     padding:
                     const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
@@ -80,13 +79,13 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
                         const SizedBox(
                           width: 20,
                         ),
-                        TextNormal(text: 'Search Categories', textSize: 18),
+                        const TextNormal(text: 'Search Categories', textSize: 18),
                       ],
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Expanded(
                 child: BlocBuilder<HomeCubit, HomeState>(
                   builder: (context, state) {
