@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: ProfileScreen(),
+          home: SplashScreen(),
         ),
       ),
     );
