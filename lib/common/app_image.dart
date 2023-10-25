@@ -9,6 +9,7 @@ class AppImages {
   static const imgOnboarding2= 'assets/images/on_boarding_2.jpg';
   static const imgOnboarding3= 'assets/images/on_boarding_3.jpg';
   static const imgStartLogin= 'assets/images/start_login.png';
+  static const imgEmptyCart= 'assets/images/img_empty_cart.png';
   static const noImage= 'assets/images/img_categories_error.jpg';
 
   ///icon

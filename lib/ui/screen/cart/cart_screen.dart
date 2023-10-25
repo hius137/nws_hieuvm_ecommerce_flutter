@@ -4,7 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/cart/cart_cubit.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/button.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/item/item_cart.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
 
@@ -44,17 +46,20 @@ class _CartScreenBodyState extends State<CartScreenBody>
   Widget build(BuildContext context) {
     super.build(context);
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-          child: BlocBuilder<CartCubit, CartState>(
-            buildWhen: (previous, current) {
-              print('oBUILD WHEN');
-              return previous.cartStatus != current.cartStatus;
-            },
-            builder: (context, state) {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+        child: BlocBuilder<CartCubit, CartState>(
+          buildWhen: (previous, current) {
+            return previous.cartStatus != current.cartStatus;
+          },
+          builder: (context, state) {
+            if (state.cartStatus == LoadStatus.loading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (state.cartStatus == LoadStatus.success) {
               return Column(
                 children: [
                   SizedBox(
@@ -91,6 +96,10 @@ class _CartScreenBodyState extends State<CartScreenBody>
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10.0, vertical: 10),
                                       child: ItemCart(
+                                        totalPrice: cartCubit.totalPriceItem(
+                                            state.listCart?[index].quantity ??
+                                                0,
+                                            state.listCart?[index].price ?? 0),
                                         quantity:
                                             state.listCart?[index].quantity ??
                                                 0,
@@ -100,13 +109,19 @@ class _CartScreenBodyState extends State<CartScreenBody>
                                         imageProduct: state.listCart?[index]
                                                 .imageProduct ??
                                             '',
-                                        totalProduct:
+                                        price:
                                             state.listCart?[index].price ?? 0,
                                         increment: () {
-                                          cartCubit.increment(index);
+                                          cartCubit.increment(
+                                              index,
+                                              state.listCart?[index].price ??
+                                                  0);
                                         },
                                         decrement: () {
-                                          cartCubit.decrement(index);
+                                          cartCubit.decrement(
+                                              index,
+                                              state.listCart?[index].price ??
+                                                  0);
                                         },
                                       ),
                                     );
@@ -117,9 +132,37 @@ class _CartScreenBodyState extends State<CartScreenBody>
                                   },
                                 ),
                               )
-                            : const Expanded(
-                                child:
-                                    Center(child: CircularProgressIndicator())),
+                            : Expanded(
+                                child: Center(
+                                  child: SizedBox(
+                                    width: size.width * 0.5,
+                                    child: Column(
+                                      children: [
+                                        Expanded(
+                                          child: Image.asset(
+                                            AppImages.imgEmptyCart,
+                                          ),
+                                        ),
+                                        const TextBold(
+                                          text: 'Opps!...Your cart is empty.',
+                                          textSize: 16,
+                                        ),
+                                        SizedBox(height: 40),
+                                        InkWell(
+                                          onTap: () {
+                                            cartCubit.navHome(context);
+                                          },
+                                          child: const Button(
+                                            textButton: 'Start Shopping',
+                                            colorButton: 0xff000000,
+                                            colorText: 0xffffffff,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
                       ],
                     ),
                   ),
@@ -130,43 +173,54 @@ class _CartScreenBodyState extends State<CartScreenBody>
                       TextBold(
                           text: 'Total ${state.listCart?.length}',
                           textSize: 11),
-                      const TextBold(text: 'tổng tiền tất cả', textSize: 18),
+                      TextBold(
+                        text: '${state.totalPrice}',
+                        textSize: 18,
+                      ),
                     ],
                   ),
                   const Spacer(),
-                  Container(
-                    padding: const EdgeInsets.only(left: 20, right: 10),
-                    height: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.black,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: Text(
-                            "Proceed to Checkout",
-                            style: GoogleFonts.poppins(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                  InkWell(
+                    onTap: () => cartCubit.deleteAllCart(appCubit.state.userEntity!.id ?? 0),
+                    child: Container(
+                      padding: const EdgeInsets.only(
+                        left: 20,
+                        right: 10,
+                      ),
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.black,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: Text(
+                              "Proceed to Checkout",
+                              style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                        ),
-                        SvgPicture.asset(
-                          AppImages.icCheckOut,
-                          height: 30,
-                          width: 30,
-                        )
-                      ],
+                          SvgPicture.asset(
+                            AppImages.icCheckOut,
+                            height: 30,
+                            width: 30,
+                          )
+                        ],
+                      ),
                     ),
                   )
                 ],
               );
-            },
-          ),
+            } else {
+              return const SizedBox();
+            }
+          },
         ),
       ),
     );

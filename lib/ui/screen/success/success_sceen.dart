@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/successful/success_cubit.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/success/success_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/button.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
 
@@ -18,7 +18,6 @@ class SuccessScreen extends StatelessWidget {
   }
 }
 
-
 class AuthScreenBody extends StatefulWidget {
   const AuthScreenBody({super.key});
 
@@ -28,11 +27,13 @@ class AuthScreenBody extends StatefulWidget {
 
 class _AuthScreenBodyState extends State<AuthScreenBody> {
   late SuccessfulCubit successfulCubit;
+
   @override
   void initState() {
     super.initState();
     successfulCubit = BlocProvider.of(context);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +47,10 @@ class _AuthScreenBodyState extends State<AuthScreenBody> {
               width: 50,
               height: 50,
             ),
-            const TextBold(text: 'Successful!', textSize: 20),
+            const TextBold(
+              text: 'Successful!',
+              textSize: 20,
+            ),
             const SizedBox(height: 10),
             Text(
               'You have successfully registered in our app and start working in it',
@@ -61,12 +65,15 @@ class _AuthScreenBodyState extends State<AuthScreenBody> {
             BlocBuilder<SuccessfulCubit, SuccessfulState>(
               builder: (context, state) {
                 return InkWell(
-                    onTap: () {
-                      successfulCubit.navHome(context);
-                    },
-                    child: const Button(textButton: 'Start Shopping',
-                        colorButton: 0xff000000,
-                        colorText: 0xffffffff));
+                  onTap: () {
+                    successfulCubit.navHome(context);
+                  },
+                  child: const Button(
+                    textButton: 'Start Shopping',
+                    colorButton: 0xff000000,
+                    colorText: 0xffffffff,
+                  ),
+                );
               },
             ),
           ],

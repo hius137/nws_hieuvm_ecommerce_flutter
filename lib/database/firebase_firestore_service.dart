@@ -7,7 +7,7 @@ import 'package:nws_hieuvm_ecommerce_flutter/model/entities/notification_entity.
 
 class FireStoreService{
   final CollectionReference cartCollectionReference = FirebaseFirestore.instance.collection('cart');
-  final CollectionReference notifcationCollectionReference = FirebaseFirestore.instance.collection('notification');
+  final CollectionReference notificationCollectionReference = FirebaseFirestore.instance.collection('notification');
 
   Future<void> addToCart(CartEntity cartEntity)async {
     try{
@@ -18,10 +18,9 @@ class FireStoreService{
   }
 
   Future<List<CartEntity>> getCart(int id) async {
-    final db = FirebaseFirestore.instance;
     List<CartEntity> cartList = [];
     await Future.delayed(const Duration(seconds: 2));
-    await db.collection('cart').where('idUser', isEqualTo: id).get().then((value) {
+    await cartCollectionReference.where('idUser', isEqualTo: id).get().then((value) {
       value.docs.map((e) {
         final cart = CartEntity.fromJson(e.data());
         cartList.add(cart);
@@ -30,19 +29,25 @@ class FireStoreService{
     return cartList;
   }
 
+  Future<void> deleteCart(int id) async {
+    await Future.delayed(const Duration(seconds: 2));
+    final deleteCarts =  await cartCollectionReference.where('idUser', isEqualTo: id).get();
+    final delete = deleteCarts.docs.map((e) => cartCollectionReference.doc(e.id).delete());
+    await Future.wait(delete);
+  }
+
   Future<void> setNotification(NotificationEntity notificationEntity)async {
     try{
-      await notifcationCollectionReference.add(notificationEntity.toJson());
+      await notificationCollectionReference.add(notificationEntity.toJson());
     }catch(e){
       debugPrint('err =>>> $e');
     }
   }
 
   Future<List<NotificationEntity>> getNotification(int id) async {
-    final db = FirebaseFirestore.instance;
     List<NotificationEntity> listNotification = [];
     await Future.delayed(const Duration(seconds: 2));
-    await db.collection('notification').where('idUser', isEqualTo: id).get().then((value) {
+    await notificationCollectionReference.where('idUser', isEqualTo: id).get().then((value) {
       value.docs.map((e) {
         final notification = NotificationEntity.fromJson(e.data());
         listNotification.add(notification);

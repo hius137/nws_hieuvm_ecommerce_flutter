@@ -6,19 +6,21 @@ import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
 class ItemCart extends StatelessWidget {
   final String nameProduct;
   final String imageProduct;
-  final int totalProduct;
+  final int price;
   final int quantity;
+  final int totalPrice;
   final Function() increment;
   final Function() decrement;
 
   const ItemCart({
     super.key,
     required this.nameProduct,
-    required this.totalProduct,
+    required this.price,
     required this.imageProduct,
     required this.quantity,
     required this.increment,
     required this.decrement,
+    required this.totalPrice,
   });
 
   @override
@@ -69,7 +71,7 @@ class ItemCart extends StatelessWidget {
                     TextBold(text: nameProduct, textSize: 14),
                     TextNormal(text: nameProduct, textSize: 11),
                     const Spacer(),
-                    TextBold(text: '$totalProduct', textSize: 14),
+                    TextBold(text: '$totalPrice', textSize: 14),
                   ],
                 )
               ],
