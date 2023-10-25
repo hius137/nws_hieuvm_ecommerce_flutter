@@ -27,7 +27,7 @@ class NotificationScreenBody extends StatefulWidget {
   State<NotificationScreenBody> createState() => _NotificationScreenBodyState();
 }
 
-class _NotificationScreenBodyState extends State<NotificationScreenBody> {
+class _NotificationScreenBodyState extends State<NotificationScreenBody> with AutomaticKeepAliveClientMixin{
   late NotificationCubit notificationCubit;
   late AppCubit appCubit;
 
@@ -52,7 +52,7 @@ class _NotificationScreenBodyState extends State<NotificationScreenBody> {
               return Column(
                 children: [
                   SizedBox(
-                    height: size.height * 0.7,
+                    height: size.height * 0.85,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -106,7 +106,6 @@ class _NotificationScreenBodyState extends State<NotificationScreenBody> {
                                   },
                                   child: ListView.separated(
                                     itemCount: state.listNotification!.length,
-                                    addAutomaticKeepAlives: true,
                                     itemBuilder: (context, index) {
                                       return ItemNotification(
                                         message: state.listNotification?[index]
@@ -120,7 +119,7 @@ class _NotificationScreenBodyState extends State<NotificationScreenBody> {
                                                 .listNotification?[index]
                                                 .imageProduct ??
                                             '',
-                                        timeOrder: '11',
+                                        timeOrder: '1 hours ago',
                                       );
                                     },
                                     separatorBuilder:
@@ -142,4 +141,7 @@ class _NotificationScreenBodyState extends State<NotificationScreenBody> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

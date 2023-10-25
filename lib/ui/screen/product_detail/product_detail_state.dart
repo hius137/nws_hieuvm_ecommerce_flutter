@@ -4,7 +4,9 @@ class ProductDetailState extends Equatable {
   final LoadStatus productDetailStatus;
   final ProductEntity? productEntity;
   final CartEntity? cartEntity;
-  final int curlIndex;
+  final int curlIndexDot;
+  final int curlIndexColor;
+  final int curlIndexSize;
   final int quantity;
   final int price;
   final int totalPrice;
@@ -14,7 +16,9 @@ class ProductDetailState extends Equatable {
     productDetailStatus,
     productEntity,
     cartEntity,
-    curlIndex,
+    curlIndexDot,
+    curlIndexColor,
+    curlIndexSize,
     quantity,
     price,
     totalPrice,
@@ -24,7 +28,9 @@ class ProductDetailState extends Equatable {
     this.productDetailStatus = LoadStatus.initial,
     this.productEntity,
     this.cartEntity,
-    this.curlIndex = 1,
+    this.curlIndexDot = 1,
+    this.curlIndexColor = 0,
+    this.curlIndexSize = 0,
     this.quantity = 1,
     this.price = 0,
     this.totalPrice = 0,
@@ -34,7 +40,9 @@ class ProductDetailState extends Equatable {
     LoadStatus? productDetailStatus,
     ProductEntity? productEntity,
     CartEntity? cartEntity,
-    int? curlIndex,
+    int? curlIndexDot,
+    int? curlIndexColor,
+    int? curlIndexSize,
     int? quantity,
     int? price,
     int? totalPrice,
@@ -43,7 +51,9 @@ class ProductDetailState extends Equatable {
       productDetailStatus: productDetailStatus ?? this.productDetailStatus,
       productEntity: productEntity ?? this.productEntity,
       cartEntity: cartEntity ?? this.cartEntity,
-      curlIndex: curlIndex ?? this.curlIndex,
+      curlIndexDot: curlIndexDot ?? this.curlIndexDot,
+      curlIndexColor: curlIndexColor ?? this.curlIndexColor,
+      curlIndexSize: curlIndexSize ?? this.curlIndexSize,
       quantity: quantity ?? this.quantity,
       price: price ?? this.price,
       totalPrice: totalPrice ?? this.totalPrice,

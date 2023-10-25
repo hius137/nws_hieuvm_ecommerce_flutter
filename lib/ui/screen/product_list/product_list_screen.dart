@@ -53,7 +53,6 @@ class _ProductListScreenBodyState extends State<ProductListScreenBody> {
     super.initState();
     productListCubit = BlocProvider.of(context);
     productListCubit.getListProducts(widget.idCategories);
-    // homeCubit.getCategories();
   }
 
   @override
@@ -141,7 +140,6 @@ class _ProductListScreenBodyState extends State<ProductListScreenBody> {
                               ),
                             );
                           },
-                        addAutomaticKeepAlives: true,
                       ),
                     );
                   } else {

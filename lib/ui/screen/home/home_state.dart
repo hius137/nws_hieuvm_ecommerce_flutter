@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/categories_entity.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/model/entities/product_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 
 class HomeState extends Equatable {

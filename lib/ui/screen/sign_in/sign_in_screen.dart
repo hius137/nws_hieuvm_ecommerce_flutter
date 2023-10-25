@@ -5,6 +5,7 @@ import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_in/sign_in_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/button.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/snackbar.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/textfield/email_text_field.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/textfield/password_text_field.dart';
@@ -105,6 +106,7 @@ class _SignInScreenBodyState extends State<SignInScreenBody> {
                     onTap: () {
                       signInCubit.signIn(
                           emailTextController.text, passwordController.text);
+                      showSnackBar(context, 'Sign in success!');
                     },
                     child: const Button(
                       textButton: 'Login',

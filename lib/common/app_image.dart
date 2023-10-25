@@ -32,6 +32,8 @@ class AppImages {
   static const icPen= 'assets/icons/ic_pen.svg';
   static const icRight= 'assets/icons/ic_right.svg';
   static const icCheck= 'assets/icons/ic_check.png';
+  static const icCheckBlack= 'assets/icons/ic_check_black.svg';
+  static const icCheckWhite= 'assets/icons/ic_check_white.svg';
   static const icApple= 'assets/icons/ic_apple.png';
   static const icGoogle= 'assets/icons/ic_google.png';
   static const icFacebook= 'assets/icons/ic_facebook.png';

@@ -3,7 +3,7 @@ class CartEntity {
     this.idUser,
     this.nameProduct,
     this.imageProduct,
-    this.totalPrice,
+    this.price,
     this.quantity,
   });
 
@@ -11,14 +11,14 @@ class CartEntity {
     idUser = json['idUser'];
     nameProduct = json['nameProduct'];
     imageProduct = json['imageProduct'];
-    totalPrice = json['totalPrice'];
+    price = json['price'];
     quantity = json['quantity'];
   }
 
   int? idUser;
   String? nameProduct;
   String? imageProduct;
-  int? totalPrice;
+  int? price;
   int? quantity;
 
   Map<String, dynamic> toJson() {
@@ -26,7 +26,7 @@ class CartEntity {
     map['idUser'] = idUser;
     map['nameProduct'] = nameProduct;
     map['imageProduct'] = imageProduct;
-    map['totalPrice'] = totalPrice;
+    map['price'] = price;
     map['quantity'] = quantity;
     return map;
   }

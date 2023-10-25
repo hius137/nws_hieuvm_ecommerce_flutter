@@ -27,7 +27,8 @@ class CartScreenBody extends StatefulWidget {
   State<CartScreenBody> createState() => _CartScreenBodyState();
 }
 
-class _CartScreenBodyState extends State<CartScreenBody> {
+class _CartScreenBodyState extends State<CartScreenBody>
+    with AutomaticKeepAliveClientMixin {
   late CartCubit cartCubit;
   late AppCubit appCubit;
 
@@ -41,117 +42,136 @@ class _CartScreenBodyState extends State<CartScreenBody> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-        child: BlocBuilder<CartCubit, CartState>(
-          builder: (context, state) {
-            return Column(
-              children: [
-                SizedBox(
-                  height: size.height * 0.7,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 30),
-                      Container(
-                        alignment: Alignment.topLeft,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: SvgPicture.asset(
-                            AppImages.icBack,
-                            height: 50,
-                            width: 50,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+          child: BlocBuilder<CartCubit, CartState>(
+            buildWhen: (previous, current) {
+              print('oBUILD WHEN');
+              return previous.cartStatus != current.cartStatus;
+            },
+            builder: (context, state) {
+              return Column(
+                children: [
+                  SizedBox(
+                    height: size.height * 0.7,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 30),
+                        Container(
+                          alignment: Alignment.topLeft,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: SvgPicture.asset(
+                              AppImages.icBack,
+                              height: 50,
+                              width: 50,
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 24),
-                      Container(
-                          alignment: Alignment.topLeft,
-                          child: const TextBold(text: 'My Cart', textSize: 18)),
-                      const SizedBox(height: 10),
-                      state.listCart != null && state.listCart!.isNotEmpty
-                          ? Expanded(
-                              child: ListView.separated(
-                                itemCount: state.listCart!.length,
-                                addAutomaticKeepAlives: true,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10.0, vertical: 10),
-                                    child: ItemCart(
-                                      quantity: state.listCart?[index].quantity ??
-                                          0,
-                                      nameProduct:
-                                          state.listCart?[index].nameProduct ??
-                                              '',
-                                      imageProduct:
-                                          state.listCart?[index].imageProduct ??
-                                              '',
-                                      totalProduct:
-                                          state.listCart?[index].totalPrice ??
-                                              0,
-                                    ),
-                                  );
-                                },
-                                separatorBuilder:
-                                    (BuildContext context, int index) {
-                                  return const SizedBox();
-                                },
-                              ),
-                            )
-                          : const Expanded(child: Center(child: CircularProgressIndicator())),
+                        const SizedBox(height: 24),
+                        Container(
+                            alignment: Alignment.topLeft,
+                            child:
+                                const TextBold(text: 'My Cart', textSize: 18)),
+                        const SizedBox(height: 10),
+                        state.listCart != null && state.listCart!.isNotEmpty
+                            ? Expanded(
+                                child: ListView.separated(
+                                  itemCount: state.listCart!.length,
+                                  itemBuilder: (context, index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10.0, vertical: 10),
+                                      child: ItemCart(
+                                        quantity:
+                                            state.listCart?[index].quantity ??
+                                                0,
+                                        nameProduct: state
+                                                .listCart?[index].nameProduct ??
+                                            '',
+                                        imageProduct: state.listCart?[index]
+                                                .imageProduct ??
+                                            '',
+                                        totalProduct:
+                                            state.listCart?[index].price ?? 0,
+                                        increment: () {
+                                          cartCubit.increment(index);
+                                        },
+                                        decrement: () {
+                                          cartCubit.decrement(index);
+                                        },
+                                      ),
+                                    );
+                                  },
+                                  separatorBuilder:
+                                      (BuildContext context, int index) {
+                                    return const SizedBox();
+                                  },
+                                ),
+                              )
+                            : const Expanded(
+                                child:
+                                    Center(child: CircularProgressIndicator())),
+                      ],
+                    ),
+                  ),
+                  const Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextBold(
+                          text: 'Total ${state.listCart?.length}',
+                          textSize: 11),
+                      const TextBold(text: 'tổng tiền tất cả', textSize: 18),
                     ],
                   ),
-                ),
-                const Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextBold(
-                        text: 'Total ${state.listCart?.length}', textSize: 11),
-                    const TextBold(text: 'tổng tiền tất cả', textSize: 18),
-                  ],
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Container(
-                  padding: const EdgeInsets.only(left: 20, right: 10),
-                  width: double.infinity,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.black,
-                  ),
-                  child: Row(
+                  const Spacer(),
+                  Container(
+                    padding: const EdgeInsets.only(left: 20, right: 10),
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.black,
+                    ),
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(left: 20),
-                          child: Text("Proceed to Checkout",
-                              style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold)),
+                          child: Text(
+                            "Proceed to Checkout",
+                            style: GoogleFonts.poppins(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                         SvgPicture.asset(
                           AppImages.icCheckOut,
                           height: 30,
                           width: 30,
                         )
-                      ]),
-                )
-              ],
-            );
-          },
+                      ],
+                    ),
+                  )
+                ],
+              );
+            },
+          ),
         ),
-      )),
+      ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

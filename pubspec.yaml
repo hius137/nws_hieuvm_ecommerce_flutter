@@ -51,6 +51,7 @@ dependencies:
   cloud_firestore: ^4.9.3
   shimmer: ^3.0.0
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

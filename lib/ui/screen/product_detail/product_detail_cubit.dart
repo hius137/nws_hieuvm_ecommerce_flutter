@@ -13,9 +13,20 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
   PageController pageController = PageController();
 
   void onChangedPage(value) {
-    int currentIndex = value;
+    int currentIndexDot = value;
     emit(state.copyWith(
-      curlIndex: currentIndex,
+      curlIndexDot: currentIndexDot,
+    ));
+  }
+  void onChangedColors(value) {
+    int currentIndexColor = value;
+    emit(state.copyWith(
+      curlIndexColor: currentIndexColor,
+    ));
+  }void onChangedSize(value) {
+    int currentIndexSize = value;
+    emit(state.copyWith(
+      curlIndexSize: currentIndexSize,
     ));
   }
 

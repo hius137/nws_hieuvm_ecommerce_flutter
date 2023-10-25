@@ -5,6 +5,7 @@ import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_up/sign_up_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_up/sign_up_state.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/button.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/snackbar.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/textfield/email_text_field.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/textfield/password_text_field.dart';
@@ -123,6 +124,7 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
                 signUpCubit.signUp(usernameTextController.text,
                     emailTextController.text, passwordTextController.text);
                 signUpCubit.navAuth(context);
+                showSnackBar(context, 'Sign up success!');
               },
               child: const Button(
                 textButton: 'Sign Up',

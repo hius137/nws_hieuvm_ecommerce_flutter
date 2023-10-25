@@ -8,12 +8,18 @@ class ItemCart extends StatelessWidget {
   final String imageProduct;
   final int totalProduct;
   final int quantity;
+  final Function() increment;
+  final Function() decrement;
 
-  const ItemCart(
-      {super.key,
-      required this.nameProduct,
-      required this.totalProduct,
-      required this.imageProduct, required this.quantity,});
+  const ItemCart({
+    super.key,
+    required this.nameProduct,
+    required this.totalProduct,
+    required this.imageProduct,
+    required this.quantity,
+    required this.increment,
+    required this.decrement,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +50,7 @@ class ItemCart extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                   child: Image(
                     width: 80,
-                    image:  NetworkImage(imageProduct),
+                    image: NetworkImage(imageProduct),
                     fit: BoxFit.cover,
                     errorBuilder: (BuildContext context, Object exception,
                         StackTrace? stackTrace) {
@@ -75,21 +81,14 @@ class ItemCart extends StatelessWidget {
             child: Container(
                 decoration: const BoxDecoration(
                     color: Color(0xffeeeeee),
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(30))),
+                    borderRadius: BorderRadius.all(Radius.circular(30))),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment
-                      .spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        // productDetailCubit.decrement();
-                      },
+                    InkWell(
+                      onTap: decrement,
                       child: Padding(
-                        padding: const EdgeInsets
-                            .symmetric(
-                            horizontal: 13.0,
-                            vertical: 13),
+                        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12,),
                         child: SvgPicture.asset(
                           AppImages.icMinus,
                           width: 2,
@@ -97,17 +96,11 @@ class ItemCart extends StatelessWidget {
                         ),
                       ),
                     ),
-                    TextBold(text: '$quantity',
-                        textSize: 16),
-                    GestureDetector(
-                      onTap: () {
-                        // productDetailCubit.increment();
-                      },
+                    TextBold(text: '$quantity', textSize: 16),
+                    InkWell(
+                      onTap: increment,
                       child: Padding(
-                        padding: const EdgeInsets
-                            .symmetric(
-                            horizontal: 13.0,
-                            vertical: 13),
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                         child: SvgPicture.asset(
                           AppImages.icPlus,
                           width: 10,
@@ -116,8 +109,7 @@ class ItemCart extends StatelessWidget {
                       ),
                     ),
                   ],
-                )
-            ),
+                )),
           )
         ],
       ),

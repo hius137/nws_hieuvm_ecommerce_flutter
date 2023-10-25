@@ -32,7 +32,7 @@ class ProfileScreenBody extends StatefulWidget {
   State<ProfileScreenBody> createState() => _ProfileScreenBodyState();
 }
 
-class _ProfileScreenBodyState extends State<ProfileScreenBody> {
+class _ProfileScreenBodyState extends State<ProfileScreenBody> with AutomaticKeepAliveClientMixin{
   // late AppCubit appCubit;
   late ProfileCubit profileCubit;
 
@@ -297,4 +297,7 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

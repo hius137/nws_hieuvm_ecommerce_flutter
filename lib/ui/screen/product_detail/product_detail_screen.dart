@@ -11,6 +11,7 @@ import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/product_detail/product_detail_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/button.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/item/dot.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/snackbar.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
 
 class ProductDetailScreen extends StatelessWidget {
@@ -50,6 +51,8 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
   late CartEntity cartEntity;
   late NotificationEntity notificationEntity;
   late AppCubit _appCubit;
+  List<int> colors = [0xffffffff, 0xff000000, 0xffCADCA8, 0xfff7a01f];
+  List<String> sizes = ['S', 'M', 'L', 'XL', 'XXL'];
 
   @override
   void initState() {
@@ -127,7 +130,7 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
                       3,
-                      (index) => buildDot(index, state.curlIndex, context),
+                      (index) => buildDot(index, state.curlIndexDot, context),
                     ),
                   ),
                 ),
@@ -184,18 +187,26 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                 const Spacer(),
                                 const TextBold(text: 'Size', textSize: 16),
                                 const SizedBox(height: 10),
-                                const SizedBox(
+                                SizedBox(
                                   width: 250,
                                   child: Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      SizeButton(textButton: 'S'),
-                                      SizeButton(textButton: 'M'),
-                                      SizeButton(textButton: 'L'),
-                                      SizeButton(textButton: 'XL'),
-                                      SizeButton(textButton: 'XXL'),
-                                    ],
+                                    MainAxisAlignment.center,
+                                    children: List.generate(
+                                      sizes.length,
+                                          (indexSize) => InkWell(
+                                        onTap: () => productDetailCubit
+                                            .onChangedSize(indexSize),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(1.0),
+                                          child: itemSize(
+                                              indexSize,
+                                              state.curlIndexSize,
+                                              context,
+                                              sizes),
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 const Spacer(),
@@ -233,7 +244,7 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () {
                                                 productDetailCubit.decrement();
                                               },
@@ -252,7 +263,7 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                             TextBold(
                                                 text: '${state.quantity}',
                                                 textSize: 16),
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () {
                                                 productDetailCubit.increment();
                                               },
@@ -273,6 +284,7 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                     const TextBold(
                                         text: 'Avalible in stok', textSize: 14),
                                     Container(
+                                      width: 50,
                                       height: 132,
                                       padding: const EdgeInsets.all(10),
                                       decoration: BoxDecoration(
@@ -288,19 +300,24 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                               offset: const Offset(0, 4),
                                             ),
                                           ]),
-                                      child: const Column(
+                                      child: Column(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          SelectColorButton(
-                                              colorButton: 0xffffffff),
-                                          SelectColorButton(
-                                              colorButton: 0xff000000),
-                                          SelectColorButton(
-                                              colorButton: 0xffCADCA8),
-                                          SelectColorButton(
-                                              colorButton: 0xfff7a01f),
-                                        ],
+                                            MainAxisAlignment.center,
+                                        children: List.generate(
+                                          colors.length,
+                                          (index) => InkWell(
+                                            onTap: () => productDetailCubit
+                                                .onChangedColors(index),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(1.0),
+                                              child: itemColor(
+                                                  index,
+                                                  state.curlIndexColor,
+                                                  context,
+                                                  colors),
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -332,7 +349,8 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                               _appCubit.state.userEntity?.id,
                                           nameProduct:
                                               state.productEntity?.title ?? '',
-                                          totalPrice: state.totalPrice,
+                                          price:
+                                              state.productEntity?.price ?? 0,
                                           quantity: state.quantity,
                                           imageProduct:
                                               state.productEntity!.images![0],
@@ -352,6 +370,7 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                         fireStoreService.addToCart(cartEntity);
                                         fireStoreService.setNotification(
                                             notificationEntity);
+                                        showSnackBar(context, 'Order success!');
                                       },
                                       child: Text(
                                         'Add to cart',

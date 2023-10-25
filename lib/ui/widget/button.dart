@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 
 class Button extends StatelessWidget {
   const Button(
@@ -37,6 +39,7 @@ class Button extends StatelessWidget {
 
 class BorderButton extends StatelessWidget {
   const BorderButton({super.key, required this.textButton});
+
   final String textButton;
 
   @override
@@ -66,13 +69,15 @@ class BorderButton extends StatelessWidget {
 }
 
 class IconBorderButton extends StatelessWidget {
-  const IconBorderButton(
-      {super.key,
-      required this.textButton,
-      required this.iconButton,
-      required this.colorBorderButton,
-      required this.colorText,
-      required this.colorButton, required this.width,});
+  const IconBorderButton({
+    super.key,
+    required this.textButton,
+    required this.iconButton,
+    required this.colorBorderButton,
+    required this.colorText,
+    required this.colorButton,
+    required this.width,
+  });
 
   final String textButton;
   final String iconButton;
@@ -115,73 +120,39 @@ class IconBorderButton extends StatelessWidget {
   }
 }
 
-class SizeButton extends StatefulWidget {
-  final String textButton;
-
-  const SizeButton({
-    super.key,
-    required this.textButton,
-  });
-
-  @override
-  _SizeButtonState createState() => _SizeButtonState();
-}
-
-class _SizeButtonState extends State<SizeButton> {
-  bool _isPressed = false;
-
-  void _handleTap() {
-    setState(() {
-      _isPressed = !_isPressed;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: _handleTap,
-      child: Container(
-        width: 40,
-        height: 40,
-        decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: _isPressed ? Colors.black : Colors.white,
-            border: Border.all(
-              color: Colors.black,
-              width: 1,
-            )),
-        child: Center(
-          child: Text(
-            widget.textButton,
-            style: GoogleFonts.poppins(
-              color: _isPressed ? Colors.white : Colors.black45,
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-            ),
-          ),
+Container itemSize(int index, int curIndex, BuildContext context,List<String> sizes){
+  return Container(
+    width: 40,
+    height: 40,
+    decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: index == curIndex ? Colors.black : Colors.white,
+        border: Border.all(
+          color: Colors.black,
+          width: 1,
+        )),
+    child: Center(
+      child: Text(
+        sizes[index],
+        style: GoogleFonts.poppins(
+          color: index == curIndex ? Colors.white : Colors.black,
+          fontWeight: FontWeight.bold,
+          fontSize: 14,
         ),
       ),
-    );
-  }
+    ),
+  );
 }
-
-class SelectColorButton extends StatelessWidget {
-  final int colorButton;
-  const SelectColorButton({super.key, required this.colorButton});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 20,
-      height: 20,
-      decoration: BoxDecoration(
-        color: Color(colorButton),
-        borderRadius: const BorderRadius.all(Radius.circular(15)),
-      ),
-    );
-  }
+Container itemColor(int index, int curIndex, BuildContext context,List<int> colors){
+  return Container(
+    width: 20,
+    height: 20,
+    decoration: BoxDecoration(
+      border: Border.all(color: colors[index] == 0xffffffff ? Colors.black : Colors.transparent, width: 1),
+      color: Color(colors[index]),
+      borderRadius: const BorderRadius.all(Radius.circular(15)),
+    ),
+    child: index == curIndex ? SvgPicture.asset(colors[index] == 0xff000000 ? AppImages.icCheckWhite : AppImages.icCheckBlack) : const SizedBox(),
+    // child: index == curIndex ? SvgPicture.asset( colors[index] == 0xffffffff ? AppImages.icCheckBlack : AppImages.icApple) : const SizedBox(),
+  );
 }
-
-
-
-
