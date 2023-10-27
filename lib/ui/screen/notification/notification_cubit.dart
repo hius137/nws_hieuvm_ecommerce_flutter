@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/database/firebase_firestore_service.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/notification_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
-import 'package:intl/intl.dart';
 
 part 'notification_state.dart';
 

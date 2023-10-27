@@ -84,7 +84,7 @@ class _MainScreenBodyState extends State<MainScreenBody> {
               ],
             ),
             child: Padding(
-              padding: const EdgeInsets.all(13.0),
+              padding: const EdgeInsets.all(16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: List.generate(

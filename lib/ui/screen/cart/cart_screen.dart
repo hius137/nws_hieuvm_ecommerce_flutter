@@ -85,7 +85,7 @@ class _CartScreenBodyState extends State<CartScreenBody>
                         Container(
                             alignment: Alignment.topLeft,
                             child:
-                                const TextBold(text: 'My Cart', textSize: 18)),
+                            const TextBold(text: 'My Cart', textSize: 18)),
                         const SizedBox(height: 10),
                         if (state.listCart != null &&
                             state.listCart!.isNotEmpty)
@@ -105,13 +105,13 @@ class _CartScreenBodyState extends State<CartScreenBody>
                                           state.listCart?[index].quantity ?? 0,
                                           state.listCart?[index].price ?? 0),
                                       quantity:
-                                          state.listCart?[index].quantity ?? 0,
+                                      state.listCart?[index].quantity ?? 0,
                                       nameProduct:
-                                          state.listCart?[index].nameProduct ??
-                                              '',
+                                      state.listCart?[index].nameProduct ??
+                                          '',
                                       imageProduct:
-                                          state.listCart?[index].imageProduct ??
-                                              '',
+                                      state.listCart?[index].imageProduct ??
+                                          '',
                                       price: state.listCart?[index].price ?? 0,
                                       increment: () {
                                         cartCubit.increment(index,

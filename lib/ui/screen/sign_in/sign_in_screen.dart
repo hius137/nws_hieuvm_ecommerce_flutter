@@ -5,7 +5,6 @@ import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_in/sign_in_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/button.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/snackbar.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/textfield/email_text_field.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/textfield/password_text_field.dart';
@@ -77,7 +76,7 @@ class _SignInScreenBodyState extends State<SignInScreenBody> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TextBold(text: 'Welcome!', textSize: 18),
-                        SizedBox(height: 10),
+                        SizedBox(height: 5),
                         TextNormal(
                             text: 'please login or sign up to continue our app',
                             textSize: 16),
@@ -89,18 +88,18 @@ class _SignInScreenBodyState extends State<SignInScreenBody> {
                     textEditingController: emailTextController,
                     labelText: 'Email',
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
                   PasswordTextField(
                     textEditingController: passwordController,
                     labelText: 'Password',
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
                   TextButton(
                     onPressed: () {
                       signInCubit.navSignUp(context);
                     },
                     child: const TextBold(
-                      textSize: 18,
+                      textSize: 16,
                       text: 'register now',
                     ),
                   ),

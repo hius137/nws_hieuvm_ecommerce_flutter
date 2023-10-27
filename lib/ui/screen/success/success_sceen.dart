@@ -61,7 +61,7 @@ class _AuthScreenBodyState extends State<AuthScreenBody> {
                 color: Colors.black,
               ),
             ),
-            const SizedBox(height: 250),
+            const Spacer(),
             BlocBuilder<SuccessfulCubit, SuccessfulState>(
               builder: (context, state) {
                 return InkWell(

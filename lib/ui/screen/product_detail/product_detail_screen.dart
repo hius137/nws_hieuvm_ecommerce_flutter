@@ -369,7 +369,7 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                                 state.productEntity?.title ??
                                                     '',
                                             imageProduct: state.productEntity!
-                                                    .images![0] ??
+                                                    .images?[0] ??
                                                 '',
                                             message:
                                                 'You have successfully ordered the product ${state.productEntity?.title ?? ''}',timeOrder: DateTime.now().toString());

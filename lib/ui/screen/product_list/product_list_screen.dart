@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/product_detail/product_detail_screen.dart';
@@ -154,51 +153,6 @@ class _ProductListScreenBodyState extends State<ProductListScreenBody> {
               ),
             ],
           ),
-        ),
-      ),
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-                topRight: Radius.circular(20), topLeft: Radius.circular(20)),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black,
-                offset: Offset(0, 5),
-                blurRadius: 10,
-                spreadRadius: 0,
-              )
-            ]),
-        child: const GNav(
-          backgroundColor: Colors.white,
-          color: Colors.white,
-          activeColor: Color(0xff000000),
-          tabBackgroundColor: Color(0xffeeeeee),
-          gap: 8,
-          padding: EdgeInsets.all(10),
-          tabs: [
-            GButton(
-              icon: Icons.home_filled,
-              iconColor: Colors.black,
-              text: 'Home',
-            ),
-            GButton(
-              icon: Icons.shopping_cart_rounded,
-              iconColor: Colors.black,
-              text: 'Cart',
-            ),
-            GButton(
-              icon: Icons.notifications,
-              iconColor: Colors.black,
-              text: 'Notification',
-            ),
-            GButton(
-              icon: Icons.account_circle,
-              iconColor: Colors.black,
-              text: 'User',
-            ),
-          ],
         ),
       ),
     );

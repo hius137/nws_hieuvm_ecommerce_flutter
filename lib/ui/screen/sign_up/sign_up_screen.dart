@@ -3,11 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_in/sign_in_screen.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_up/sign_up_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_up/sign_up_state.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/button.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/snackbar.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/textfield/email_text_field.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/textfield/password_text_field.dart';
@@ -128,12 +126,13 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
                           },
                         ),
                         const SizedBox(width: 10),
-                        const SizedBox(
-                          width: 300,
-                          child: TextNormal(
-                            text:
-                            'By creating an account you have to agree with our them & condication',
-                            textSize: 16,
+                        const Expanded(
+                          child: SizedBox(
+                            child: TextNormal(
+                              text:
+                              'By creating an account you have to agree with our them & condication',
+                              textSize: 16,
+                            ),
                           ),
                         ),
                       ],

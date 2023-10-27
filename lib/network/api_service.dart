@@ -1,11 +1,8 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/categories_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/product_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/user/token_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/user/user_entity.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/snackbar.dart';
 
 Future<TokenEntity?> signInRequest(String email, String password) async {
   final dio = Dio();
