@@ -1,4 +1,3 @@
-import 'dart:async';
 
 class CartEntity {
   CartEntity({
@@ -7,7 +6,6 @@ class CartEntity {
     this.imageProduct,
     this.price,
     this.quantity,
-    this.timeOrder,
   });
 
   CartEntity.fromJson(dynamic json) {
@@ -16,7 +14,6 @@ class CartEntity {
     imageProduct = json['imageProduct'];
     price = json['price'];
     quantity = json['quantity'];
-    timeOrder = json['time'];
   }
 
   int? idUser;
@@ -24,7 +21,6 @@ class CartEntity {
   String? imageProduct;
   int? price;
   int? quantity;
-  String? timeOrder;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -33,7 +29,6 @@ class CartEntity {
     map['imageProduct'] = imageProduct;
     map['price'] = price;
     map['quantity'] = quantity;
-    map['time'] = timeOrder;
     return map;
   }
 }

@@ -112,7 +112,6 @@ class _SignInScreenBodyState extends State<SignInScreenBody> {
                         emailTextController.text,
                         passwordController.text,
                       );
-                      showSnackBar(context, 'Sign in success!');
                     },
                     child: const Button(
                       textButton: 'Login',

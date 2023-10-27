@@ -8,6 +8,7 @@ import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/network/api_service.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_up/sign_up_screen.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/success/success_sceen.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/snackbar.dart';
 part 'sign_in_state.dart';
 
 class SignInCubit extends Cubit<SignInState> {
@@ -17,20 +18,24 @@ class SignInCubit extends Cubit<SignInState> {
   void signIn(BuildContext context, String email, String password) async {
     emit(state.copyWith(signInStatus: LoadStatus.loading));
     try {
-      final responseSignIn = await signInRequest(email, password);
-      if (responseSignIn != null && responseSignIn.accessToken.isNotEmpty) {
-        SharedPreferencesHelper.setAccessToken(responseSignIn.accessToken);
-        final userEntity = await getProfileUser(responseSignIn.accessToken);
-        appCubit.setProfileUser(userEntity);
-        Future.delayed(const Duration(milliseconds: 500)).then((value) {
-          emit(state.copyWith(
-            signInStatus: LoadStatus.success,
-          ),);
-        });
+      if(email.isEmpty || password.isEmpty){
+        showSnackBar(context, 'Email or Password is empty');
+      }else {
+        final responseSignIn = await signInRequest(email, password);
+        if (responseSignIn != null && responseSignIn.accessToken.isNotEmpty) {
+          SharedPreferencesHelper.setAccessToken(responseSignIn.accessToken);
+          final userEntity = await getProfileUser(responseSignIn.accessToken);
+          appCubit.setProfileUser(userEntity);
+          Future.delayed(const Duration(milliseconds: 200)).then((value) {
+            showSnackBar(context, 'Sign in success!');
+            emit(state.copyWith(
+              signInStatus: LoadStatus.success,
+            ),);
+          });
+        }else {
+          showSnackBar(context, 'Wrong email or password');
+        }
       }
-      // else if(email.isEmpty) {
-      //   showSnackBar(context, 'Please enter your email is empty');
-      // }
     } catch (e) {
       print('sign in =>>> $e');
       emit(state.copyWith(signInStatus: LoadStatus.failure));

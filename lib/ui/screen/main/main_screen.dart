@@ -50,8 +50,8 @@ class _MainScreenBodyState extends State<MainScreenBody> {
         builder: (context, state) {
           return PageView(
             controller: mainCubit.pageController,
-            onPageChanged: (index) {
-              mainCubit.onPageChange(index);
+            onPageChanged: (value) {
+              mainCubit.onIndexChange(value);
             },
             children: const [
               HomeScreen(),

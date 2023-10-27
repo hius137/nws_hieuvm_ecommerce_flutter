@@ -10,11 +10,17 @@ class MainCubit extends Cubit<MainState> {
 
   void onPageChange(int index) {
     int currentIndex = index;
-    pageController.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 100),
-      curve: Curves.linear,
+    pageController.jumpToPage(
+      currentIndex,
     );
+    emit(
+      state.copyWith(
+        curlIndex: currentIndex,
+      ),
+    );
+  }
+  void onIndexChange(int index) {
+    int currentIndex = index;
     emit(
       state.copyWith(
         curlIndex: currentIndex,

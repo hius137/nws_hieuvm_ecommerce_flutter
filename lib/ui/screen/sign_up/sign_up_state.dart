@@ -4,6 +4,7 @@ import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 
 class SignUpState extends Equatable {
   final LoadStatus signUpStatus;
+  final LoadStatus checkStatus;
   final UserEntity? userEntity;
   final bool isChecked;
 
@@ -17,6 +18,7 @@ class SignUpState extends Equatable {
   const SignUpState({
     this.userEntity,
     this.signUpStatus = LoadStatus.initial,
+    this.checkStatus = LoadStatus.initial,
     this.isChecked = false,
   });
 
@@ -24,11 +26,13 @@ class SignUpState extends Equatable {
     UserEntity? userEntity,
     bool? isChecked,
     LoadStatus? signUpStatus,
+    LoadStatus? checkStatus,
   }) {
     return SignUpState(
       userEntity: userEntity ?? this.userEntity,
       isChecked: isChecked ?? this.isChecked,
       signUpStatus: signUpStatus ?? this.signUpStatus,
+      checkStatus: checkStatus ?? this.checkStatus,
     );
   }
 }

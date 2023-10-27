@@ -22,25 +22,29 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       controller: widget.textEditingController,
       obscureText: _obscureText,
       decoration: InputDecoration(
-          labelText: widget.labelText,
-          labelStyle: GoogleFonts.poppins(
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-            color: Colors.black,
+        labelText: widget.labelText,
+        labelStyle: GoogleFonts.poppins(
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+          color: Colors.black,
+        ),
+        border: const UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.black12,
+            width: 1,
           ),
-          border: const UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.black12, width: 1)),
-          suffixIcon: IconButton(
-            icon: Icon(
-              _obscureText ? Icons.visibility : Icons.visibility_off,
-            ),
-            onPressed: () {
-              setState(() {
-                _obscureText = !_obscureText;
-              });
-            },
-          ),),
-      // keyboardType: TextInputType.none,
+        ),
+        suffixIcon: IconButton(
+          icon: Icon(
+            _obscureText ? Icons.visibility : Icons.visibility_off,
+          ),
+          onPressed: () {
+            setState(() {
+              _obscureText = !_obscureText;
+            });
+          },
+        ),
+      ),
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Please enter password';
@@ -50,7 +54,6 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
         }
         return null;
       },
-      // style: const TextStyle(fontSize: 16, color: Colors.black),
     );
   }
 }

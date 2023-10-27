@@ -361,7 +361,6 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                           quantity: state.quantity,
                                           imageProduct:
                                               state.productEntity!.images![0],
-                                          timeOrder: DateTime.now().toString(),
                                         );
                                         notificationEntity = NotificationEntity(
                                             idUser:
@@ -373,7 +372,7 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                                     .images![0] ??
                                                 '',
                                             message:
-                                                'Bạn đã đặt hàng thành công sản phẩm ${state.productEntity?.title ?? ''}',timeOrder: DateTime.now().toString());
+                                                'You have successfully ordered the product ${state.productEntity?.title ?? ''}',timeOrder: DateTime.now().toString());
 
                                         fireStoreService.addToCart(cartEntity);
                                         fireStoreService.setNotification(
