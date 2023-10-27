@@ -105,8 +105,7 @@ class _NotificationScreenBodyState extends State<NotificationScreenBody>
                           ),
                         ),
                         const SizedBox(height: 10),
-                        state.notificationStatus == LoadStatus.success
-                            ? Expanded(
+                        if (state.notificationStatus == LoadStatus.success && state.listNotification!.isNotEmpty) Expanded(
                                 child: RefreshIndicator(
                                   onRefresh: () async {
                                     notificationCubit.getListNotification(
@@ -140,10 +139,24 @@ class _NotificationScreenBodyState extends State<NotificationScreenBody>
                                     },
                                   ),
                                 ),
-                              )
-                            : const Expanded(
+                              ) else Expanded(
                                 child: Center(
-                                  child: CircularProgressIndicator(),
+                                  child: SizedBox(
+                                    width: size.width * 0.5,
+                                    child: Column(
+                                      children: [
+                                        Expanded(
+                                          child: Image.asset(
+                                            AppImages.imgNotificationError,
+                                          ),
+                                        ),
+                                        const TextBold(
+                                          text: "You don't have any notifications.",
+                                          textSize: 16,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
                       ],

@@ -11,6 +11,7 @@ class AppImages {
   static const imgStartLogin= 'assets/images/start_login.png';
   static const imgEmptyCart= 'assets/images/img_empty_cart.png';
   static const noImage= 'assets/images/img_categories_error.jpg';
+  static const imgNotificationError= 'assets/images/img_notification_error.png';
 
   ///icon
   static const icNext= 'assets/icons/ic_next.svg';
