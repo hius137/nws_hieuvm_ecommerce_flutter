@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/cart/cart_screen.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/home/home_screen.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/main/main_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/notification/notification_screen.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/profile/profile_screen.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -28,6 +30,9 @@ class MainScreenBody extends StatefulWidget {
 
 class _MainScreenBodyState extends State<MainScreenBody> {
   late MainCubit mainCubit;
+  List<String> iconsBlack = [AppImages.icHome, AppImages.icCart, AppImages.icNotification, AppImages.icProfile];
+  List<String> iconsWhite = [AppImages.icHomeWhite, AppImages.icCartWhite, AppImages.icNotificationWhite, AppImages.icProfileWhite];
+  List<String> titles = ['Home', 'Cart', 'Notify', 'Profile'];
 
   @override
   void initState() {
@@ -39,11 +44,14 @@ class _MainScreenBodyState extends State<MainScreenBody> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocBuilder<MainCubit, MainState>(
+        buildWhen: (previous, current) {
+          return previous.curlIndex != current.curlIndex;
+        },
         builder: (context, state) {
           return PageView(
             controller: mainCubit.pageController,
             onPageChanged: (index) {
-              mainCubit.switchTap(index);
+              mainCubit.onPageChange(index);
             },
             children: const [
               HomeScreen(),
@@ -60,53 +68,39 @@ class _MainScreenBodyState extends State<MainScreenBody> {
         },
         builder: (context, state) {
           return Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
             decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    topLeft: Radius.circular(20)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black,
-                    offset: Offset(0, 5),
-                    blurRadius: 10,
-                    spreadRadius: 0,
-                  )
-                ]),
-            child: GNav(
-              onTabChange: (index) {
-                mainCubit.switchTap(index);
-              },
-              selectedIndex: state.curlIndex,
-              backgroundColor: Colors.white,
               color: Colors.white,
-              activeColor: const Color(0xff000000),
-              tabBackgroundColor: const Color(0xffeeeeee),
-              gap: 8,
-              padding: const EdgeInsets.all(10),
-              tabs: const [
-                GButton(
-                  icon: Icons.home_filled,
-                  iconColor: Colors.black,
-                  text: 'Home',
-                ),
-                GButton(
-                  icon: Icons.shopping_cart_rounded,
-                  iconColor: Colors.black,
-                  text: 'Cart',
-                ),
-                GButton(
-                  icon: Icons.notifications,
-                  iconColor: Colors.black,
-                  text: 'Notification',
-                ),
-                GButton(
-                  icon: Icons.account_circle,
-                  iconColor: Colors.black,
-                  text: 'User',
-                ),
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(20),
+                topLeft: Radius.circular(20),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black,
+                  offset: Offset(0, 5),
+                  blurRadius: 10,
+                  spreadRadius: 0,
+                )
               ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(13.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: List.generate(
+                  4,
+                  (index) => InkWell(
+                    onTap: () => mainCubit.onPageChange(index),
+                    child: itemHomeBottom(
+                      index,
+                      state.curlIndex,
+                      iconsBlack,
+                      iconsWhite,
+                      titles,
+                    ),
+                  ),
+                ),
+              ),
             ),
           );
         },
@@ -115,3 +109,38 @@ class _MainScreenBodyState extends State<MainScreenBody> {
   }
 }
 
+Container itemHomeBottom(
+    int index, int curIndex, List<String> iconsBlack,List<String> iconsWhite, List<String> titles) {
+  return Container(
+    child: index == curIndex
+        ? Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: const Color(0xffeeeeee),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle, color: Colors.black),
+                  child: SvgPicture.asset(
+                    iconsWhite[index],
+                    width: 18,
+                    height: 18,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: TextBold(text: titles[index], textSize: 14),
+                ),
+              ],
+            ),
+          )
+        : SvgPicture.asset(
+            iconsBlack[index],
+            width: 18,
+            height: 18,
+          ),
+  );
+}

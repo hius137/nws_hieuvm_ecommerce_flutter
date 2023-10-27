@@ -87,82 +87,82 @@ class _CartScreenBodyState extends State<CartScreenBody>
                             child:
                                 const TextBold(text: 'My Cart', textSize: 18)),
                         const SizedBox(height: 10),
-                        state.listCart != null && state.listCart!.isNotEmpty
-                            ? Expanded(
-                                child: ListView.separated(
-                                  itemCount: state.listCart!.length,
-                                  itemBuilder: (context, index) {
-                                    return Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10.0, vertical: 10),
-                                      child: ItemCart(
-                                        totalPrice: cartCubit.totalPriceItem(
-                                            state.listCart?[index].quantity ??
-                                                0,
-                                            state.listCart?[index].price ?? 0),
-                                        quantity:
-                                            state.listCart?[index].quantity ??
-                                                0,
-                                        nameProduct: state
-                                                .listCart?[index].nameProduct ??
-                                            '',
-                                        imageProduct: state.listCart?[index]
-                                                .imageProduct ??
-                                            '',
-                                        price:
-                                            state.listCart?[index].price ?? 0,
-                                        increment: () {
-                                          cartCubit.increment(
-                                              index,
-                                              state.listCart?[index].price ??
-                                                  0);
-                                        },
-                                        decrement: () {
-                                          cartCubit.decrement(
-                                              index,
-                                              state.listCart?[index].price ??
-                                                  0);
-                                        },
-                                      ),
-                                    );
-                                  },
-                                  separatorBuilder:
-                                      (BuildContext context, int index) {
-                                    return const SizedBox();
-                                  },
-                                ),
-                              )
-                            : Expanded(
-                                child: Center(
-                                  child: SizedBox(
-                                    width: size.width * 0.5,
-                                    child: Column(
-                                      children: [
-                                        Expanded(
-                                          child: Image.asset(
-                                            AppImages.imgEmptyCart,
-                                          ),
-                                        ),
-                                        const TextBold(
-                                          text: 'Opps!...Your cart is empty.',
-                                          textSize: 16,
-                                        ),
-                                        SizedBox(height: 40),
-                                        InkWell(
-                                          onTap: () {
-                                            cartCubit.navHome(context);
-                                          },
-                                          child: const Button(
-                                            textButton: 'Start Shopping',
-                                            colorButton: 0xff000000,
-                                            colorText: 0xffffffff,
-                                          ),
-                                        ),
-                                      ],
+                        if (state.listCart != null &&
+                            state.listCart!.isNotEmpty)
+                          Expanded(
+                            child: RefreshIndicator(
+                              onRefresh: () async {
+                                cartCubit.getListCart(appCubit.state.userEntity!.id ?? 0);
+                              },
+                              child: ListView.separated(
+                                itemCount: state.listCart!.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10.0, vertical: 10),
+                                    child: ItemCart(
+                                      totalPrice: cartCubit.totalPriceItem(
+                                          state.listCart?[index].quantity ?? 0,
+                                          state.listCart?[index].price ?? 0),
+                                      quantity:
+                                          state.listCart?[index].quantity ?? 0,
+                                      nameProduct:
+                                          state.listCart?[index].nameProduct ??
+                                              '',
+                                      imageProduct:
+                                          state.listCart?[index].imageProduct ??
+                                              '',
+                                      price: state.listCart?[index].price ?? 0,
+                                      increment: () {
+                                        cartCubit.increment(index,
+                                            state.listCart?[index].price ?? 0);
+                                      },
+                                      decrement: () {
+                                        cartCubit.decrement(index,
+                                            state.listCart?[index].price ?? 0);
+                                      },
                                     ),
-                                  ),
+                                  );
+                                },
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return const SizedBox();
+                                },
+                              ),
+                            ),
+                          )
+                        else
+                          Expanded(
+                            child: Center(
+                              child: SizedBox(
+                                width: size.width * 0.5,
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                      child: Image.asset(
+                                        AppImages.imgEmptyCart,
+                                      ),
+                                    ),
+                                    const TextBold(
+                                      text: 'Opps!...Your cart is empty.',
+                                      textSize: 16,
+                                    ),
+                                    const SizedBox(height: 40),
+                                    InkWell(
+                                      onTap: () {
+                                        cartCubit.navHome(context);
+                                      },
+                                      child: const Button(
+                                        textButton: 'Start Shopping',
+                                        colorButton: 0xff000000,
+                                        colorText: 0xffffffff,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
+                            ),
+                          ),
                       ],
                     ),
                   ),
@@ -171,17 +171,18 @@ class _CartScreenBodyState extends State<CartScreenBody>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextBold(
-                          text: 'Total ${state.listCart?.length}',
-                          textSize: 11),
+                          text: 'Total: ${state.listCart?.length}',
+                          textSize: 14),
                       TextBold(
-                        text: '${state.totalPrice}',
+                        text: '\$${state.totalPrice}',
                         textSize: 18,
                       ),
                     ],
                   ),
                   const Spacer(),
                   InkWell(
-                    onTap: () => cartCubit.deleteAllCart(appCubit.state.userEntity!.id ?? 0),
+                    onTap: () => cartCubit
+                        .deleteAllCart(appCubit.state.userEntity!.id ?? 0),
                     child: Container(
                       padding: const EdgeInsets.only(
                         left: 20,

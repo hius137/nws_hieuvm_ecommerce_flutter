@@ -82,7 +82,7 @@ class _HomeScreenBodyState extends State<HomeScreenBody>
                     fillColor: Colors.black12,
                     hintText: 'Search Categories',
                     contentPadding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 10,),
                     prefixIconConstraints: const BoxConstraints(
                       minWidth: 20,
                       minHeight: 20,
@@ -97,6 +97,7 @@ class _HomeScreenBodyState extends State<HomeScreenBody>
             const SizedBox(height: 20),
             Expanded(
               child: BlocBuilder<HomeCubit, HomeState>(
+                buildWhen: (previous, current) => previous.categoriesStatus != current.categoriesStatus,
                 builder: (context, state) {
                   if (state.categoriesStatus == LoadStatus.loading) {
                     return const Center(

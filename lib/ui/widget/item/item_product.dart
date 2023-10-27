@@ -41,6 +41,7 @@ class ItemProduct extends StatelessWidget {
                         ),
                       ),
                     ),
+                    errorWidget: (context, url, error) => Image.asset(AppImages.noImage),
                   ),
                 ),
               ),

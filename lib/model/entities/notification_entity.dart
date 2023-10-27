@@ -1,4 +1,5 @@
-import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NotificationEntity {
   NotificationEntity({
@@ -6,7 +7,7 @@ class NotificationEntity {
     this.nameProduct,
     this.imageProduct,
     this.message,
-    this.time,
+    this.timeOrder,
   });
 
   NotificationEntity.fromJson(dynamic json) {
@@ -14,14 +15,14 @@ class NotificationEntity {
     nameProduct = json['nameProduct'];
     imageProduct = json['imageProduct'];
     message = json['message'];
-    time = json['time'];
+    timeOrder = json['timeOrder'];
   }
 
   int? idUser;
   String? nameProduct;
   String? imageProduct;
   String? message;
-  Timer? time;
+  String? timeOrder;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -29,7 +30,7 @@ class NotificationEntity {
     map['nameProduct'] = nameProduct;
     map['imageProduct'] = imageProduct;
     map['message'] = message;
-    map['time'] = time;
+    map['timeOrder'] = timeOrder;
     return map;
   }
 }

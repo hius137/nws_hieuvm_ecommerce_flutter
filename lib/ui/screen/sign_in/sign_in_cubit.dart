@@ -14,7 +14,7 @@ class SignInCubit extends Cubit<SignInState> {
   final AppCubit appCubit;
   SignInCubit({required this.appCubit}) : super(const SignInState());
 
-  void signIn(String email, String password) async {
+  void signIn(BuildContext context, String email, String password) async {
     emit(state.copyWith(signInStatus: LoadStatus.loading));
     try {
       final responseSignIn = await signInRequest(email, password);
@@ -25,9 +25,12 @@ class SignInCubit extends Cubit<SignInState> {
         Future.delayed(const Duration(milliseconds: 500)).then((value) {
           emit(state.copyWith(
             signInStatus: LoadStatus.success,
-          ));
+          ),);
         });
       }
+      // else if(email.isEmpty) {
+      //   showSnackBar(context, 'Please enter your email is empty');
+      // }
     } catch (e) {
       print('sign in =>>> $e');
       emit(state.copyWith(signInStatus: LoadStatus.failure));

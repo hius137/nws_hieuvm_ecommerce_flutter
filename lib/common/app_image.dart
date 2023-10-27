@@ -22,7 +22,7 @@ class AppImages {
   static const icMoon= 'assets/icons/ic_moon.svg';
   static const icQuestion= 'assets/icons/ic_question.svg';
   static const icWorld= 'assets/icons/ic_world.svg';
-  static const icProfile= 'assets/icons/ic_next.svg';
+  static const icProfile= 'assets/icons/ic_profile.svg';
   static const icLoveBlack= 'assets/icons/ic_love_black.svg';
   static const icLoveWhite= 'assets/icons/ic_love_white.svg';
   static const icBagWhite= 'assets/icons/ic_bag.svg';
@@ -41,5 +41,9 @@ class AppImages {
   static const icCheckSuccess= 'assets/icons/ic_check_success.png';
   static const icPlus= 'assets/icons/ic_plus.svg';
   static const icMinus= 'assets/icons/ic_minus.svg';
+  static const icHomeWhite= 'assets/icons/ic_home_white.svg';
+  static const icCartWhite= 'assets/icons/ic_cart_white.svg';
+  static const icNotificationWhite= 'assets/icons/ic_notification_white.svg';
+  static const icProfileWhite= 'assets/icons/ic_profile_white.svg';
 
 }

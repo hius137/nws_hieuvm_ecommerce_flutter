@@ -5,7 +5,6 @@ import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/database/share_preferences_helper.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/network/api_service.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/auth/auth_screen.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/home/home_screen.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/main/main_screen.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/onboarding/onboarding_screen.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/splash/splash_state.dart';

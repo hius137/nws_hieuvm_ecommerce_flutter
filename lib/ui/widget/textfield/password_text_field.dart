@@ -39,8 +39,8 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                 _obscureText = !_obscureText;
               });
             },
-          )),
-      keyboardType: TextInputType.emailAddress,
+          ),),
+      // keyboardType: TextInputType.none,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Please enter password';

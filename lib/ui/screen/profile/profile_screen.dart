@@ -45,6 +45,7 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> with AutomaticKee
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Padding(

@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/model/entities/categories_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/network/api_service.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/home/home_state.dart';

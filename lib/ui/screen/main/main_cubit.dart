@@ -8,12 +8,17 @@ class MainCubit extends Cubit<MainState> {
   MainCubit() : super(const MainState());
   PageController pageController = PageController();
 
-  void switchTap(int index) {
+  void onPageChange(int index) {
+    int currentIndex = index;
     pageController.animateToPage(
       index,
       duration: const Duration(milliseconds: 100),
       curve: Curves.linear,
     );
-    emit(state.copyWith(curlIndex: index));
+    emit(
+      state.copyWith(
+        curlIndex: currentIndex,
+      ),
+    );
   }
 }

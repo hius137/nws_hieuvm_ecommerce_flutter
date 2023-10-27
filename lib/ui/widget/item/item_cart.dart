@@ -71,7 +71,7 @@ class ItemCart extends StatelessWidget {
                     TextBold(text: nameProduct, textSize: 14),
                     TextNormal(text: nameProduct, textSize: 11),
                     const Spacer(),
-                    TextBold(text: '$totalPrice', textSize: 14),
+                    TextBold(text: '\$$totalPrice', textSize: 14),
                   ],
                 )
               ],

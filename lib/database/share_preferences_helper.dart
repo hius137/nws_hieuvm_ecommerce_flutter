@@ -1,5 +1,4 @@
-import 'dart:convert';
-import 'package:nws_hieuvm_ecommerce_flutter/model/entities/user/user_entity.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesHelper {

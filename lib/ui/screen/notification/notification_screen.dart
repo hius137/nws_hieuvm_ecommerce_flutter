@@ -27,7 +27,8 @@ class NotificationScreenBody extends StatefulWidget {
   State<NotificationScreenBody> createState() => _NotificationScreenBodyState();
 }
 
-class _NotificationScreenBodyState extends State<NotificationScreenBody> with AutomaticKeepAliveClientMixin{
+class _NotificationScreenBodyState extends State<NotificationScreenBody>
+    with AutomaticKeepAliveClientMixin {
   late NotificationCubit notificationCubit;
   late AppCubit appCubit;
 
@@ -41,6 +42,7 @@ class _NotificationScreenBodyState extends State<NotificationScreenBody> with Au
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -48,6 +50,8 @@ class _NotificationScreenBodyState extends State<NotificationScreenBody> with Au
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
           child: BlocBuilder<NotificationCubit, NotificationState>(
+            buildWhen: (previous, current) =>
+                previous.notificationStatus != current.notificationStatus,
             builder: (context, state) {
               return Column(
                 children: [
@@ -94,15 +98,19 @@ class _NotificationScreenBodyState extends State<NotificationScreenBody> with Au
                         ),
                         const SizedBox(height: 24),
                         Container(
-                            alignment: Alignment.topLeft,
-                            child: const TextBold(
-                                text: 'Notification', textSize: 18),),
+                          alignment: Alignment.topLeft,
+                          child: const TextBold(
+                            text: 'Notification',
+                            textSize: 18,
+                          ),
+                        ),
                         const SizedBox(height: 10),
                         state.notificationStatus == LoadStatus.success
                             ? Expanded(
                                 child: RefreshIndicator(
                                   onRefresh: () async {
-                                    notificationCubit.getListNotification(appCubit.state.userEntity!.id ?? 0);
+                                    notificationCubit.getListNotification(
+                                        appCubit.state.userEntity!.id ?? 0);
                                   },
                                   child: ListView.separated(
                                     itemCount: state.listNotification!.length,
@@ -119,7 +127,11 @@ class _NotificationScreenBodyState extends State<NotificationScreenBody> with Au
                                                 .listNotification?[index]
                                                 .imageProduct ??
                                             '',
-                                        timeOrder: '1 hours ago',
+                                        timeOrder: notificationCubit
+                                            .formatTimeAgo(state
+                                                    .listNotification?[index]
+                                                    .timeOrder ??
+                                                ''),
                                       );
                                     },
                                     separatorBuilder:
@@ -129,7 +141,11 @@ class _NotificationScreenBodyState extends State<NotificationScreenBody> with Au
                                   ),
                                 ),
                               )
-                            : const Expanded(child: Center(child: CircularProgressIndicator())),
+                            : const Expanded(
+                                child: Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              ),
                       ],
                     ),
                   ),

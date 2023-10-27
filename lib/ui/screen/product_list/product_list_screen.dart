@@ -98,6 +98,7 @@ class _ProductListScreenBodyState extends State<ProductListScreenBody> {
               ),
               const SizedBox(height: 10),
               BlocBuilder<ProductListCubit, ProductListState>(
+                buildWhen: (previous, current) => previous.productListStatus != current.productListStatus,
                 builder: (context, state) {
                   if (state.productListStatus == LoadStatus.loading) {
                     return const Center(
@@ -117,7 +118,7 @@ class _ProductListScreenBodyState extends State<ProductListScreenBody> {
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
                           itemBuilder: (context, index) {
-                            return GestureDetector(
+                            return InkWell(
                               onTap: () {
                                 Navigator.push(
                                   context,

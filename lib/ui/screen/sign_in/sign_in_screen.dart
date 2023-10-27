@@ -35,6 +35,7 @@ class _SignInScreenBodyState extends State<SignInScreenBody> {
   late SignInCubit signInCubit;
   late TextEditingController emailTextController;
   late TextEditingController passwordController;
+
   // late FirebaseStoreHelper firebaseStoreHelper = FirebaseStoreHelper();
 
   @override
@@ -51,7 +52,9 @@ class _SignInScreenBodyState extends State<SignInScreenBody> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: WillPopScope(
-        onWillPop: () async{ return shouldPop;},
+        onWillPop: () async {
+          return shouldPop;
+        },
         child: BlocConsumer<SignInCubit, SignInState>(
           listenWhen: (previous, current) {
             return previous.signInStatus != current.signInStatus;
@@ -105,7 +108,10 @@ class _SignInScreenBodyState extends State<SignInScreenBody> {
                   InkWell(
                     onTap: () {
                       signInCubit.signIn(
-                          emailTextController.text, passwordController.text);
+                        context,
+                        emailTextController.text,
+                        passwordController.text,
+                      );
                       showSnackBar(context, 'Sign in success!');
                     },
                     child: const Button(

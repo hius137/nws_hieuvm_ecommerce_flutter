@@ -151,79 +151,86 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                       Container(
                         width: size.width,
                         height: size.height / 2,
-                        padding: const EdgeInsets.all(25),
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
                         decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30)),
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30),
+                          ),
                         ),
                         child: Stack(
                           children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                TextBold(
-                                    text: state.productEntity?.title ?? '',
-                                    textSize: 18),
-                                const SizedBox(height: 5),
-                                TextNormal(
-                                    text: state.productEntity?.title ?? '',
-                                    textSize: 11),
-                                const SizedBox(height: 5),
-                                Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                      AppImages.icStar,
-                                      width: 70,
-                                      height: 10,
-                                    ),
-                                    const SizedBox(width: 10),
-                                    const TextNormal(
-                                        text: '(320 Review)', textSize: 11),
-                                  ],
-                                ),
-                                const Spacer(),
-                                const TextBold(text: 'Size', textSize: 16),
-                                const SizedBox(height: 10),
-                                SizedBox(
-                                  width: 250,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.center,
-                                    children: List.generate(
-                                      sizes.length,
-                                          (indexSize) => InkWell(
-                                        onTap: () => productDetailCubit
-                                            .onChangedSize(indexSize),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(1.0),
-                                          child: itemSize(
-                                              indexSize,
-                                              state.curlIndexSize,
-                                              context,
-                                              sizes),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 15),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  TextBold(
+                                      text: state.productEntity?.title ?? '',
+                                      textSize: 18),
+                                  const SizedBox(height: 5),
+                                  TextNormal(
+                                      text: state.productEntity?.title ?? '',
+                                      textSize: 11),
+                                  const SizedBox(height: 5),
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                        AppImages.icStar,
+                                        width: 70,
+                                        height: 10,
+                                      ),
+                                      const SizedBox(width: 10),
+                                      const TextNormal(
+                                          text: '(320 Review)', textSize: 11),
+                                    ],
+                                  ),
+                                  const Spacer(),
+                                  const TextBold(text: 'Size', textSize: 16),
+                                  const SizedBox(height: 10),
+                                  SizedBox(
+                                    width: 250,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: List.generate(
+                                        sizes.length,
+                                        (indexSize) => InkWell(
+                                          onTap: () => productDetailCubit
+                                              .onChangedSize(indexSize),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(1.0),
+                                            child: itemSize(
+                                                indexSize,
+                                                state.curlIndexSize,
+                                                context,
+                                                sizes),
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                const Spacer(),
-                                const TextBold(
-                                    text: 'Description', textSize: 16),
-                                const SizedBox(height: 10),
-                                TextNormal(
-                                    text:
-                                        state.productEntity?.description ?? '',
-                                    textSize: 11),
-                                const Spacer(),
-                                const TextNormal(
-                                    text: 'Total Price', textSize: 9),
-                                TextBold(
-                                    text: '\$${state.totalPrice}.00',
-                                    textSize: 18),
-                              ],
+                                  const Spacer(),
+                                  const TextBold(
+                                      text: 'Description', textSize: 16),
+                                  const SizedBox(height: 10),
+                                  TextNormal(
+                                      text: state.productEntity?.description ??
+                                          '',
+                                      textSize: 11),
+                                  const Spacer(),
+                                  const TextNormal(
+                                    text: 'Total Price',
+                                    textSize: 9,
+                                  ),
+                                  TextBold(
+                                      text: '\$${state.totalPrice}.00',
+                                      textSize: 18),
+                                ],
+                              ),
                             ),
                             Positioned(
                               top: 0,
@@ -284,7 +291,6 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                     const TextBold(
                                         text: 'Avalible in stok', textSize: 14),
                                     Container(
-                                      width: 50,
                                       height: 132,
                                       padding: const EdgeInsets.all(10),
                                       decoration: BoxDecoration(
@@ -309,7 +315,8 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                             onTap: () => productDetailCubit
                                                 .onChangedColors(index),
                                             child: Padding(
-                                              padding: const EdgeInsets.all(1.0),
+                                              padding:
+                                                  const EdgeInsets.all(1.0),
                                               child: itemColor(
                                                   index,
                                                   state.curlIndexColor,
@@ -326,7 +333,7 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                             ),
                             Positioned(
                               right: 0,
-                              bottom: 0,
+                              bottom: 10,
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 15, horizontal: 30),
@@ -354,6 +361,7 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                           quantity: state.quantity,
                                           imageProduct:
                                               state.productEntity!.images![0],
+                                          timeOrder: DateTime.now().toString(),
                                         );
                                         notificationEntity = NotificationEntity(
                                             idUser:
@@ -365,7 +373,7 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                                     .images![0] ??
                                                 '',
                                             message:
-                                                'Bạn đã đặt hàng thành công sản phẩm ${state.productEntity?.title ?? ''}');
+                                                'Bạn đã đặt hàng thành công sản phẩm ${state.productEntity?.title ?? ''}',timeOrder: DateTime.now().toString());
 
                                         fireStoreService.addToCart(cartEntity);
                                         fireStoreService.setNotification(
