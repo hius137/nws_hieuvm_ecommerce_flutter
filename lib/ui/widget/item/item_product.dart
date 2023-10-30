@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 
 class ItemProduct extends StatelessWidget {
   final int priceProduct;
@@ -73,7 +73,7 @@ class ItemProduct extends StatelessWidget {
               color: const Color(0xffeeeeee),
               ),
         ),
-        TextBold(text: '\$$priceProduct.00', textSize: 13),
+        TextBold(text: '\$$priceProduct.00', textSize: 13,color: 0xff000000,),
       ],
     );
   }

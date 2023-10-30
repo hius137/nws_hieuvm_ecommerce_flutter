@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 
 class ItemCart extends StatelessWidget {
   final String nameProduct;
@@ -68,10 +68,10 @@ class ItemCart extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    TextBold(text: nameProduct, textSize: 14),
+                    TextBold(text: nameProduct, textSize: 14,color: 0xff000000,),
                     TextNormal(text: nameProduct, textSize: 11),
                     const Spacer(),
-                    TextBold(text: '\$$totalPrice', textSize: 14),
+                    TextBold(text: '\$$totalPrice', textSize: 14,color: 0xff000000,),
                   ],
                 )
               ],
@@ -98,7 +98,7 @@ class ItemCart extends StatelessWidget {
                         ),
                       ),
                     ),
-                    TextBold(text: '$quantity', textSize: 16),
+                    TextBold(text: '$quantity', textSize: 16,color: 0xff000000,),
                     InkWell(
                       onTap: increment,
                       child: Padding(

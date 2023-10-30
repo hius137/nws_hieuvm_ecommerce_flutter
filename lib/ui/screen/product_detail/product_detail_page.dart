@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/database/firebase_firestore_service.dart';
@@ -9,23 +8,23 @@ import 'package:nws_hieuvm_ecommerce_flutter/model/entities/cart_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/notification_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/product_detail/product_detail_cubit.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/button.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/item/dot.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/snackbar.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_button.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/item/item_dot.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_snackbar.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 
-class ProductDetailScreen extends StatelessWidget {
+class ProductDetailPage extends StatelessWidget {
   final int idProduct;
   final int price;
 
-  const ProductDetailScreen(
+  const ProductDetailPage(
       {super.key, required this.idProduct, required this.price});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ProductDetailCubit>(
       create: (context) => ProductDetailCubit(),
-      child: ProductDetailScreenBody(
+      child: ProductDetailPageBody(
         idProduct: idProduct,
         price: price,
       ),
@@ -33,19 +32,19 @@ class ProductDetailScreen extends StatelessWidget {
   }
 }
 
-class ProductDetailScreenBody extends StatefulWidget {
+class ProductDetailPageBody extends StatefulWidget {
   final int idProduct;
   final int price;
 
-  const ProductDetailScreenBody(
+  const ProductDetailPageBody(
       {super.key, required this.idProduct, required this.price});
 
   @override
-  State<ProductDetailScreenBody> createState() =>
-      _ProductDetailScreenBodyState();
+  State<ProductDetailPageBody> createState() =>
+      _ProductDetailPageBodyState();
 }
 
-class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
+class _ProductDetailPageBodyState extends State<ProductDetailPageBody> {
   late ProductDetailCubit productDetailCubit;
   late FireStoreService fireStoreService = FireStoreService();
   late CartEntity cartEntity;
@@ -169,8 +168,10 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   TextBold(
-                                      text: state.productEntity?.title ?? '',
-                                      textSize: 18),
+                                    text: state.productEntity?.title ?? '',
+                                    textSize: 18,
+                                    color: 0xff000000,
+                                  ),
                                   const SizedBox(height: 5),
                                   TextNormal(
                                       text: state.productEntity?.title ?? '',
@@ -189,7 +190,11 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                     ],
                                   ),
                                   const Spacer(),
-                                  const TextBold(text: 'Size', textSize: 16),
+                                  const TextBold(
+                                    text: 'Size',
+                                    textSize: 16,
+                                    color: 0xff000000,
+                                  ),
                                   const SizedBox(height: 10),
                                   SizedBox(
                                     width: 250,
@@ -215,7 +220,10 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                   ),
                                   const Spacer(),
                                   const TextBold(
-                                      text: 'Description', textSize: 16),
+                                    text: 'Description',
+                                    textSize: 16,
+                                    color: 0xff000000,
+                                  ),
                                   const SizedBox(height: 10),
                                   TextNormal(
                                       text: state.productEntity?.description ??
@@ -227,8 +235,10 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                     textSize: 9,
                                   ),
                                   TextBold(
-                                      text: '\$${state.totalPrice}.00',
-                                      textSize: 18),
+                                    text: '\$${state.totalPrice}.00',
+                                    textSize: 18,
+                                    color: 0xff000000,
+                                  ),
                                 ],
                               ),
                             ),
@@ -268,8 +278,10 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                               ),
                                             ),
                                             TextBold(
-                                                text: '${state.quantity}',
-                                                textSize: 16),
+                                              text: '${state.quantity}',
+                                              textSize: 16,
+                                              color: 0xff000000,
+                                            ),
                                             InkWell(
                                               onTap: () {
                                                 productDetailCubit.increment();
@@ -289,7 +301,10 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                           ],
                                         )),
                                     const TextBold(
-                                        text: 'Avalible in stok', textSize: 14),
+                                      text: 'Avalible in stok',
+                                      textSize: 14,
+                                      color: 0xff000000,
+                                    ),
                                     Container(
                                       height: 132,
                                       padding: const EdgeInsets.all(10),
@@ -372,20 +387,19 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
                                                     .images?[0] ??
                                                 '',
                                             message:
-                                                'You have successfully ordered the product ${state.productEntity?.title ?? ''}',timeOrder: DateTime.now().toString());
+                                                'You have successfully ordered the product ${state.productEntity?.title ?? ''}',
+                                            timeOrder:
+                                                DateTime.now().toString());
 
                                         fireStoreService.addToCart(cartEntity);
                                         fireStoreService.setNotification(
                                             notificationEntity);
                                         showSnackBar(context, 'Order success!');
                                       },
-                                      child: Text(
-                                        'Add to cart',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          color: const Color(0xffffffff),
-                                        ),
+                                      child: const TextBold(
+                                        text: 'Add to cart',
+                                        textSize: 18,
+                                        color: 0xff000000,
                                       ),
                                     ),
                                   ],
@@ -408,5 +422,10 @@ class _ProductDetailScreenBodyState extends State<ProductDetailScreenBody> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

@@ -2,29 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/auth/auth_cubit.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/button.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_button.dart';
 
-class AuthScreen extends StatelessWidget {
-  const AuthScreen({super.key});
+class AuthPage extends StatelessWidget {
+  const AuthPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<AuthCubit>(
       create: (context) => AuthCubit(),
-      child: const LoginOrSignUpScreenBody(),
+      child: const AuthPageBody(),
     );
   }
 }
 
-class LoginOrSignUpScreenBody extends StatefulWidget {
-  const LoginOrSignUpScreenBody({super.key});
+class AuthPageBody extends StatefulWidget {
+  const AuthPageBody({super.key});
 
   @override
-  State<LoginOrSignUpScreenBody> createState() =>
-      _LoginOrSignUpScreenBodyState();
+  State<AuthPageBody> createState() =>
+      _AuthPageBodyState();
 }
 
-class _LoginOrSignUpScreenBodyState extends State<LoginOrSignUpScreenBody> {
+class _AuthPageBodyState extends State<AuthPageBody> {
   late AuthCubit authCubit;
 
   @override
@@ -93,5 +93,9 @@ class _LoginOrSignUpScreenBodyState extends State<LoginOrSignUpScreenBody> {
         ],
       ),
     );
+  }
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

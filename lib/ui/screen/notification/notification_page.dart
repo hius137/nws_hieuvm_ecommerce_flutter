@@ -6,28 +6,28 @@ import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/notification/notification_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/item/item_notification.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 
-class NotificationScreen extends StatelessWidget {
-  const NotificationScreen({super.key});
+class NotificationPage extends StatelessWidget {
+  const NotificationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => NotificationCubit(),
-      child: const NotificationScreenBody(),
+      child: const NotificationPageBody(),
     );
   }
 }
 
-class NotificationScreenBody extends StatefulWidget {
-  const NotificationScreenBody({super.key});
+class NotificationPageBody extends StatefulWidget {
+  const NotificationPageBody({super.key});
 
   @override
-  State<NotificationScreenBody> createState() => _NotificationScreenBodyState();
+  State<NotificationPageBody> createState() => _NotificationPageBodyState();
 }
 
-class _NotificationScreenBodyState extends State<NotificationScreenBody>
+class _NotificationPageBodyState extends State<NotificationPageBody>
     with AutomaticKeepAliveClientMixin {
   late NotificationCubit notificationCubit;
   late AppCubit appCubit;
@@ -102,6 +102,7 @@ class _NotificationScreenBodyState extends State<NotificationScreenBody>
                           child: const TextBold(
                             text: 'Notification',
                             textSize: 18,
+                            color: 0xff000000,
                           ),
                         ),
                         const SizedBox(height: 10),
@@ -142,17 +143,17 @@ class _NotificationScreenBodyState extends State<NotificationScreenBody>
                               ) else Expanded(
                                 child: Center(
                                   child: SizedBox(
-                                    width: size.width * 0.5,
+                                    width: size.width * 0.4,
                                     child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Expanded(
-                                          child: Image.asset(
-                                            AppImages.imgNotificationError,
-                                          ),
+                                        Image.asset(
+                                          AppImages.imgNotificationError,
                                         ),
                                         const TextBold(
                                           text: "You don't have any notifications.",
                                           textSize: 16,
+                                          color: 0xff000000,
                                         ),
                                       ],
                                     ),
@@ -173,4 +174,9 @@ class _NotificationScreenBodyState extends State<NotificationScreenBody>
 
   @override
   bool get wantKeepAlive => true;
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 }

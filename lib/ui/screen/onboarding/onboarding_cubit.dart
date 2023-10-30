@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/auth/auth_screen.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/auth/auth_page.dart';
 part 'onboarding_state.dart';
 
 class OnboardingCubit extends Cubit<OnboardingState> {
@@ -19,7 +19,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) =>
-        const AuthScreen(),
+        const AuthPage(),
       ),
     );
   }

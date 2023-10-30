@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 
 class ItemCategories extends StatelessWidget {
   final String nameCategories;
@@ -62,8 +62,8 @@ class ItemCategories extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  TextBold(text: nameCategories, textSize: 16),
-                  TextBold(text: '$lenghtCategories Product', textSize: 14),
+                  TextBold(text: nameCategories, textSize: 16,color: 0xff000000,),
+                  TextBold(text: '$lenghtCategories Product', textSize: 14,color: 0xff000000,),
                 ],
               ),
             ),

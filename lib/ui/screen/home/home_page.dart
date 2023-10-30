@@ -6,29 +6,29 @@ import 'package:nws_hieuvm_ecommerce_flutter/database/firebase_firestore_service
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/home/home_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/home/home_state.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/product_list/product_list_screen.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/product_list/product_list_page.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/item/item_categories.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<HomeCubit>(
       create: (context) => HomeCubit(),
-      child: const HomeScreenBody(),
+      child: const HomePageBody(),
     );
   }
 }
 
-class HomeScreenBody extends StatefulWidget {
-  const HomeScreenBody({super.key});
+class HomePageBody extends StatefulWidget {
+  const HomePageBody({super.key});
 
   @override
-  State<HomeScreenBody> createState() => _HomeScreenBodyState();
+  State<HomePageBody> createState() => _HomePageBodyState();
 }
 
-class _HomeScreenBodyState extends State<HomeScreenBody>
+class _HomePageBodyState extends State<HomePageBody>
     with AutomaticKeepAliveClientMixin {
   late HomeCubit homeCubit;
   late FireStoreService fireStoreService = FireStoreService();
@@ -122,7 +122,7 @@ class _HomeScreenBodyState extends State<HomeScreenBody>
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ProductListScreen(
+                                builder: (context) => ProductListPage(
                                   idCategories:
                                       state.listCategories?[index].id ?? 0,
                                   nameCategories:
@@ -157,4 +157,10 @@ class _HomeScreenBodyState extends State<HomeScreenBody>
 
   @override
   bool get wantKeepAlive => true;
+
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 }

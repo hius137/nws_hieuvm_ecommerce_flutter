@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/product_detail/product_detail_screen.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/product_detail/product_detail_page.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/product_list/product_list_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/item/item_product.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 
-class ProductListScreen extends StatelessWidget {
-  const ProductListScreen({
+class ProductListPage extends StatelessWidget {
+  const ProductListPage({
     super.key,
     required this.idCategories,
     required this.nameCategories,
@@ -22,7 +22,7 @@ class ProductListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<ProductListCubit>(
       create: (context) => ProductListCubit(),
-      child: ProductListScreenBody(
+      child: ProductListPageBody(
         idCategories: idCategories,
         nameCategories: nameCategories,
       ),
@@ -30,21 +30,21 @@ class ProductListScreen extends StatelessWidget {
   }
 }
 
-class ProductListScreenBody extends StatefulWidget {
+class ProductListPageBody extends StatefulWidget {
   final int idCategories;
   final String nameCategories;
 
-  const ProductListScreenBody({
+  const ProductListPageBody({
     super.key,
     required this.idCategories,
     required this.nameCategories,
   });
 
   @override
-  State<ProductListScreenBody> createState() => _ProductListScreenBodyState();
+  State<ProductListPageBody> createState() => _ProductListPageBodyState();
 }
 
-class _ProductListScreenBodyState extends State<ProductListScreenBody> {
+class _ProductListPageBodyState extends State<ProductListPageBody> {
   late ProductListCubit productListCubit;
 
   @override
@@ -88,7 +88,11 @@ class _ProductListScreenBodyState extends State<ProductListScreenBody> {
                       return Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          TextBold(text: widget.nameCategories, textSize: 20),
+                          TextBold(
+                            text: widget.nameCategories,
+                            textSize: 20,
+                            color: 0xff000000,
+                          ),
                         ],
                       );
                     },
@@ -97,7 +101,8 @@ class _ProductListScreenBodyState extends State<ProductListScreenBody> {
               ),
               const SizedBox(height: 10),
               BlocBuilder<ProductListCubit, ProductListState>(
-                buildWhen: (previous, current) => previous.productListStatus != current.productListStatus,
+                buildWhen: (previous, current) =>
+                    previous.productListStatus != current.productListStatus,
                 builder: (context, state) {
                   if (state.productListStatus == LoadStatus.loading) {
                     return const Center(
@@ -106,40 +111,40 @@ class _ProductListScreenBodyState extends State<ProductListScreenBody> {
                   } else if (state.productListStatus == LoadStatus.success) {
                     return Expanded(
                       child: GridView.builder(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisSpacing: 15,
-                                  // mainAxisExtent: MediaQuery.of(context).size.width / 2,
-                                  crossAxisCount: 2,
-                                  mainAxisSpacing: 15,
-                                  childAspectRatio: 0.75),
-                          itemCount: state.listProduct?.length,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          itemBuilder: (context, index) {
-                            return InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ProductDetailScreen(
-                                      price: state.listProduct?[index].price ?? 0,
-                                      idProduct:
-                                          state.listProduct?[index].id ?? 0,
-                                    ),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisSpacing: 15,
+                                // mainAxisExtent: MediaQuery.of(context).size.width / 2,
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 15,
+                                childAspectRatio: 0.75,),
+                        itemCount: state.listProduct?.length,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProductDetailPage(
+                                    price: state.listProduct?[index].price ?? 0,
+                                    idProduct:
+                                        state.listProduct?[index].id ?? 0,
                                   ),
-                                );
-                              },
-                              child: ItemProduct(
-                                imageProduct:
-                                    state.listProduct?[index].images?[0] ?? '',
-                                nameProduct:
-                                    state.listProduct?[index].title ?? '',
-                                priceProduct:
-                                    state.listProduct?[index].price ?? 0,
-                              ),
-                            );
-                          },
+                                ),
+                              );
+                            },
+                            child: ItemProduct(
+                              imageProduct:
+                                  state.listProduct?[index].images?[0] ?? '',
+                              nameProduct:
+                                  state.listProduct?[index].title ?? '',
+                              priceProduct:
+                                  state.listProduct?[index].price ?? 0,
+                            ),
+                          );
+                        },
                       ),
                     );
                   } else {
@@ -156,5 +161,10 @@ class _ProductListScreenBodyState extends State<ProductListScreenBody> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

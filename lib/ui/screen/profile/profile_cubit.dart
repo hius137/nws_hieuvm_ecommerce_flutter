@@ -5,7 +5,7 @@ import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/database/share_preferences_helper.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/user/user_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_in/sign_in_screen.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_in/sign_in_page.dart';
 
 part 'profile_state.dart';
 
@@ -44,7 +44,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (context) =>
-        const SignInScreen(),
+        const SignInPage(),
       ),
     );
   }

@@ -6,9 +6,9 @@ import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/database/share_preferences_helper.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/network/api_service.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_up/sign_up_screen.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/success/success_sceen.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/snackbar.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_up/sign_up_page.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/success/success_page.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_snackbar.dart';
 part 'sign_in_state.dart';
 
 class SignInCubit extends Cubit<SignInState> {
@@ -45,7 +45,7 @@ class SignInCubit extends Cubit<SignInState> {
   void navAuth(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const SuccessScreen(),
+        builder: (context) => const SuccessPage(),
       ),
     );
   }
@@ -53,7 +53,7 @@ class SignInCubit extends Cubit<SignInState> {
   void navSignUp(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const SignUpScreen(),
+        builder: (context) => const SignUpPage(),
       ),
     );
   }

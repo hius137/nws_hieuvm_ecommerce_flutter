@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SharedPreferencesHelper {
   static const _accessToken = '_accessToken';  // luu token
 
-  static const _userEntity = '_userEntity';  // luu thong tin nguoi dung
+  // static const _userEntity = '_userEntity';  // luu thong tin nguoi dung
 
   static const _didOnboardKey = '_didOnboardKey'; // check xem no da xem onboard chua / true: da xem , false: chua
 

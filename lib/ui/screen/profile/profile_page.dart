@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/profile/profile_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/item/item_gender.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/switch.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/textfield/normal_textfield.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_switch.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text_field/normal_textfield.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,19 +19,19 @@ class ProfileScreen extends StatelessWidget {
         final appCubit = RepositoryProvider.of<AppCubit>(context);
         return ProfileCubit(appCubit: appCubit);
       },
-      child: const ProfileScreenBody(),
+      child: const ProfilePageBody(),
     );
   }
 }
 
-class ProfileScreenBody extends StatefulWidget {
-  const ProfileScreenBody({super.key});
+class ProfilePageBody extends StatefulWidget {
+  const ProfilePageBody({super.key});
 
   @override
-  State<ProfileScreenBody> createState() => _ProfileScreenBodyState();
+  State<ProfilePageBody> createState() => _ProfilePageBodyState();
 }
 
-class _ProfileScreenBodyState extends State<ProfileScreenBody> with AutomaticKeepAliveClientMixin{
+class _ProfilePageBodyState extends State<ProfilePageBody> with AutomaticKeepAliveClientMixin{
   // late AppCubit appCubit;
   late ProfileCubit profileCubit;
 
@@ -91,11 +90,11 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> with AutomaticKee
                     )
                   ],
                 ),
-                const TextBold(text: 'Upload image', textSize: 16),
+                const TextBold(text: 'Upload image', textSize: 16,color: 0xff000000,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const TextBoldEEEE(text: 'Name', textSize: 16),
+                    const TextBoldEEEE(text: 'Name', textSize: 16,),
                     SizedBox(
                       // height: 30,
                       width: MediaQuery.of(context).size.width * 0.6,
@@ -142,7 +141,7 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> with AutomaticKee
                 const Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextBold(text: 'Setting', textSize: 18),
+                    TextBold(text: 'Setting', textSize: 18,color: 0xff000000,),
                   ],
                 ),
                 Container(
@@ -171,9 +170,9 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> with AutomaticKee
                             ),
                           ),
                           const SizedBox(width: 15),
-                          const TextBold(text: 'Language', textSize: 16),
+                          const TextBold(text: 'Language', textSize: 16,color: 0xff000000,),
                           const Spacer(),
-                          const TextEEEE(text: 'English', textSize: 12),
+                          const TextEEEE(text: 'English', textSize: 12,),
                           const SizedBox(width: 10),
                           SvgPicture.asset(
                             AppImages.icRight,
@@ -199,7 +198,7 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> with AutomaticKee
                             ),
                           ),
                           const SizedBox(width: 15),
-                          const TextBold(text: 'Notification', textSize: 16),
+                          const TextBold(text: 'Notification', textSize: 16,color: 0xff000000,),
                           const Spacer(),
                           const CustomSwitch(),
                         ],
@@ -220,7 +219,7 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> with AutomaticKee
                             ),
                           ),
                           const SizedBox(width: 15),
-                          const TextBold(text: 'Dark Mood', textSize: 16),
+                          const TextBold(text: 'Dark Mood', textSize: 16,color: 0xff000000,),
                           const Spacer(),
                           const TextEEEE(text: 'off', textSize: 12),
                           const SizedBox(width: 10),
@@ -243,7 +242,7 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> with AutomaticKee
                             ),
                           ),
                           const SizedBox(width: 15),
-                          const TextBold(text: 'Help Center', textSize: 16),
+                          const TextBold(text: 'Help Center', textSize: 16,color: 0xff000000,),
                           const Spacer(),
                           SvgPicture.asset(
                             AppImages.icRight,
@@ -279,13 +278,10 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> with AutomaticKee
                           width: 30,
                         ),
                         const SizedBox(width: 10),
-                        Text(
-                          'Log out',
-                          style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.white,
-                          ),
+                        const TextBold(
+                          text: 'Log out',
+                          textSize: 16,
+                          color: 0xff000000,
                         ),
                       ],
                     ),
@@ -301,4 +297,9 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> with AutomaticKee
 
   @override
   bool get wantKeepAlive => true;
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 }

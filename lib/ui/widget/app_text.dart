@@ -3,7 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 class TextBold extends StatelessWidget {
   final String text;
   final double textSize;
-  const TextBold({super.key, required this.text, required this.textSize});
+  final int color;
+  const TextBold({super.key, required this.text, required this.textSize, required this.color,});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class TextBold extends StatelessWidget {
       style: GoogleFonts.poppins(
         fontSize: textSize,
         fontWeight: FontWeight.bold,
-        color: Colors.black,
+        color: Color(color),
       ),
     );
   }

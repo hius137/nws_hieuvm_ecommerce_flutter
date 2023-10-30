@@ -3,29 +3,29 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/success/success_cubit.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/button.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_button.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 
-class SuccessScreen extends StatelessWidget {
-  const SuccessScreen({super.key});
+class SuccessPage extends StatelessWidget {
+  const SuccessPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SuccessfulCubit>(
       create: (context) => SuccessfulCubit(),
-      child: const AuthScreenBody(),
+      child: const AuthPageBody(),
     );
   }
 }
 
-class AuthScreenBody extends StatefulWidget {
-  const AuthScreenBody({super.key});
+class AuthPageBody extends StatefulWidget {
+  const AuthPageBody({super.key});
 
   @override
-  State<AuthScreenBody> createState() => _AuthScreenBodyState();
+  State<AuthPageBody> createState() => _AuthPageBodyState();
 }
 
-class _AuthScreenBodyState extends State<AuthScreenBody> {
+class _AuthPageBodyState extends State<AuthPageBody> {
   late SuccessfulCubit successfulCubit;
 
   @override
@@ -50,6 +50,7 @@ class _AuthScreenBodyState extends State<AuthScreenBody> {
             const TextBold(
               text: 'Successful!',
               textSize: 20,
+              color: 0xff000000,
             ),
             const SizedBox(height: 10),
             Text(
@@ -80,5 +81,9 @@ class _AuthScreenBodyState extends State<AuthScreenBody> {
         ),
       ),
     );
+  }
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

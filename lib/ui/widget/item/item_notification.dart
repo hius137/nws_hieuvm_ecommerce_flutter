@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 
 class ItemNotification extends StatelessWidget {
   final String nameProduct;
@@ -49,7 +49,7 @@ class ItemNotification extends StatelessWidget {
                   TextNormal(
                       text: message,
                       textSize: 14),
-                  TextBold(text: timeOrder, textSize: 14),
+                  TextBold(text: timeOrder, textSize: 14,color: 0xff000000,),
                 ],
               ),
             ),

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/database/firebase_firestore_service.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/cart_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/main/main_screen.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/main/main_page.dart';
 
 part 'cart_state.dart';
 
@@ -124,7 +124,7 @@ class CartCubit extends Cubit<CartState> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) =>
-        const MainScreen(),
+        const MainPage(),
       ),
     );
   }

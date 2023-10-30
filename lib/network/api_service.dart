@@ -10,14 +10,10 @@ Future<TokenEntity?> signInRequest(String email, String password) async {
     final data = {'email': email, 'password': password};
     final response = await dio
         .post('https://api.escuelajs.co/api/v1/auth/login', data: data);
-    if (response != null) {
       final body = response.data;
       return TokenEntity(
           accessToken: body['access_token'],
           refreshToken: body['refresh_token']);
-    } else {
-      return null;
-    }
   } catch (e) {
     return null;
   }

@@ -5,31 +5,31 @@ import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_up/sign_up_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_up/sign_up_state.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/button.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/textfield/email_text_field.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/textfield/password_text_field.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_button.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text_field/email_text_field.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text_field/password_text_field.dart';
 
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SignUpCubit>(
       create: (context) => SignUpCubit(),
-      child: const SignUpScreenBody(),
+      child: const SignUpPageBody(),
     );
   }
 }
 
-class SignUpScreenBody extends StatefulWidget {
-  const SignUpScreenBody({super.key});
+class SignUpPageBody extends StatefulWidget {
+  const SignUpPageBody({super.key});
 
   @override
-  State<SignUpScreenBody> createState() => _SignUpScreenBodyState();
+  State<SignUpPageBody> createState() => _SignUpPageBodyState();
 }
 
-class _SignUpScreenBodyState extends State<SignUpScreenBody> {
+class _SignUpPageBodyState extends State<SignUpPageBody> {
   late SignUpCubit signUpCubit;
   final usernameTextController = TextEditingController();
   late TextEditingController emailTextController;
@@ -76,9 +76,9 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
                   child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      TextBold(text: 'Sign Up', textSize: 18),
+                      TextBold(text: 'Sign Up', textSize: 18,color: 0xff000000,),
                       SizedBox(height: 10),
-                      TextNormal(text: 'Create an new account', textSize: 16),
+                      TextNormal(text: 'Create an new account', textSize: 16,),
                     ],
                   ),
                 ),
@@ -163,5 +163,9 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
         },
       ),
     );
+  }
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

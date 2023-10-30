@@ -1,35 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/cart/cart_cubit.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/button.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_button.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/item/item_cart.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 
-class CartScreen extends StatelessWidget {
-  const CartScreen({super.key});
+class CartPage extends StatelessWidget {
+  const CartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<CartCubit>(
       create: (context) => CartCubit(),
-      child: const CartScreenBody(),
+      child: const CartPageBody(),
     );
   }
 }
 
-class CartScreenBody extends StatefulWidget {
-  const CartScreenBody({super.key});
+class CartPageBody extends StatefulWidget {
+  const CartPageBody({super.key});
 
   @override
-  State<CartScreenBody> createState() => _CartScreenBodyState();
+  State<CartPageBody> createState() => _CartPageBodyState();
 }
 
-class _CartScreenBodyState extends State<CartScreenBody>
+class _CartPageBodyState extends State<CartPageBody>
     with AutomaticKeepAliveClientMixin {
   late CartCubit cartCubit;
   late AppCubit appCubit;
@@ -84,15 +83,19 @@ class _CartScreenBodyState extends State<CartScreenBody>
                         const SizedBox(height: 24),
                         Container(
                             alignment: Alignment.topLeft,
-                            child:
-                            const TextBold(text: 'My Cart', textSize: 18)),
+                            child: const TextBold(
+                              text: 'My Cart',
+                              textSize: 18,
+                              color: 0xff000000,
+                            )),
                         const SizedBox(height: 10),
                         if (state.listCart != null &&
                             state.listCart!.isNotEmpty)
                           Expanded(
                             child: RefreshIndicator(
                               onRefresh: () async {
-                                cartCubit.getListCart(appCubit.state.userEntity!.id ?? 0);
+                                cartCubit.getListCart(
+                                    appCubit.state.userEntity!.id ?? 0);
                               },
                               child: ListView.separated(
                                 itemCount: state.listCart!.length,
@@ -105,13 +108,13 @@ class _CartScreenBodyState extends State<CartScreenBody>
                                           state.listCart?[index].quantity ?? 0,
                                           state.listCart?[index].price ?? 0),
                                       quantity:
-                                      state.listCart?[index].quantity ?? 0,
+                                          state.listCart?[index].quantity ?? 0,
                                       nameProduct:
-                                      state.listCart?[index].nameProduct ??
-                                          '',
+                                          state.listCart?[index].nameProduct ??
+                                              '',
                                       imageProduct:
-                                      state.listCart?[index].imageProduct ??
-                                          '',
+                                          state.listCart?[index].imageProduct ??
+                                              '',
                                       price: state.listCart?[index].price ?? 0,
                                       increment: () {
                                         cartCubit.increment(index,
@@ -146,6 +149,7 @@ class _CartScreenBodyState extends State<CartScreenBody>
                                     const TextBold(
                                       text: 'Opps!...Your cart is empty.',
                                       textSize: 16,
+                                      color: 0xff000000,
                                     ),
                                     const SizedBox(height: 40),
                                     InkWell(
@@ -171,11 +175,14 @@ class _CartScreenBodyState extends State<CartScreenBody>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextBold(
-                          text: 'Total: ${state.listCart?.length}',
-                          textSize: 14),
+                        text: 'Total: ${state.listCart?.length}',
+                        textSize: 14,
+                        color: 0xff000000,
+                      ),
                       TextBold(
                         text: '\$${state.totalPrice}',
                         textSize: 18,
+                        color: 0xff000000,
                       ),
                     ],
                   ),
@@ -196,15 +203,12 @@ class _CartScreenBodyState extends State<CartScreenBody>
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Text(
-                              "Proceed to Checkout",
-                              style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 20),
+                            child: TextBold(
+                              text: 'Proceed to Checkout',
+                              textSize: 16,
+                              color: 0xffffffff,
                             ),
                           ),
                           SvgPicture.asset(
@@ -229,4 +233,9 @@ class _CartScreenBodyState extends State<CartScreenBody>
 
   @override
   bool get wantKeepAlive => true;
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 }

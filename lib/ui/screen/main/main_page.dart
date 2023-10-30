@@ -2,36 +2,46 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/cart/cart_screen.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/home/home_screen.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/cart/cart_page.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/home/home_page.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/main/main_cubit.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/notification/notification_screen.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/profile/profile_screen.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/notification/notification_page.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/profile/profile_page.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 
-class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+class MainPage extends StatelessWidget {
+  const MainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<MainCubit>(
       create: (context) => MainCubit(),
-      child: const MainScreenBody(),
+      child: const MainPageBody(),
     );
   }
 }
 
-class MainScreenBody extends StatefulWidget {
-  const MainScreenBody({super.key});
+class MainPageBody extends StatefulWidget {
+  const MainPageBody({super.key});
 
   @override
-  State<MainScreenBody> createState() => _MainScreenBodyState();
+  State<MainPageBody> createState() => _MainPageBodyState();
 }
 
-class _MainScreenBodyState extends State<MainScreenBody> {
+class _MainPageBodyState extends State<MainPageBody> {
   late MainCubit mainCubit;
-  List<String> iconsBlack = [AppImages.icHome, AppImages.icCart, AppImages.icNotification, AppImages.icProfile];
-  List<String> iconsWhite = [AppImages.icHomeWhite, AppImages.icCartWhite, AppImages.icNotificationWhite, AppImages.icProfileWhite];
+  List<String> iconsBlack = [
+    AppImages.icHome,
+    AppImages.icCart,
+    AppImages.icNotification,
+    AppImages.icProfile
+  ];
+  List<String> iconsWhite = [
+    AppImages.icHomeWhite,
+    AppImages.icCartWhite,
+    AppImages.icNotificationWhite,
+    AppImages.icProfileWhite
+  ];
   List<String> titles = ['Home', 'Cart', 'Notify', 'Profile'];
 
   @override
@@ -54,10 +64,10 @@ class _MainScreenBodyState extends State<MainScreenBody> {
               mainCubit.onIndexChange(value);
             },
             children: const [
-              HomeScreen(),
-              CartScreen(),
-              NotificationScreen(),
-              ProfileScreen(),
+              HomePage(),
+              CartPage(),
+              NotificationPage(),
+              ProfilePage(),
             ],
           );
         },
@@ -107,10 +117,15 @@ class _MainScreenBodyState extends State<MainScreenBody> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 }
 
-Container itemHomeBottom(
-    int index, int curIndex, List<String> iconsBlack,List<String> iconsWhite, List<String> titles) {
+Container itemHomeBottom(int index, int curIndex, List<String> iconsBlack,
+    List<String> iconsWhite, List<String> titles) {
   return Container(
     child: index == curIndex
         ? Container(
@@ -132,7 +147,11 @@ Container itemHomeBottom(
                 ),
                 Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child: TextBold(text: titles[index], textSize: 14),
+                  child: TextBold(
+                    text: titles[index],
+                    textSize: 14,
+                    color: 0xff000000,
+                  ),
                 ),
               ],
             ),

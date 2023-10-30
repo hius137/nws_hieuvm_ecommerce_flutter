@@ -7,26 +7,26 @@ import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/onboarding/onboarding_cub
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/item/item_onboarding.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class OnboardingScreen extends StatelessWidget {
-  const OnboardingScreen({super.key});
+class OnboardingPage extends StatelessWidget {
+  const OnboardingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<OnboardingCubit>(
       create: (context) => OnboardingCubit(),
-      child: const OnboardingScreenBody(),
+      child: const OnboardingPageBody(),
     );
   }
 }
 
-class OnboardingScreenBody extends StatefulWidget {
-  const OnboardingScreenBody({super.key});
+class OnboardingPageBody extends StatefulWidget {
+  const OnboardingPageBody({super.key});
 
   @override
-  State<OnboardingScreenBody> createState() => _OnboardingScreenBodyState();
+  State<OnboardingPageBody> createState() => _OnboardingPageBodyState();
 }
 
-class _OnboardingScreenBodyState extends State<OnboardingScreenBody> {
+class _OnboardingPageBodyState extends State<OnboardingPageBody> {
   late OnboardingCubit onboardingCubit;
   int currentIndexPageView = 0;
   final controller = PageController();
@@ -131,5 +131,9 @@ class _OnboardingScreenBodyState extends State<OnboardingScreenBody> {
         );
       },
     );
+  }
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

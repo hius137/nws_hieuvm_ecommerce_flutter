@@ -4,13 +4,12 @@ import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_in/sign_in_cubit.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/button.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/textfield/email_text_field.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/textfield/password_text_field.dart';
-
-class SignInScreen extends StatelessWidget {
-  const SignInScreen({super.key});
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_button.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text_field/email_text_field.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text_field/password_text_field.dart';
+class SignInPage extends StatelessWidget {
+  const SignInPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,19 +17,19 @@ class SignInScreen extends StatelessWidget {
       create: (context) => SignInCubit(
         appCubit: RepositoryProvider.of<AppCubit>(context),
       ),
-      child: const SignInScreenBody(),
+      child: const SignInPageBody(),
     );
   }
 }
 
-class SignInScreenBody extends StatefulWidget {
-  const SignInScreenBody({super.key});
+class SignInPageBody extends StatefulWidget {
+  const SignInPageBody({super.key});
 
   @override
-  State<SignInScreenBody> createState() => _SignInScreenBodyState();
+  State<SignInPageBody> createState() => _SignInPageBodyState();
 }
 
-class _SignInScreenBodyState extends State<SignInScreenBody> {
+class _SignInPageBodyState extends State<SignInPageBody> {
   late SignInCubit signInCubit;
   late TextEditingController emailTextController;
   late TextEditingController passwordController;
@@ -75,7 +74,7 @@ class _SignInScreenBodyState extends State<SignInScreenBody> {
                     child: const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextBold(text: 'Welcome!', textSize: 18),
+                        TextBold(text: 'Welcome!', textSize: 18,color: 0xff000000,),
                         SizedBox(height: 5),
                         TextNormal(
                             text: 'please login or sign up to continue our app',
@@ -101,6 +100,7 @@ class _SignInScreenBodyState extends State<SignInScreenBody> {
                     child: const TextBold(
                       textSize: 16,
                       text: 'register now',
+                      color: 0xff000000,
                     ),
                   ),
                   const Spacer(),
@@ -152,5 +152,9 @@ class _SignInScreenBodyState extends State<SignInScreenBody> {
         ),
       ),
     );
+  }
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

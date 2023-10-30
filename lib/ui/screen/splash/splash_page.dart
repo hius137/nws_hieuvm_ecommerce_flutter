@@ -5,8 +5,8 @@ import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/splash/splash_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/splash/splash_state.dart';
 
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+class SplashPage extends StatelessWidget {
+  const SplashPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,18 +15,18 @@ class SplashScreen extends StatelessWidget {
           final appCubit = context.read<AppCubit>();
           return SplashCubit(appCubit: appCubit);
         },
-        child: const SplashScreenBody());
+        child: const SplashPageBody());
   }
 }
 
-class SplashScreenBody extends StatefulWidget {
-  const SplashScreenBody({super.key});
+class SplashPageBody extends StatefulWidget {
+  const SplashPageBody({super.key});
 
   @override
-  State<SplashScreenBody> createState() => _SplashScreenBodyState();
+  State<SplashPageBody> createState() => _SplashPageBodyState();
 }
 
-class _SplashScreenBodyState extends State<SplashScreenBody> {
+class _SplashPageBodyState extends State<SplashPageBody> {
   late SplashCubit splashCubit;
 
   @override
@@ -48,5 +48,10 @@ class _SplashScreenBodyState extends State<SplashScreenBody> {
         );
       }),
     );
+  }
+  @override
+  void dispose() {
+    splashCubit.close();
+    super.dispose();
   }
 }
