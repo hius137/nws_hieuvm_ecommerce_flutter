@@ -16,10 +16,30 @@ class ProductListCubit extends Cubit<ProductListState> {
       emit(state.copyWith(
         productListStatus: LoadStatus.success,
         listProduct: responseListProducts,
+        currentProducts: responseListProducts,
       ));
     } catch (e) {
       print('categories =>>> $e');
       emit(state.copyWith(productListStatus: LoadStatus.failure));
     }
+  }
+
+  Future<void> searchProduct(String inputKeyword) async {
+    try {
+      final suggestions = state.listProduct?.where((product) {
+        final title = product.title?.toLowerCase();
+        final input = inputKeyword.toLowerCase();
+        return title?.contains(input) ?? false;
+      }).toList();
+      emit(state.copyWith(
+        currentProducts: suggestions,
+      ));
+    } catch (e) {
+      emit(state.copyWith(productListStatus: LoadStatus.failure));
+    }
+  }
+
+  void isSearch(){
+    emit(state.copyWith(isSearch: !state.isSearch));
   }
 }

@@ -32,7 +32,6 @@ class ProfilePageBody extends StatefulWidget {
 }
 
 class _ProfilePageBodyState extends State<ProfilePageBody> with AutomaticKeepAliveClientMixin{
-  // late AppCubit appCubit;
   late ProfileCubit profileCubit;
 
   @override
@@ -281,7 +280,7 @@ class _ProfilePageBodyState extends State<ProfilePageBody> with AutomaticKeepAli
                         const TextBold(
                           text: 'Log out',
                           textSize: 16,
-                          color: 0xff000000,
+                          color: 0xffffffff,
                         ),
                       ],
                     ),

@@ -46,6 +46,7 @@ class ProductListPageBody extends StatefulWidget {
 
 class _ProductListPageBodyState extends State<ProductListPageBody> {
   late ProductListCubit productListCubit;
+  final _searchProductController = TextEditingController();
 
   @override
   void initState() {
@@ -75,10 +76,62 @@ class _ProductListPageBodyState extends State<ProductListPageBody> {
                           height: 50,
                         ),
                       ),
-                      SvgPicture.asset(
-                        AppImages.icSearch,
-                        width: 20,
-                        height: 20,
+                      BlocBuilder<ProductListCubit, ProductListState>(
+                        builder: (context, state) {
+                          return GestureDetector(
+                            onTap: () {
+                              productListCubit.isSearch();
+                            },
+                            child: state.isSearch == true
+                                ? SizedBox(
+                                    width: MediaQuery.of(context).size.width * 0.6,
+                                    child: TextField(
+                                      controller: _searchProductController,
+                                      decoration: InputDecoration(
+                                        border:  OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(30),
+                                          borderSide: BorderSide.none,
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(30),
+                                          borderSide: BorderSide.none,
+                                        ),
+                                        prefixIcon: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            const SizedBox(width: 10),
+                                            SvgPicture.asset(
+                                              AppImages.icSearch,
+                                            ),
+                                            const SizedBox(width: 10),
+                                          ],
+                                        ),
+                                        filled: true,
+                                        fillColor: Colors.black12,
+                                        hintText: 'Search...',
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                          vertical: 6,
+                                          horizontal: 10,
+                                        ),
+                                        prefixIconConstraints:
+                                            const BoxConstraints(
+                                          minWidth: 20,
+                                          minHeight: 20,
+                                        ),
+                                      ),
+                                      onChanged: (value) {
+                                        productListCubit.searchProduct(value);
+                                      },
+                                    ),
+                                  )
+                                : SvgPicture.asset(
+                                    AppImages.icSearch,
+                                    width: 20,
+                                    height: 20,
+                                  ),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -102,7 +155,7 @@ class _ProductListPageBodyState extends State<ProductListPageBody> {
               const SizedBox(height: 10),
               BlocBuilder<ProductListCubit, ProductListState>(
                 buildWhen: (previous, current) =>
-                    previous.productListStatus != current.productListStatus,
+                    previous.currentProducts != current.currentProducts,
                 builder: (context, state) {
                   if (state.productListStatus == LoadStatus.loading) {
                     return const Center(
@@ -113,12 +166,13 @@ class _ProductListPageBodyState extends State<ProductListPageBody> {
                       child: GridView.builder(
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisSpacing: 15,
-                                // mainAxisExtent: MediaQuery.of(context).size.width / 2,
-                                crossAxisCount: 2,
-                                mainAxisSpacing: 15,
-                                childAspectRatio: 0.75,),
-                        itemCount: state.listProduct?.length,
+                          crossAxisSpacing: 15,
+                          // mainAxisExtent: MediaQuery.of(context).size.width / 2,
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 15,
+                          childAspectRatio: 0.75,
+                        ),
+                        itemCount: state.currentProducts?.length,
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, index) {
@@ -128,20 +182,20 @@ class _ProductListPageBodyState extends State<ProductListPageBody> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => ProductDetailPage(
-                                    price: state.listProduct?[index].price ?? 0,
+                                    price: state.currentProducts?[index].price ?? 0,
                                     idProduct:
-                                        state.listProduct?[index].id ?? 0,
+                                        state.currentProducts?[index].id ?? 0,
                                   ),
                                 ),
                               );
                             },
                             child: ItemProduct(
                               imageProduct:
-                                  state.listProduct?[index].images?[0] ?? '',
+                                  state.currentProducts?[index].images?[0] ?? '',
                               nameProduct:
-                                  state.listProduct?[index].title ?? '',
+                                  state.currentProducts?[index].title ?? '',
                               priceProduct:
-                                  state.listProduct?[index].price ?? 0,
+                                  state.currentProducts?[index].price ?? 0,
                             ),
                           );
                         },

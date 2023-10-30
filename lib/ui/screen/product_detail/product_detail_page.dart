@@ -399,7 +399,7 @@ class _ProductDetailPageBodyState extends State<ProductDetailPageBody> {
                                       child: const TextBold(
                                         text: 'Add to cart',
                                         textSize: 18,
-                                        color: 0xff000000,
+                                        color: 0xffffffff,
                                       ),
                                     ),
                                   ],

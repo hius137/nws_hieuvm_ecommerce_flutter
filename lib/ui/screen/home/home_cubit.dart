@@ -12,7 +12,8 @@ class HomeCubit extends Cubit<HomeState> {
       final responseCategories = await requestCategories();
       emit(state.copyWith(
         categoriesStatus: LoadStatus.success,
-        listCategories: responseCategories,
+        categories: responseCategories,
+        currentCategories: responseCategories,
       ));
     } catch (e) {
       print('categories =>>> $e');
@@ -20,11 +21,18 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  // void addSearchedFOrItemsToSearchedList(String searchedCategories) {
-  //   final List<CategoriesEntity> allCategories;
-  //   emit(state.copyWith(
-  //     listCategories: allCategories.where((categories) =>
-  //         categories.name!.toLowerCase().startsWith(searchedCategories)).toList();
-  //   ));
-  // }
+  Future<void> searchCategories(String inputKeyword) async {
+    try {
+      final suggestions = state.categories?.where((category) {
+        final title = category.name?.toLowerCase();
+        final input = inputKeyword.toLowerCase();
+        return title?.contains(input) ?? false;
+      }).toList();
+      emit(state.copyWith(
+        currentCategories: suggestions,
+      ));
+    } catch (e) {
+      emit(state.copyWith(categoriesStatus: LoadStatus.failure));
+    }
+  }
 }

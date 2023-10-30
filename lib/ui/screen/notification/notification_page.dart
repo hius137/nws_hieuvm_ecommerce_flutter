@@ -106,60 +106,64 @@ class _NotificationPageBodyState extends State<NotificationPageBody>
                           ),
                         ),
                         const SizedBox(height: 10),
-                        if (state.notificationStatus == LoadStatus.success && state.listNotification!.isNotEmpty) Expanded(
-                                child: RefreshIndicator(
-                                  onRefresh: () async {
-                                    notificationCubit.getListNotification(
-                                        appCubit.state.userEntity!.id ?? 0);
-                                  },
-                                  child: ListView.separated(
-                                    itemCount: state.listNotification!.length,
-                                    itemBuilder: (context, index) {
-                                      return ItemNotification(
-                                        message: state.listNotification?[index]
-                                                .message ??
-                                            '',
-                                        nameProduct: state
-                                                .listNotification?[index]
-                                                .nameProduct ??
-                                            '',
-                                        imageProduct: state
-                                                .listNotification?[index]
-                                                .imageProduct ??
-                                            '',
-                                        timeOrder: notificationCubit
-                                            .formatTimeAgo(state
-                                                    .listNotification?[index]
-                                                    .timeOrder ??
-                                                ''),
-                                      );
-                                    },
-                                    separatorBuilder:
-                                        (BuildContext context, int index) {
-                                      return const Divider();
-                                    },
-                                  ),
-                                ),
-                              ) else Expanded(
-                                child: Center(
-                                  child: SizedBox(
-                                    width: size.width * 0.4,
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          AppImages.imgNotificationError,
-                                        ),
-                                        const TextBold(
-                                          text: "You don't have any notifications.",
-                                          textSize: 16,
-                                          color: 0xff000000,
-                                        ),
-                                      ],
+                        if (state.notificationStatus == LoadStatus.success &&
+                            state.listNotification!.isNotEmpty)
+                          Expanded(
+                            child: RefreshIndicator(
+                              onRefresh: () async {
+                                notificationCubit.getListNotification(
+                                    appCubit.state.userEntity!.id ?? 0);
+                              },
+                              child: ListView.separated(
+                                itemCount: state.listNotification!.length,
+                                itemBuilder: (context, index) {
+                                  return ItemNotification(
+                                    message: state
+                                            .listNotification?[index].message ??
+                                        '',
+                                    nameProduct: state.listNotification?[index]
+                                            .nameProduct ??
+                                        '',
+                                    imageProduct: state.listNotification?[index]
+                                            .imageProduct ??
+                                        '',
+                                    timeOrder: notificationCubit.formatTimeAgo(
+                                        state.listNotification?[index]
+                                                .timeOrder ??
+                                            ''),
+                                  );
+                                },
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return const Divider();
+                                },
+                              ),
+                            ),
+                          )
+                        else if (state.listNotification?.isEmpty ?? false)
+                          Expanded(
+                            child: Center(
+                              child: SizedBox(
+                                width: size.width * 0.4,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      AppImages.imgNotificationError,
                                     ),
-                                  ),
+                                    const SizedBox(height: 10),
+                                    const TextBold(
+                                      text: "You don't have any notifications.",
+                                      textSize: 16,
+                                      color: 0xff000000,
+                                    ),
+                                  ],
                                 ),
                               ),
+                            ),
+                          ),
+                        if(state.notificationStatus == LoadStatus.loading)
+                          const Expanded(child: Center(child: CircularProgressIndicator())),
                       ],
                     ),
                   ),

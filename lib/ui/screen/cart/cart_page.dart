@@ -5,7 +5,6 @@ import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/cart/cart_cubit.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_button.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/item/item_cart.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 
@@ -134,39 +133,6 @@ class _CartPageBodyState extends State<CartPageBody>
                               ),
                             ),
                           )
-                        else
-                          Expanded(
-                            child: Center(
-                              child: SizedBox(
-                                width: size.width * 0.5,
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                      child: Image.asset(
-                                        AppImages.imgEmptyCart,
-                                      ),
-                                    ),
-                                    const TextBold(
-                                      text: 'Opps!...Your cart is empty.',
-                                      textSize: 16,
-                                      color: 0xff000000,
-                                    ),
-                                    const SizedBox(height: 40),
-                                    InkWell(
-                                      onTap: () {
-                                        cartCubit.navHome(context);
-                                      },
-                                      child: const Button(
-                                        textButton: 'Start Shopping',
-                                        colorButton: 0xff000000,
-                                        colorText: 0xffffffff,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
                       ],
                     ),
                   ),

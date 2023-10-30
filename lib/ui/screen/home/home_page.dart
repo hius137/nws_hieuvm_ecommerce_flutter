@@ -89,7 +89,7 @@ class _HomePageBodyState extends State<HomePageBody>
                     ),
                   ),
                   onChanged: (value) {
-                    // homeCubit.addSearchedFOrItemsToSearchedList(value);
+                    homeCubit.searchCategories(value);
                   },
                 ),
               ],
@@ -97,7 +97,7 @@ class _HomePageBodyState extends State<HomePageBody>
             const SizedBox(height: 20),
             Expanded(
               child: BlocBuilder<HomeCubit, HomeState>(
-                buildWhen: (previous, current) => previous.categoriesStatus != current.categoriesStatus,
+                buildWhen: (previous, current) => previous.currentCategories != current.currentCategories,
                 builder: (context, state) {
                   if (state.categoriesStatus == LoadStatus.loading) {
                     return const Center(
@@ -112,36 +112,34 @@ class _HomePageBodyState extends State<HomePageBody>
                         mainAxisSpacing: 15,
                         childAspectRatio: 0.75,
                       ),
-                      itemCount: state.listCategories?.length,
+                      itemCount: state.currentCategories?.length,
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
-                        return GestureDetector(
+                        return InkWell(
                           onTap: () {
-                            // fireStoreService.addUser();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => ProductListPage(
                                   idCategories:
-                                      state.listCategories?[index].id ?? 0,
+                                      state.currentCategories?[index].id ?? 0,
                                   nameCategories:
-                                      state.listCategories?[index].name ?? '',
+                                      state.currentCategories?[index].name ?? '',
                                 ),
                               ),
                             );
                           },
                           child: ItemCategories(
                             nameCategories:
-                                state.listCategories?[index].name ?? '',
+                                state.currentCategories?[index].name ?? '',
                             imageCategories:
-                                state.listCategories?[index].image ?? '',
+                                state.currentCategories?[index].image ?? '',
                             lenghtCategories:
-                                state.listCategories?[index].totalProducts ?? 0,
+                                state.currentCategories?[index].totalProducts ?? 0,
                           ),
                         );
                       },
-                      addAutomaticKeepAlives: true,
                     );
                   } else {
                     return const Center(child: CircularProgressIndicator());
@@ -157,7 +155,6 @@ class _HomePageBodyState extends State<HomePageBody>
 
   @override
   bool get wantKeepAlive => true;
-
 
   @override
   void dispose() {

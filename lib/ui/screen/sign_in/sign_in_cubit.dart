@@ -33,6 +33,7 @@ class SignInCubit extends Cubit<SignInState> {
             ),);
           });
         }else {
+          // ignore: use_build_context_synchronously
           showSnackBar(context, 'Wrong email or password');
         }
       }

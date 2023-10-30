@@ -43,6 +43,7 @@ class SignUpCubit extends Cubit<SignUpState> {
             userEntity: responseSignUp,
             signUpStatus: LoadStatus.success
         ));
+        // ignore: use_build_context_synchronously
         showSnackBar(
           context,
           'Sign up success!',

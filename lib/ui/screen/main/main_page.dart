@@ -124,11 +124,18 @@ class _MainPageBodyState extends State<MainPageBody> {
   }
 }
 
-Container itemHomeBottom(int index, int curIndex, List<String> iconsBlack,
-    List<String> iconsWhite, List<String> titles) {
+Container itemHomeBottom(
+  int index,
+  int curIndex,
+  List<String> iconsBlack,
+  List<String> iconsWhite,
+  List<String> titles,
+) {
   return Container(
     child: index == curIndex
-        ? Container(
+        ? AnimatedContainer(
+            duration: const Duration(seconds: 5),
+            curve: Curves.elasticOut,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               color: const Color(0xffeeeeee),
@@ -156,10 +163,16 @@ Container itemHomeBottom(int index, int curIndex, List<String> iconsBlack,
               ],
             ),
           )
-        : SvgPicture.asset(
-            iconsBlack[index],
-            width: 18,
-            height: 18,
+        : Container(
+            padding: const EdgeInsets.all(10),
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+            ),
+            child: SvgPicture.asset(
+              iconsBlack[index],
+              width: 18,
+              height: 18,
+            ),
           ),
   );
 }

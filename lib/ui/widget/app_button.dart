@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 
@@ -120,7 +119,8 @@ class IconBorderButton extends StatelessWidget {
   }
 }
 
-Container itemSize(int index, int curIndex, BuildContext context,List<String> sizes){
+Container itemSize(
+    int index, int curIndex, BuildContext context, List<String> sizes) {
   return Container(
     width: 40,
     height: 40,
@@ -143,16 +143,28 @@ Container itemSize(int index, int curIndex, BuildContext context,List<String> si
     ),
   );
 }
-Container itemColor(int index, int curIndex, BuildContext context,List<int> colors){
+
+Container itemColor(
+    int index, int curIndex, BuildContext context, List<int> colors) {
   return Container(
     width: 20,
     height: 20,
     decoration: BoxDecoration(
-      border: Border.all(color: colors[index] == 0xffffffff ? Colors.black : Colors.transparent, width: 1),
+      border: Border.all(
+          color:
+              colors[index] == 0xffffffff ? Colors.black : Colors.transparent,
+          width: 1),
       color: Color(colors[index]),
       borderRadius: const BorderRadius.all(Radius.circular(15)),
     ),
-    child: index == curIndex ? SvgPicture.asset(colors[index] == 0xff000000 ? AppImages.icCheckWhite : AppImages.icCheckBlack) : const SizedBox(),
-    // child: index == curIndex ? SvgPicture.asset( colors[index] == 0xffffffff ? AppImages.icCheckBlack : AppImages.icApple) : const SizedBox(),
+    child: index == curIndex
+        ? Image.asset(
+            colors[index] == 0xff000000
+                ? AppImages.icCheckWhite
+                : AppImages.icCheckBlack,
+            width: 16,
+            height: 16,
+          )
+        : const SizedBox(),
   );
 }

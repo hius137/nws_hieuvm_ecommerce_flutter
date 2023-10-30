@@ -10,6 +10,7 @@ class TextBold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
+      textAlign: TextAlign.center,
       style: GoogleFonts.poppins(
         fontSize: textSize,
         fontWeight: FontWeight.bold,
