@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/product_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/network/api_service.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/utils/logger.dart';
 
 part 'product_list_state.dart';
 
@@ -19,7 +20,7 @@ class ProductListCubit extends Cubit<ProductListState> {
         currentProducts: responseListProducts,
       ));
     } catch (e) {
-      print('categories =>>> $e');
+      logger.e(e);
       emit(state.copyWith(productListStatus: LoadStatus.failure));
     }
   }

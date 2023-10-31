@@ -5,6 +5,7 @@ import 'package:nws_hieuvm_ecommerce_flutter/model/entities/cart_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/product_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/network/api_service.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/utils/logger.dart';
 
 part 'product_detail_state.dart';
 
@@ -39,7 +40,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
         productEntity: responseProducts,
       ));
     } catch (e) {
-      print('product =>>> $e');
+      logger.e(e);
       emit(
         state.copyWith(productDetailStatus: LoadStatus.failure),
       );

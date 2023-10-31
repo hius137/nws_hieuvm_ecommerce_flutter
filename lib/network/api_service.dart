@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/categories_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/product_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/user/token_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/user/user_entity.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/utils/logger.dart';
 
 Future<TokenEntity?> signInRequest(String email, String password) async {
   final dio = Dio();
@@ -10,10 +13,9 @@ Future<TokenEntity?> signInRequest(String email, String password) async {
     final data = {'email': email, 'password': password};
     final response = await dio
         .post('https://api.escuelajs.co/api/v1/auth/login', data: data);
-      final body = response.data;
-      return TokenEntity(
-          accessToken: body['access_token'],
-          refreshToken: body['refresh_token']);
+    final body = response.data;
+    return TokenEntity(
+        accessToken: body['access_token'], refreshToken: body['refresh_token']);
   } catch (e) {
     return null;
   }
@@ -29,7 +31,7 @@ Future<UserEntity?> signUpRequest(
       'name': name,
       'email': email,
       'password': password,
-      'avatar': avatar
+      'avatar': avatar,
     };
     final response =
         await dio.post('https://api.escuelajs.co/api/v1/users/', data: data);
@@ -53,18 +55,20 @@ Future<List<CategoriesEntity>?> requestCategories() async {
       final List<dynamic> responseData = response.data;
       List<CategoriesEntity> listCategories =
           responseData.map((json) => CategoriesEntity.fromJson(json)).toList();
-      final totalProduct =
-          listCategories.map((e) => requestTotalProduct(e.id!));
+      final totalProduct = listCategories.map((e) => requestTotalProduct(e.id!));
       final waitGetTotal = await Future.wait(totalProduct);
+      List<CategoriesEntity>? result = [];
       for (int i = 0; i < listCategories.length; i++) {
-        listCategories[i].totalProducts = waitGetTotal[i];
+        Map<String, dynamic> temp = listCategories[i].toJson();
+        temp['totalProduct'] = waitGetTotal[i];
+        result.add(CategoriesEntity.fromJson(temp));
       }
-      return listCategories;
+      return result;
     } else {
       return null;
     }
   } catch (e) {
-    print('err $e');
+    logger.e(e);
     return null;
   }
 }
@@ -83,7 +87,7 @@ Future<int?> requestTotalProduct(int idCategory) async {
       return null;
     }
   } catch (e) {
-    print('err $e');
+    logger.e(e);
     return null;
   }
 }
@@ -102,7 +106,7 @@ Future<List<ProductEntity>?> requestListProduct(int idCategory) async {
       return null;
     }
   } catch (e) {
-    print('err $e');
+    logger.e(e);
     return null;
   }
 }
@@ -119,7 +123,7 @@ Future<ProductEntity?> requestProduct(int idProduct) async {
       return null;
     }
   } catch (e) {
-    print('err $e');
+    logger.e(e);
     return null;
   }
 }
@@ -140,7 +144,7 @@ Future<UserEntity> getProfileUser(String authToken) async {
       throw Exception('Failed to load profile data');
     }
   } catch (e) {
-    print('Error: $e');
+    logger.e(e);
     rethrow;
   }
 }

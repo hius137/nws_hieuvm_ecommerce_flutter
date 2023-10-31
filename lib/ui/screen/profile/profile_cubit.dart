@@ -6,6 +6,7 @@ import 'package:nws_hieuvm_ecommerce_flutter/database/share_preferences_helper.d
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/user/user_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_in/sign_in_page.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/utils/logger.dart';
 
 part 'profile_state.dart';
 
@@ -36,7 +37,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       SharedPreferencesHelper.removeAccessToken();
       appCubit.signOut();
     }catch(e){
-      print('err sign out ===> $e');
+      logger.e(e);
     }
   }
 

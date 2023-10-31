@@ -9,6 +9,7 @@ import 'package:nws_hieuvm_ecommerce_flutter/network/api_service.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_up/sign_up_page.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/success/success_page.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_snackbar.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/utils/logger.dart';
 part 'sign_in_state.dart';
 
 class SignInCubit extends Cubit<SignInState> {
@@ -38,7 +39,7 @@ class SignInCubit extends Cubit<SignInState> {
         }
       }
     } catch (e) {
-      print('sign in =>>> $e');
+      logger.e('sign up page: $e');
       emit(state.copyWith(signInStatus: LoadStatus.failure));
     }
   }

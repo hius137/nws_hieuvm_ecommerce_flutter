@@ -28,6 +28,7 @@ class ItemCart extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 120,
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: const BorderRadius.all(Radius.circular(15)),

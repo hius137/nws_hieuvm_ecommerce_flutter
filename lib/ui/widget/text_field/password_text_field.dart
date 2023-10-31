@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/utils/utils.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/utils/app_utils.dart';
 
 class PasswordTextField extends StatefulWidget {
   final TextEditingController textEditingController;

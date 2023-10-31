@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/app_state.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/user/user_entity.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/utils/logger.dart';
 
 class AppCubit extends Cubit<AppState> {
   AppCubit() : super(const AppState());
@@ -13,8 +14,7 @@ class AppCubit extends Cubit<AppState> {
         ),
       );
     } catch (e) {
-      print('err setProfile =>> $e');
-    }
+      logger.e(e);    }
   }
 
   void signOut() async {
@@ -22,8 +22,7 @@ class AppCubit extends Cubit<AppState> {
       await Future.delayed(const Duration(seconds: 1));
       emit(state.removeUser());
     }catch(e){
-      print('err sign out ===> $e');
-    }
+      logger.e(e);    }
 
   }
 }

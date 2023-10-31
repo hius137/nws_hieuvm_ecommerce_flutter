@@ -28,6 +28,8 @@ class TextNormal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
+      maxLines: 3,
+      overflow: TextOverflow.ellipsis,
       style: GoogleFonts.poppins(
         fontSize: textSize,
         fontWeight: FontWeight.normal,

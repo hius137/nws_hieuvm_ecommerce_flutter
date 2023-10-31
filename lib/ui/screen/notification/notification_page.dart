@@ -45,7 +45,6 @@ class _NotificationPageBodyState extends State<NotificationPageBody>
     super.build(context);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
@@ -56,7 +55,7 @@ class _NotificationPageBodyState extends State<NotificationPageBody>
               return Column(
                 children: [
                   SizedBox(
-                    height: size.height * 0.85,
+                    height: size.height * 0.83,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

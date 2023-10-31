@@ -9,6 +9,7 @@ class CategoriesEntity {
     id = json['id'];
     name = json['name'];
     image = json['image'];
+    totalProducts = json['totalProduct'];
   }
 
   int? id;
@@ -33,6 +34,7 @@ class CategoriesEntity {
     map['id'] = id;
     map['name'] = name;
     map['image'] = image;
+    map['totalProduct'] = totalProducts;
     return map;
   }
 }
