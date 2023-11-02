@@ -4,7 +4,6 @@ import 'package:nws_hieuvm_ecommerce_flutter/database/firebase_firestore_service
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/notification_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/utils/logger.dart';
-
 part 'notification_state.dart';
 
 class NotificationCubit extends Cubit<NotificationState> {

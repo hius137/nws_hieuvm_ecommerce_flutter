@@ -1,16 +1,16 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/database/firebase_firestore_service.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/cart_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/main/main_page.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/cart/cart_navigator.dart';
 
 part 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
-  CartCubit() : super(const CartState());
-  final FireStoreService fireStoreService = FireStoreService();
+  CartCubit({required this.fireStoreService, required this.navigator}) : super(const CartState());
+  final FireStoreService fireStoreService;
+  final CartNavigator navigator;
 
   void getListCart(int id) async {
     emit(
@@ -50,6 +50,7 @@ class CartCubit extends Cubit<CartState> {
       emit(state.copyWith(cartStatus: LoadStatus.failure));
     }
   }
+
   void increment(int index, int price) {
     emit(
       state.copyWith(cartStatus: LoadStatus.loading),
@@ -76,9 +77,6 @@ class CartCubit extends Cubit<CartState> {
     ///TODO HANDLE UPDATE TO FIREBASE
   }
 
-  int totalPriceItem( int quantity, int price){
-    return quantity * price;
-  }
   void decrement(int index, int price) {
     emit(
       state.copyWith(cartStatus: LoadStatus.loading),
@@ -118,14 +116,5 @@ class CartCubit extends Cubit<CartState> {
     }
 
     ///TODO HANDLE UPDATE TO FIREBASE
-  }
-
-  void navHome(BuildContext context)  {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) =>
-        const MainPage(),
-      ),
-    );
   }
 }

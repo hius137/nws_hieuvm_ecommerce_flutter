@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/cart_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/notification_entity.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/utils/logger.dart';
 
-// .set là ghi đè một field còn .add là thêm một document mới cho collection
 
 class FireStoreService{
   final CollectionReference cartCollectionReference = FirebaseFirestore.instance.collection('cart');
@@ -13,7 +12,7 @@ class FireStoreService{
     try{
       await cartCollectionReference.add(cartEntity.toJson());
     }catch(e){
-      debugPrint('err =>>> $e');
+      logger.e('err =>>> $e');
     }
   }
 
@@ -40,7 +39,7 @@ class FireStoreService{
     try{
       await notificationCollectionReference.add(notificationEntity.toJson());
     }catch(e){
-      debugPrint('err =>>> $e');
+      logger.e('err =>>> $e');
     }
   }
 

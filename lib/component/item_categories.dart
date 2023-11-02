@@ -6,13 +6,13 @@ import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 class ItemCategories extends StatelessWidget {
   final String nameCategories;
   final String imageCategories;
-  final int lenghtCategories;
+  final int lengthCategories;
 
   const ItemCategories(
       {super.key,
       required this.nameCategories,
       required this.imageCategories,
-      required this.lenghtCategories});
+      required this.lengthCategories});
 
   @override
   Widget build(BuildContext context) {
@@ -63,24 +63,12 @@ class ItemCategories extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   TextBold(text: nameCategories, textSize: 16,color: 0xff000000,),
-                  TextBold(text: '$lenghtCategories Product', textSize: 14,color: 0xff000000,),
+                  TextBold(text: '$lengthCategories Product', textSize: 14,color: 0xff000000,),
                 ],
               ),
             ),
           ),
         ),
-        // Positioned(
-        //   bottom: 3,
-        //   left: 0,
-        //   right: 0,
-        //   child: Column(
-        //     crossAxisAlignment: CrossAxisAlignment.center,
-        //     children: [
-        //       TextBold(text: nameCategories, textSize: 20),
-        //       TextBold(text: '$lenghtCategories Product', textSize: 16),
-        //     ],
-        //   ),
-        // ),
       ],
     );
   }

@@ -7,7 +7,6 @@ class NormalTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-
       initialValue: initValue,
       decoration: const InputDecoration(
         isDense: true,

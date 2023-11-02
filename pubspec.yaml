@@ -49,6 +49,7 @@ dependencies:
   firebase_core: ^2.17.0
   cloud_firestore: ^4.9.3
   logger:
+  another_flushbar: ^1.12.30
 
 
 dev_dependencies:

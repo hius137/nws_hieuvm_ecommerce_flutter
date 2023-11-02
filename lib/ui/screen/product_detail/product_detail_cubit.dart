@@ -1,33 +1,38 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/database/firebase_firestore_service.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/cart_entity.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/model/entities/notification_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/product_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/network/api_service.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/product_detail/product_detail_navigator.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/utils/logger.dart';
 
 part 'product_detail_state.dart';
 
 class ProductDetailCubit extends Cubit<ProductDetailState> {
-  ProductDetailCubit() : super(const ProductDetailState());
-  PageController pageController = PageController();
+  ProductDetailCubit(
+      {required this.fireStoreService, required this.navigator})
+      : super(const ProductDetailState());
+  final FireStoreService fireStoreService;
+  final ProductDetailNavigator navigator;
 
   void onChangedPage(value) {
-    int currentIndexDot = value;
     emit(state.copyWith(
-      curlIndexDot: currentIndexDot,
+      curlIndexDot: value,
     ));
   }
+
   void onChangedColors(value) {
-    int currentIndexColor = value;
     emit(state.copyWith(
-      curlIndexColor: currentIndexColor,
+      curlIndexColor: value,
     ));
-  }void onChangedSize(value) {
-    int currentIndexSize = value;
+  }
+
+  void onChangedSize(value) {
     emit(state.copyWith(
-      curlIndexSize: currentIndexSize,
+      curlIndexSize: value,
     ));
   }
 
@@ -66,6 +71,32 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
       emit(
         state.copyWith(quantity: 1, totalPrice: state.quantity * state.price),
       );
+    }
+  }
+
+  void addToCart(int idUser) {
+    try {
+      CartEntity cartEntity = CartEntity(
+        idUser: idUser,
+        nameProduct: state.productEntity?.title ?? '',
+        price: state.productEntity?.price ?? 0,
+        quantity: state.quantity,
+        imageProduct: state.productEntity!.images![0],
+      );
+
+      NotificationEntity notificationEntity = NotificationEntity(
+        idUser: idUser,
+        nameProduct: state.productEntity?.title ?? '',
+        imageProduct: state.productEntity!.images?[0] ?? '',
+        message:
+        'You have successfully ordered the product ${state.productEntity?.title ?? ''}',
+        timeOrder: DateTime.now().toString(),
+      );
+      fireStoreService.addToCart(cartEntity);
+      fireStoreService.setNotification(notificationEntity);
+      navigator.showSuccessFlushbar(message: 'Order success!');
+    } catch (e) {
+      logger.e('add to cart: $e');
     }
   }
 

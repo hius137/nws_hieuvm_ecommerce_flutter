@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -6,36 +5,37 @@ import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/database/share_preferences_helper.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/network/api_service.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_up/sign_up_page.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/success/success_page.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_snackbar.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_in/sign_in_navigator.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/utils/logger.dart';
+
 part 'sign_in_state.dart';
 
 class SignInCubit extends Cubit<SignInState> {
+  final SignInNavigator navigator;
   final AppCubit appCubit;
-  SignInCubit({required this.appCubit}) : super(const SignInState());
+
+  SignInCubit({required this.appCubit, required this.navigator}) : super(const SignInState());
 
   void signIn(BuildContext context, String email, String password) async {
-    emit(state.copyWith(signInStatus: LoadStatus.loading));
     try {
-      if(email.isEmpty || password.isEmpty){
-        showSnackBar(context, 'Email or Password is empty');
-      }else {
+      if (email.isEmpty || password.isEmpty) {
+        navigator.showErrorFlushbar(message: 'Email or Password is empty');
+      } else {
         final responseSignIn = await signInRequest(email, password);
         if (responseSignIn != null && responseSignIn.accessToken.isNotEmpty) {
+          emit(state.copyWith(signInStatus: LoadStatus.loading));
           SharedPreferencesHelper.setAccessToken(responseSignIn.accessToken);
           final userEntity = await getProfileUser(responseSignIn.accessToken);
           appCubit.setProfileUser(userEntity);
-          Future.delayed(const Duration(milliseconds: 200)).then((value) {
-            showSnackBar(context, 'Sign in success!');
-            emit(state.copyWith(
+          emit(
+            state.copyWith(
               signInStatus: LoadStatus.success,
-            ),);
-          });
-        }else {
-          // ignore: use_build_context_synchronously
-          showSnackBar(context, 'Wrong email or password');
+            ),
+          );
+          navigator.navSuccessPage();
+        } if(responseSignIn == null) {
+          navigator.showErrorFlushbar(message: 'Wrong email or password');
+          emit(state.copyWith(signInStatus: LoadStatus.failure));
         }
       }
     } catch (e) {
@@ -43,21 +43,4 @@ class SignInCubit extends Cubit<SignInState> {
       emit(state.copyWith(signInStatus: LoadStatus.failure));
     }
   }
-
-  void navAuth(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const SuccessPage(),
-      ),
-    );
-  }
-
-  void navSignUp(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const SignUpPage(),
-      ),
-    );
-  }
 }
-

@@ -12,6 +12,7 @@ class AppImages {
   static const imgEmptyCart= 'assets/images/img_empty_cart.png';
   static const noImage= 'assets/images/img_categories_error.jpg';
   static const imgNotificationError= 'assets/images/img_notification_error.png';
+  static const imgSearchEmpty= 'assets/images/img_search_empty.png';
 
   ///icon
   static const icNext= 'assets/icons/ic_next.svg';
@@ -33,7 +34,8 @@ class AppImages {
   static const icLogOut= 'assets/icons/ic_logout.svg';
   static const icPen= 'assets/icons/ic_pen.svg';
   static const icRight= 'assets/icons/ic_right.svg';
-  static const icCheck= 'assets/icons/ic_check.png';
+  static const icValid= 'assets/icons/ic_check.png';
+  static const icInvalid= 'assets/icons/ic_invalid.png';
   static const icCheckBlack= 'assets/icons/ic_check_black.png';
   static const icCheckWhite= 'assets/icons/ic_check_white.png';
   static const icApple= 'assets/icons/ic_apple.png';

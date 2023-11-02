@@ -4,19 +4,26 @@ import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_in/sign_in_cubit.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/sign_in/sign_in_navigator.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_button.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text_field/email_text_field.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text_field/password_text_field.dart';
+
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SignInCubit>(
-      create: (context) => SignInCubit(
-        appCubit: RepositoryProvider.of<AppCubit>(context),
-      ),
+      create: (context) {
+        final navigator = SignInNavigator(context: context);
+        final appCubit = RepositoryProvider.of<AppCubit>(context);
+        return SignInCubit(
+          navigator: navigator,
+          appCubit: appCubit,
+        );
+      },
       child: const SignInPageBody(),
     );
   }
@@ -46,115 +53,115 @@ class _SignInPageBodyState extends State<SignInPageBody> {
 
   @override
   Widget build(BuildContext context) {
-    bool shouldPop = false;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: WillPopScope(
-        onWillPop: () async {
-          return shouldPop;
+      body: _buildBodyPage(),
+    );
+  }
+
+  Widget _buildBodyPage() {
+    bool shouldPop = false;
+    return WillPopScope(
+      onWillPop: () async {
+        return shouldPop;
+      },
+      child: BlocBuilder<SignInCubit, SignInState>(
+        buildWhen: (previous, current) {
+          return previous.signInStatus != current.signInStatus;
         },
-        child: BlocConsumer<SignInCubit, SignInState>(
-          listenWhen: (previous, current) {
-            return previous.signInStatus != current.signInStatus;
-          },
-          listener: (context, state) {
-            if (state.signInStatus == LoadStatus.success) {
-              signInCubit.navAuth(context);
-            }
-          },
-          builder: (context, state) {
-            return Container(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-              child: Column(
-                children: [
-                  const Image(image: AssetImage(AppImages.icLogoBlack)),
-                  const Spacer(),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    child: const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextBold(text: 'Welcome!', textSize: 18,color: 0xff000000,),
-                        SizedBox(height: 5),
-                        TextNormal(
-                            text: 'please login or sign up to continue our app',
-                            textSize: 16),
-                      ],
-                    ),
+        builder: (context, state) {
+          return state.signInStatus == LoadStatus.loading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                  child: Column(
+                    children: [
+                      const Image(image: AssetImage(AppImages.icLogoBlack)),
+                      const Spacer(),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: const Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextBold(
+                              text: 'Welcome!',
+                              textSize: 18,
+                              color: 0xff000000,
+                            ),
+                            SizedBox(height: 5),
+                            TextNormal(
+                                text:
+                                    'please login or sign up to continue our app',
+                                textSize: 16),
+                          ],
+                        ),
+                      ),
+                      const Spacer(),
+                      EmailTextField(
+                        textEditingController: emailTextController,
+                        labelText: 'Email',
+                      ),
+                      const SizedBox(height: 10),
+                      PasswordTextField(
+                        textEditingController: passwordController,
+                        labelText: 'Password',
+                      ),
+                      const Spacer(),
+                      InkWell(
+                        onTap: () {
+                          signInCubit.signIn(
+                            context,
+                            emailTextController.text,
+                            passwordController.text,
+                          );
+                        },
+                        child: const Button(
+                          textButton: 'Login',
+                          colorButton: 0xFF000000,
+                          colorText: 0xffffffff,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      const Text('or'),
+                      // 0xFF3b5999
+                      const SizedBox(height: 10),
+                      const IconBorderButton(
+                          width: 350,
+                          textButton: 'Continue with Facebook',
+                          iconButton: AppImages.icFacebook,
+                          colorBorderButton: 0,
+                          colorButton: 0xFF3b5999,
+                          colorText: 0xffffffff),
+                      const SizedBox(height: 10),
+                      const IconBorderButton(
+                          width: 350,
+                          textButton: 'Continue with Google',
+                          iconButton: AppImages.icGoogle,
+                          colorBorderButton: 0xff000000,
+                          colorButton: 0,
+                          colorText: 0xff000000),
+                      const SizedBox(height: 10),
+                      const IconBorderButton(
+                          width: 350,
+                          textButton: 'Continue with Apple',
+                          iconButton: AppImages.icApple,
+                          colorBorderButton: 0xff000000,
+                          colorButton: 0,
+                          colorText: 0xff000000),
+                    ],
                   ),
-                  const Spacer(),
-                  EmailTextField(
-                    textEditingController: emailTextController,
-                    labelText: 'Email',
-                  ),
-                  const SizedBox(height: 10),
-                  PasswordTextField(
-                    textEditingController: passwordController,
-                    labelText: 'Password',
-                  ),
-                  const SizedBox(height: 10),
-                  TextButton(
-                    onPressed: () {
-                      signInCubit.navSignUp(context);
-                    },
-                    child: const TextBold(
-                      textSize: 16,
-                      text: 'register now',
-                      color: 0xff000000,
-                    ),
-                  ),
-                  const Spacer(),
-                  InkWell(
-                    onTap: () {
-                      signInCubit.signIn(
-                        context,
-                        emailTextController.text,
-                        passwordController.text,
-                      );
-                    },
-                    child: const Button(
-                      textButton: 'Login',
-                      colorButton: 0xFF000000,
-                      colorText: 0xffffffff,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  const Text('or'),
-                  // 0xFF3b5999
-                  const SizedBox(height: 10),
-                  const IconBorderButton(
-                      width: 350,
-                      textButton: 'Continue with Facebook',
-                      iconButton: AppImages.icFacebook,
-                      colorBorderButton: 0,
-                      colorButton: 0xFF3b5999,
-                      colorText: 0xff000000),
-                  const SizedBox(height: 10),
-                  const IconBorderButton(
-                      width: 350,
-                      textButton: 'Continue with Google',
-                      iconButton: AppImages.icGoogle,
-                      colorBorderButton: 0xff000000,
-                      colorButton: 0,
-                      colorText: 0xff000000),
-                  const SizedBox(height: 10),
-                  const IconBorderButton(
-                      width: 350,
-                      textButton: 'Continue with Apple',
-                      iconButton: AppImages.icApple,
-                      colorBorderButton: 0xff000000,
-                      colorButton: 0,
-                      colorText: 0xff000000),
-                ],
-              ),
-            );
-          },
-        ),
+                );
+        },
       ),
     );
   }
+
   @override
   void dispose() {
+    signInCubit.close();
     super.dispose();
   }
 }

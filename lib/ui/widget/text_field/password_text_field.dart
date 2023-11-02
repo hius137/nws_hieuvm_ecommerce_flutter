@@ -21,6 +21,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
     return TextFormField(
       controller: widget.textEditingController,
       obscureText: _obscureText,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         labelText: widget.labelText,
         labelStyle: GoogleFonts.poppins(

@@ -19,11 +19,13 @@ class EmailTextField extends StatefulWidget {
 
 class _EmailTextFieldState extends State<EmailTextField> {
   bool isEmailValid = false;
+  bool isUserActive = false;
 
   @override
   void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -32,20 +34,21 @@ class _EmailTextFieldState extends State<EmailTextField> {
           onChanged: (value) {
             setState(() {
               isEmailValid = Utils.isEmail(value);
+              isUserActive = true;
             });
           },
           controller: widget.textEditingController,
-          autovalidateMode: AutovalidateMode.always,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             labelText: widget.labelText,
             labelStyle: GoogleFonts.poppins(
               fontWeight: FontWeight.bold,
               fontSize: 18,
-              color: Colors.black,
+              
             ),
-            suffixIcon: isEmailValid
-                ? Image.asset(AppImages.icCheck, height: 4, width: 4)
-                : const Icon(Icons.cancel),
+            suffixIcon: isUserActive ? isEmailValid
+                ? Image.asset(AppImages.icValid, height: 4, width: 4)
+                : Image.asset(AppImages.icInvalid, height: 4, width: 4) : const SizedBox(),
             border: const UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.black12, width: 1)),
           ),

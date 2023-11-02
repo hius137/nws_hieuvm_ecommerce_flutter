@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 
@@ -166,5 +167,16 @@ Container itemColor(
             height: 16,
           )
         : const SizedBox(),
+  );
+}
+
+InkWell backButton (BuildContext context){
+  return InkWell(
+    onTap: () => Navigator.of(context).pop(),
+    child: SvgPicture.asset(
+      AppImages.icBack,
+      width: 50,
+      height: 50,
+    ),
   );
 }

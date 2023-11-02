@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/categories_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/product_entity.dart';

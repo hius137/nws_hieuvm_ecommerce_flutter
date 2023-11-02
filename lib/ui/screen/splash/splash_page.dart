@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/splash/splash_cubit.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/splash/splash_navigator.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/splash/splash_state.dart';
 
 class SplashPage extends StatelessWidget {
@@ -13,7 +14,11 @@ class SplashPage extends StatelessWidget {
     return BlocProvider(
         create: (context) {
           final appCubit = context.read<AppCubit>();
-          return SplashCubit(appCubit: appCubit);
+          final navigator = SplashNavigator(context: context);
+          return SplashCubit(
+            appCubit: appCubit,
+            navigator: navigator,
+          );
         },
         child: const SplashPageBody());
   }
@@ -49,6 +54,7 @@ class _SplashPageBodyState extends State<SplashPageBody> {
       }),
     );
   }
+
   @override
   void dispose() {
     splashCubit.close();
