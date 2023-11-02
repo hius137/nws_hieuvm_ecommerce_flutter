@@ -43,6 +43,7 @@ class _EmailTextFieldState extends State<EmailTextField> {
             labelText: widget.labelText,
             labelStyle: GoogleFonts.poppins(
               fontWeight: FontWeight.bold,
+              color: Colors.black,
               fontSize: 18,
               
             ),

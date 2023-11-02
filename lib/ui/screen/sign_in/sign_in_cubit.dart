@@ -19,7 +19,7 @@ class SignInCubit extends Cubit<SignInState> {
   void signIn(BuildContext context, String email, String password) async {
     try {
       if (email.isEmpty || password.isEmpty) {
-        navigator.showErrorFlushbar(message: 'Email or Password is empty');
+        navigator.showErrorFlushBar(message: 'Email or Password is empty');
       } else {
         final responseSignIn = await signInRequest(email, password);
         if (responseSignIn != null && responseSignIn.accessToken.isNotEmpty) {
@@ -34,7 +34,7 @@ class SignInCubit extends Cubit<SignInState> {
           );
           navigator.navSuccessPage();
         } if(responseSignIn == null) {
-          navigator.showErrorFlushbar(message: 'Wrong email or password');
+          navigator.showErrorFlushBar(message: 'Wrong email or password');
           emit(state.copyWith(signInStatus: LoadStatus.failure));
         }
       }

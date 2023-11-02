@@ -94,7 +94,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
       );
       fireStoreService.addToCart(cartEntity);
       fireStoreService.setNotification(notificationEntity);
-      navigator.showSuccessFlushbar(message: 'Order success!');
+      navigator.showSuccessFlushBar(message: 'Order success!');
     } catch (e) {
       logger.e('add to cart: $e');
     }

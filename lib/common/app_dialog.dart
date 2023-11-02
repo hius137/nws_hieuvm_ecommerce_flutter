@@ -1,8 +1,9 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 
-class AppNavigator{
+class AppNavigator {
   BuildContext context;
+
   AppNavigator({required this.context});
 
   Future<bool> onWillPop() async {
@@ -30,7 +31,7 @@ class AppNavigator{
     );
   }
 
-  void showErrorFlushbar({required String message}) {
+  void showErrorFlushBar({required String message}) {
     Flushbar(
       message: message,
       flushbarStyle: FlushbarStyle.GROUNDED,
@@ -46,9 +47,13 @@ class AppNavigator{
     ).show(context);
   }
 
-
-  void showSuccessFlushbar({required String message}) {
+  void showSuccessFlushBar({required String message}) {
     Flushbar(
+      borderRadius: const BorderRadius.only(
+        bottomLeft: Radius.circular(15),
+        bottomRight: Radius.circular(15),
+      ),
+      padding: const EdgeInsets.all(10),
       message: message,
       flushbarStyle: FlushbarStyle.GROUNDED,
       flushbarPosition: FlushbarPosition.TOP,
@@ -62,10 +67,4 @@ class AppNavigator{
       backgroundColor: Colors.black,
     ).show(context);
   }
-
 }
-
-
-
-
-

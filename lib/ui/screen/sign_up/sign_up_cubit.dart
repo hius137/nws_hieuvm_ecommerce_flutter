@@ -13,12 +13,12 @@ class SignUpCubit extends Cubit<SignUpState> {
     emit(state.copyWith(signUpStatus: LoadStatus.loading));
     try{
       if(email.isEmpty && password.isEmpty && name.isEmpty){
-        navigator.showErrorFlushbar(message: 'Please enter your information');
+        navigator.showErrorFlushBar(message: 'Please enter your information');
         emit(state.copyWith(
           signUpStatus: LoadStatus.failure
         ));
       }else if(email.isEmpty){
-        navigator.showErrorFlushbar(message: 'Email is empty');
+        navigator.showErrorFlushBar(message: 'Email is empty');
         emit(state.copyWith(
           signUpStatus: LoadStatus.failure
         ));
@@ -26,22 +26,22 @@ class SignUpCubit extends Cubit<SignUpState> {
         emit(state.copyWith(
             signUpStatus: LoadStatus.failure
         ));
-        navigator.showErrorFlushbar(message: 'Password is empty');
+        navigator.showErrorFlushBar(message: 'Password is empty');
       }else if(name.isEmpty){
         emit(state.copyWith(
             signUpStatus: LoadStatus.failure
         ));
-        navigator.showErrorFlushbar(message: 'Name is empty');
+        navigator.showErrorFlushBar(message: 'Name is empty');
       }else if(password != confirmPassword){
         emit(state.copyWith(
             signUpStatus: LoadStatus.failure
         ));
-        navigator.showErrorFlushbar(message: 'Password must be the same');
+        navigator.showErrorFlushBar(message: 'Password must be the same');
       }else if(state.isChecked == false){
         emit(state.copyWith(
             signUpStatus: LoadStatus.failure
         ));
-        navigator.showErrorFlushbar(message: 'Please accept our terms and conditions');
+        navigator.showErrorFlushBar(message: 'Please accept our terms and conditions');
       }else{
         final responseSignUp = await signUpRequest(name, email, password);
         if(responseSignUp != null){
@@ -49,12 +49,12 @@ class SignUpCubit extends Cubit<SignUpState> {
               userEntity: responseSignUp,
               signUpStatus: LoadStatus.success
           ));
-          navigator.showSuccessFlushbar(message: 'Sign up success!');
+          navigator.showSuccessFlushBar(message: 'Sign up success!');
         }else{
           emit(state.copyWith(
               signUpStatus: LoadStatus.failure
           ));
-          navigator.showErrorFlushbar(message: 'Sign up error!');
+          navigator.showErrorFlushBar(message: 'Sign up error!');
         }
       }
     }
