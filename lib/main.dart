@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/database/firebase_firestore_service.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/firebase_options.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/screen/splash/splash_page.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/page/splash/splash_page.dart';
 
 
 void main() {

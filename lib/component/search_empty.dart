@@ -14,6 +14,7 @@ class SearchEmpty extends StatelessWidget {
           const TextNormal(
             text: 'File not found, Try search again',
             textSize: 14,
+            color: 0x73000000,
           ),
         ],
       ),
