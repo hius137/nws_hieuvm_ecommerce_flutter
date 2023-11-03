@@ -78,6 +78,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
     try {
       CartEntity cartEntity = CartEntity(
         idUser: idUser,
+        idProduct: state.productEntity?.id ?? 0,
         nameProduct: state.productEntity?.title ?? '',
         price: state.productEntity?.price ?? 0,
         quantity: state.quantity,

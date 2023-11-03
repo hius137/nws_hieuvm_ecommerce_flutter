@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/database/firebase_firestore_service.dart';
@@ -62,7 +63,7 @@ class _CartPageBodyState extends State<CartPageBody>
   Widget _buildBodyPage() {
     Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
       child: BlocBuilder<CartCubit, CartState>(
         buildWhen: (previous, current) {
           return previous.cartStatus != current.cartStatus;
@@ -97,21 +98,48 @@ class _CartPageBodyState extends State<CartPageBody>
                                 return Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 10.0, vertical: 10),
-                                  child: ItemCart(
-                                    totalPrice: (listCart?.quantity ?? 0) *
-                                        (listCart?.price ?? 0),
-                                    quantity: listCart?.quantity ?? 0,
-                                    nameProduct: listCart?.nameProduct ?? '',
-                                    imageProduct: listCart?.imageProduct ?? '',
-                                    price: listCart?.price ?? 0,
-                                    increment: () {
-                                      cartCubit.increment(index,
-                                          state.listCart?[index].price ?? 0);
-                                    },
-                                    decrement: () {
-                                      cartCubit.decrement(index,
-                                          state.listCart?[index].price ?? 0);
-                                    },
+                                  child: Slidable(
+                                    key: Key(listCart.toString()),
+                                    // The end action pane is the one at the right or the bottom side.
+                                    endActionPane: ActionPane(
+                                      motion: const ScrollMotion(),
+                                      children: [
+                                        SlidableAction(
+                                          // An action can be bigger than the others.
+                                          padding: const EdgeInsets.all(10),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          onPressed: (context) => {
+                                            cartCubit.deleteItemCart(
+                                                context,
+                                                appCubit.state.userEntity!.id ?? 0,
+                                                state.listCart?[index].idProduct ?? 0,
+                                            )
+                                          },
+                                          backgroundColor: Colors.red,
+                                          foregroundColor: Colors.white,
+                                          icon: Icons.restore_from_trash,
+                                          label: 'Delete',
+                                        ),
+                                      ],
+                                    ),
+                                    child: ItemCart(
+                                      totalPrice: (listCart?.quantity ?? 0) *
+                                          (listCart?.price ?? 0),
+                                      quantity: listCart?.quantity ?? 0,
+                                      nameProduct: listCart?.nameProduct ?? '',
+                                      imageProduct:
+                                          listCart?.imageProduct ?? '',
+                                      price: listCart?.price ?? 0,
+                                      increment: () {
+                                        cartCubit.increment(index,
+                                            state.listCart?[index].price ?? 0);
+                                      },
+                                      decrement: () {
+                                        cartCubit.decrement(index,
+                                            state.listCart?[index].price ?? 0);
+                                      },
+                                    ),
                                   ),
                                 );
                               },

@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/database/firebase_firestore_service.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/cart_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
@@ -33,19 +34,36 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
-  Future<void> deleteAllCart(int id) async {
+  Future<void> deleteAllCart(int idUser) async {
     emit(
       state.copyWith(cartStatus: LoadStatus.loading),
     );
     try {
       await Future.delayed(const Duration(seconds: 1));
-      await fireStoreService.deleteCart(id);
+      await fireStoreService.deleteAllCart(idUser);
       emit(state.copyWith(
         listCart: [],
         cartStatus: LoadStatus.success,
         totalPrice: 0,
       ));
       navigator.showSuccessFlushBar(message: 'Check out success!');
+    } catch (e) {
+      emit(state.copyWith(cartStatus: LoadStatus.failure));
+    }
+  }
+  Future<void> deleteItemCart(BuildContext context, int idUser, int idProduct) async {
+    emit(
+      state.copyWith(cartStatus: LoadStatus.loading),
+    );
+    try {
+      await fireStoreService.deleteItemCart(idUser, idProduct);
+      final List<CartEntity>? list = state.listCart;
+      list?.removeWhere((idProduct) => idProduct == idProduct);
+      emit(state.copyWith(
+        listCart: list,
+        cartStatus: LoadStatus.success,
+      ));
+      navigator.showSuccessFlushBar(message: 'Delete success!');
     } catch (e) {
       emit(state.copyWith(cartStatus: LoadStatus.failure));
     }

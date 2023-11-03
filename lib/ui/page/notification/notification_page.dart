@@ -54,42 +54,45 @@ class _NotificationPageBodyState extends State<NotificationPageBody>
   Widget _buildBodyPage() {
     Size size = MediaQuery.of(context).size;
     return Container(
-      height: size.height * 0.83,
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+      height: size.height * 0.88,
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
       child: BlocBuilder<NotificationCubit, NotificationState>(
         buildWhen: (previous, current) =>
             previous.notificationStatus != current.notificationStatus,
         builder: (context, state) {
           return Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 30),
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: const Color(0xffeeeeee),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.1),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 4),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: const TextBold(
+                      text: 'Notification',
+                      textSize: 18,
+                      color: 0xff000000,
                     ),
-                  ],
-                ),
-                child: const Icon(Icons.more_vert),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: const Color(0xffeeeeee),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: const Icon(Icons.more_vert),
+                  ),
+                ],
               ),
               const SizedBox(height: 24),
-              Container(
-                alignment: Alignment.topLeft,
-                child: const TextBold(
-                  text: 'Notification',
-                  textSize: 18,
-                  color: 0xff000000,
-                ),
-              ),
-              const SizedBox(height: 10),
               if (state.notificationStatus == LoadStatus.success &&
                   state.listNotification!.isNotEmpty)
                 Expanded(

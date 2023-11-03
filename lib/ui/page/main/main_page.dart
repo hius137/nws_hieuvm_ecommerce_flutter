@@ -59,7 +59,7 @@ class _MainPageBodyState extends State<MainPageBody> {
         return false;
       },
       child: Scaffold(
-        body: _buildBodyPage(),
+        body: SafeArea(child: _buildBodyPage()),
         bottomNavigationBar: _buildBottomNavigationBar(),
       ),
     );

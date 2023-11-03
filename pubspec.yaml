@@ -50,6 +50,7 @@ dependencies:
   cloud_firestore: ^4.9.3
   logger:
   another_flushbar: ^1.12.30
+  flutter_slidable:
 
 
 dev_dependencies:
