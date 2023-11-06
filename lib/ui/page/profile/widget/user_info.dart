@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/component/item_gender.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_text_styles.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/page/profile/widget/item_gender.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text_field/normal_textfield.dart';
 
 class UserInfo extends StatelessWidget {
@@ -20,10 +20,9 @@ class UserInfo extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const TextBold(
-              text: 'Name',
-              textSize: 16,
-              color: 0x71000000,
+            Text(
+              'Name',
+              style: AppTextStyle.black16Bold,
             ),
             SizedBox(
               // height: 30,
@@ -37,27 +36,25 @@ class UserInfo extends StatelessWidget {
             right: MediaQuery.of(context).size.width * 0.16,
             top: 10,
           ),
-          child: const Row(
+          child: Row(
             children: [
-              TextBold(
-                text: 'Gender',
-                textSize: 16,
-                color: 0x61000000,
+              Text(
+                'Gender',
+                style: AppTextStyle.black16Bold,
               ),
-              Spacer(),
-              CustomGender(text: 'Male'),
-              SizedBox(width: 10),
-              CustomGender(text: 'Female'),
+              const Spacer(),
+              const CustomGender(text: 'Male'),
+              const SizedBox(width: 10),
+              const CustomGender(text: 'Female'),
             ],
           ),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const TextBold(
-              text: 'Age',
-              textSize: 16,
-              color: 0x61000000,
+            Text(
+              'Age',
+              style: AppTextStyle.black16Bold,
             ),
             SizedBox(
               height: 30,
@@ -69,10 +66,9 @@ class UserInfo extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const TextBold(
-              text: 'Email',
-              textSize: 16,
-              color: 0x61000000,
+            Text(
+              'Email',
+              style: AppTextStyle.black16Bold,
             ),
             SizedBox(
               height: 30,

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_colors.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/auth/sign_up/sign_up_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/auth/sign_up/sign_up_navigator.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/auth/sign_up/sign_up_state.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_button.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text_field/email_text_field.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text_field/password_text_field.dart';
 
@@ -81,19 +82,17 @@ class _SignUpPageBodyState extends State<SignUpPageBody> {
               const Spacer(),
               Container(
                 alignment: Alignment.centerLeft,
-                child: const Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextBold(
-                      text: 'Sign Up',
-                      textSize: 18,
-                      color: 0xff000000,
+                    Text(
+                      'Sign Up',
+                      style: AppTextStyle.black18Bold,
                     ),
-                    SizedBox(height: 10),
-                    TextNormal(
-                      text: 'Create an new account',
-                      textSize: 16,
-                      color: 0x73000000,
+                    const SizedBox(height: 10),
+                    Text(
+                      'Create an new account',
+                      style: AppTextStyle.black16W,
                     ),
                   ],
                 ),
@@ -142,13 +141,11 @@ class _SignUpPageBodyState extends State<SignUpPageBody> {
                         },
                       ),
                       const SizedBox(width: 10),
-                      const Expanded(
+                      Expanded(
                         child: SizedBox(
-                          child: TextNormal(
-                            text:
-                                'By creating an account you have to agree with our them & condication',
-                            textSize: 16,
-                            color: 0x73000000,
+                          child: Text(
+                            'By creating an account you have to agree with our them & condication',
+                            style: AppTextStyle.black16W,
                           ),
                         ),
                       ),
@@ -169,8 +166,8 @@ class _SignUpPageBodyState extends State<SignUpPageBody> {
                 },
                 child: const Button(
                   textButton: 'Sign Up',
-                  colorButton: 0xFF000000,
-                  colorText: 0xffffffff,
+                  colorButton: AppColors.black,
+                  colorText: AppColors.white,
                 ),
               ),
               const SizedBox(height: 10),

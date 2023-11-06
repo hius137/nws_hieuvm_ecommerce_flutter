@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/utils/app_utils.dart';
 
 class EmailTextField extends StatefulWidget {

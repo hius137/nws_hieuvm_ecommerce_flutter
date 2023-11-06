@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/cart/cart_cubit.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 
 class CheckOutCart extends StatefulWidget {
   const CheckOutCart({super.key});
@@ -40,13 +40,9 @@ class _CheckOutCartState extends State<CheckOutCart> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(left: 20),
-              child: TextBold(
-                text: 'Proceed to Checkout',
-                textSize: 16,
-                color: 0xffffffff,
-              ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Text('Proceed to Checkout', style: AppTextStyle.white16Bold,)
             ),
             SvgPicture.asset(
               AppImages.icCheckOut,

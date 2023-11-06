@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_text_styles.dart';
 
 class TitleCart extends StatelessWidget {
   const TitleCart({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const TextBold(
-      text: 'My Cart',
-      textSize: 18,
-      color: 0xff000000,
+    return Text(
+      'My Cart',
+      style: AppTextStyle.black18Bold,
     );
   }
 }

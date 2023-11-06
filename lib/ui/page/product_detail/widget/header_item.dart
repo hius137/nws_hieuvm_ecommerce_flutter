@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_button.dart';
 
 class HeaderItem extends StatelessWidget {

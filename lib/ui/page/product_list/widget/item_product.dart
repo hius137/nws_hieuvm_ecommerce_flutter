@@ -1,9 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_text_styles.dart';
 
 class ItemProduct extends StatelessWidget {
   final int priceProduct;
@@ -41,7 +40,8 @@ class ItemProduct extends StatelessWidget {
                         ),
                       ),
                     ),
-                    errorWidget: (context, url, error) => Image.asset(AppImages.noImage),
+                    errorWidget: (context, url, error) =>
+                        Image.asset(AppImages.noImage),
                   ),
                 ),
               ),
@@ -60,20 +60,17 @@ class ItemProduct extends StatelessWidget {
         Text(
           nameProduct,
           overflow: TextOverflow.ellipsis,
-          style: GoogleFonts.poppins(
-              fontSize: 13,
-              color: const Color(0xff000000),
-              fontWeight: FontWeight.bold),
+          style: AppTextStyle.black12Bold,
         ),
         Text(
           nameProduct,
           overflow: TextOverflow.ellipsis,
-          style: GoogleFonts.poppins(
-              fontSize: 13,
-              color: const Color(0xffeeeeee),
-              ),
+          style: AppTextStyle.black12W,
         ),
-        TextBold(text: '\$$priceProduct.00', textSize: 13,color: 0xff000000,),
+        Text(
+          '\$$priceProduct.00',
+          style: AppTextStyle.black12Bold,
+        ),
       ],
     );
   }

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_text_styles.dart';
 
 class ItemCategories extends StatelessWidget {
   final String nameCategories;
@@ -19,11 +19,6 @@ class ItemCategories extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Stack(
       children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-          ),
-        ),
         SizedBox(
           width: size.width,
           height: size.height,
@@ -62,8 +57,8 @@ class ItemCategories extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  TextBold(text: nameCategories, textSize: 16,color: 0xff000000,),
-                  TextBold(text: '$lengthCategories Product', textSize: 14,color: 0xff000000,),
+                  Text(nameCategories, style: AppTextStyle.black16Bold,),
+                  Text('$lengthCategories Product', style: AppTextStyle.black16Bold,),
                 ],
               ),
             ),

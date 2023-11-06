@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_colors.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/database/firebase_firestore_service.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/product_detail/product_detail_cubit.dart';
@@ -46,7 +47,7 @@ class ProductDetailPageBody extends StatefulWidget {
 
 class _ProductDetailPageBodyState extends State<ProductDetailPageBody> {
   late ProductDetailCubit productDetailCubit;
-  List<int> colors = [0xffffffff, 0xff000000, 0xffCADCA8, 0xfff7a01f];
+  List<Color> colors = [AppColors.white, AppColors.black, AppColors.green, AppColors.orange];
   List<String> sizes = ['S', 'M', 'L', 'XL', 'XXL'];
   late PageController _pageController;
 

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_colors.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_text_styles.dart';
 
 class Button extends StatelessWidget {
   const Button(
@@ -11,8 +13,8 @@ class Button extends StatelessWidget {
       required this.colorText});
 
   final String textButton;
-  final int colorButton;
-  final int colorText;
+  final Color colorButton;
+  final Color colorText;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class Button extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
-        color: Color(colorButton),
+        color: colorButton,
         borderRadius: BorderRadius.circular(25),
       ),
       child: Center(
@@ -29,7 +31,7 @@ class Button extends StatelessWidget {
           style: GoogleFonts.poppins(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Color(colorText),
+            color: colorText,
           ),
         ),
       ),
@@ -57,11 +59,7 @@ class BorderButton extends StatelessWidget {
       child: Center(
         child: Text(
           textButton,
-          style: GoogleFonts.poppins(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: const Color(0xffffffff),
-          ),
+          style: AppTextStyle.white18Bold
         ),
       ),
     );
@@ -81,9 +79,9 @@ class IconBorderButton extends StatelessWidget {
 
   final String textButton;
   final String iconButton;
-  final int colorBorderButton;
-  final int colorButton;
-  final int colorText;
+  final Color colorBorderButton;
+  final Color colorButton;
+  final Color colorText;
   final double width;
 
   @override
@@ -93,10 +91,10 @@ class IconBorderButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
         border: Border.all(
-          color: Color(colorBorderButton),
+          color: colorBorderButton,
           width: 1,
         ),
-        color: Color(colorButton),
+        color: colorButton,
         borderRadius: BorderRadius.circular(25),
       ),
       child: Row(
@@ -112,7 +110,7 @@ class IconBorderButton extends StatelessWidget {
             style: GoogleFonts.poppins(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Color(colorText)),
+                color: colorText),
           ),
         ],
       ),
@@ -146,21 +144,21 @@ Container itemSize(
 }
 
 Container itemColor(
-    int index, int curIndex, BuildContext context, List<int> colors) {
+    int index, int curIndex, BuildContext context, List<Color> colors) {
   return Container(
     width: 20,
     height: 20,
     decoration: BoxDecoration(
       border: Border.all(
           color:
-              colors[index] == 0xffffffff ? Colors.black : Colors.transparent,
+              colors[index] == AppColors.white ? AppColors.black : Colors.transparent,
           width: 1),
-      color: Color(colors[index]),
+      color: colors[index],
       borderRadius: const BorderRadius.all(Radius.circular(15)),
     ),
     child: index == curIndex
         ? Image.asset(
-            colors[index] == 0xff000000
+            colors[index] == AppColors.black
                 ? AppImages.icCheckWhite
                 : AppImages.icCheckBlack,
             width: 16,

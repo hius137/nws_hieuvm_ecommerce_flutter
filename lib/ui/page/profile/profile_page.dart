@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/profile/profile_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/profile/profile_navigator.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/profile/widget/user_info.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/profile/widget/image_header.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/profile/widget/setting_option.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -58,10 +58,9 @@ class _ProfilePageBodyState extends State<ProfilePageBody>
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const ImageHeader(),
-                const TextBold(
-                  text: 'Upload image',
-                  textSize: 16,
-                  color: 0xff000000,
+                Text(
+                  'Upload image',
+                  style:  AppTextStyle.white16Bold,
                 ),
                 UserInfo(
                     userName: state.user?.name ?? '',
@@ -102,10 +101,9 @@ class _ProfilePageBodyState extends State<ProfilePageBody>
               width: 30,
             ),
             const SizedBox(width: 10),
-            const TextBold(
-              text: 'Log out',
-              textSize: 16,
-              color: 0xffffffff,
+            Text(
+              'Log out',
+              style: AppTextStyle.white16Bold,
             ),
           ],
         ),

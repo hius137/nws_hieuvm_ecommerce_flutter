@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_colors.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/database/firebase_firestore_service.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/cart/cart_cubit.dart';
@@ -13,7 +15,6 @@ import 'package:nws_hieuvm_ecommerce_flutter/ui/page/cart/widget/item_cart.dart'
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/cart/widget/title_cart.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/cart/widget/total_price_in_cart.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_button.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -84,20 +85,19 @@ class _CartPageBodyState extends State<CartPageBody>
                     children: [
                       const TitleCart(),
                       const SizedBox(height: 20),
-                      if (state.listCart != null && state.listCart!.isNotEmpty)
+                      if (state.listCart!.isNotEmpty)
                         Expanded(
                           child: RefreshIndicator(
                             onRefresh: () async {
                               cartCubit.getListCart(
                                   appCubit.state.userEntity!.id ?? 0);
                             },
-                            child: ListView.separated(
+                            child: ListView.builder(
                               itemCount: state.listCart!.length,
                               itemBuilder: (context, index) {
                                 final listCart = state.listCart?[index];
                                 return Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10.0, vertical: 10),
+                                  padding: const EdgeInsets.all(10),
                                   child: Slidable(
                                     key: Key(listCart.toString()),
                                     // The end action pane is the one at the right or the bottom side.
@@ -111,9 +111,12 @@ class _CartPageBodyState extends State<CartPageBody>
                                               BorderRadius.circular(15),
                                           onPressed: (context) => {
                                             cartCubit.deleteItemCart(
-                                                context,
-                                                appCubit.state.userEntity!.id ?? 0,
-                                                state.listCart?[index].idProduct ?? 0,
+                                              context,
+                                              appCubit.state.userEntity!.id ??
+                                                  0,
+                                              state.listCart?[index]
+                                                      .idProduct ??
+                                                  0,
                                             )
                                           },
                                           backgroundColor: Colors.red,
@@ -143,10 +146,6 @@ class _CartPageBodyState extends State<CartPageBody>
                                   ),
                                 );
                               },
-                              separatorBuilder:
-                                  (BuildContext context, int index) {
-                                return const SizedBox();
-                              },
                             ),
                           ),
                         )
@@ -162,10 +161,9 @@ class _CartPageBodyState extends State<CartPageBody>
                                       AppImages.imgEmptyCart,
                                     ),
                                   ),
-                                  const TextBold(
-                                    text: 'Opps!...Your cart is empty.',
-                                    textSize: 16,
-                                    color: 0xff000000,
+                                  Text(
+                                    'Opps!...Your cart is empty.',
+                                    style: AppTextStyle.black16Bold,
                                   ),
                                   const SizedBox(height: 40),
                                   InkWell(
@@ -174,8 +172,8 @@ class _CartPageBodyState extends State<CartPageBody>
                                     },
                                     child: const Button(
                                       textButton: 'Start Shopping',
-                                      colorButton: 0xff000000,
-                                      colorText: 0xffffffff,
+                                      colorButton: AppColors.black,
+                                      colorText: AppColors.white,
                                     ),
                                   ),
                                 ],

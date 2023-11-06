@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/component/item_categories.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/page/home/widget/item_categories.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/entities/categories_entity.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/product_list/product_list_page.dart';
 

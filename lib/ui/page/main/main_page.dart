@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/cart/cart_page.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/home/home_page.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/main/main_cubit.dart';

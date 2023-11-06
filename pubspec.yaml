@@ -51,6 +51,8 @@ dependencies:
   logger:
   another_flushbar: ^1.12.30
   flutter_slidable:
+  json_annotation: ^4.8.1
+
 
 
 dev_dependencies:
@@ -64,6 +66,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  json_serializable:
+  build_runner:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

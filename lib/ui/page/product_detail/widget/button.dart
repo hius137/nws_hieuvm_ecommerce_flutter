@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_text_styles.dart';
 
 class AddToCartButton extends StatelessWidget {
   const AddToCartButton({super.key});
@@ -25,10 +25,9 @@ class AddToCartButton extends StatelessWidget {
         children: [
           SvgPicture.asset(AppImages.icBagBlack),
           const SizedBox(width: 10),
-          const TextBold(
-            text: 'Add to cart',
-            textSize: 18,
-            color: 0xffffffff,
+          Text(
+            'Add to cart',
+            style: AppTextStyle.white18Bold,
           ),
         ],
       ),

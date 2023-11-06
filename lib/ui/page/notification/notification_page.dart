@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/notification/widget/item_notification.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/notification/notification_cubit.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 
 class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});
@@ -68,10 +68,9 @@ class _NotificationPageBodyState extends State<NotificationPageBody>
                 children: [
                   Container(
                     alignment: Alignment.topLeft,
-                    child: const TextBold(
-                      text: 'Notification',
-                      textSize: 18,
-                      color: 0xff000000,
+                    child: Text(
+                      'Notification',
+                      style: AppTextStyle.black18Bold,
                     ),
                   ),
                   Container(
@@ -138,10 +137,9 @@ class _NotificationPageBodyState extends State<NotificationPageBody>
                 AppImages.imgNotificationError,
               ),
               const SizedBox(height: 10),
-              const TextBold(
-                text: "You don't have any notifications.",
-                textSize: 16,
-                color: 0xff000000,
+              Text(
+                "You don't have any notifications.",
+                style: AppTextStyle.black16Bold,
               ),
             ],
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_colors.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/auth/auth_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/auth/auth_navigator.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_button.dart';
@@ -80,8 +81,8 @@ class _AuthPageBodyState extends State<AuthPageBody> {
                     },
                     child: const Button(
                       textButton: 'Sign In',
-                      colorButton: 0xFFFFFFFF,
-                      colorText: 0xff000000,
+                      colorButton: AppColors.white,
+                      colorText: AppColors.black,
                     ),
                   ),
                   const SizedBox(height: 10),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/component/item_product.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/component/search_empty.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/page/product_list/widget/item_product.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/page/home/widget/search_empty.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/product_detail/product_detail_page.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/product_list/product_list_cubit.dart';

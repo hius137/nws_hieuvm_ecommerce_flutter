@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 
 class ItemCart extends StatelessWidget {
@@ -69,10 +70,10 @@ class ItemCart extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    TextBold(text: nameProduct, textSize: 14,color: 0xff000000,),
-                    TextNormal(text: nameProduct, textSize: 11, color: 0x73000000,),
+                    Text(nameProduct,style: AppTextStyle.black14Bold,),
+                    Text(nameProduct,style: AppTextStyle.black12Bold,),
                     const Spacer(),
-                    TextBold(text: '\$$totalPrice', textSize: 14,color: 0xff000000,),
+                    Text('\$$totalPrice',style: AppTextStyle.black14Bold,)
                   ],
                 )
               ],

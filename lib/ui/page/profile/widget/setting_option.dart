@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_switch.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 
 class SettingOption extends StatelessWidget {
   const SettingOption({super.key});
@@ -11,13 +11,12 @@ class SettingOption extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Row(
+        Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextBold(
-              text: 'Setting',
-              textSize: 18,
-              color: 0xff000000,
+            Text(
+              'Setting',
+              style: AppTextStyle.black18Bold,
             ),
           ],
         ),
@@ -58,16 +57,14 @@ class SettingOption extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 15),
-        const TextBold(
-          text: 'Language',
-          textSize: 16,
-          color: 0xff000000,
+        Text(
+          'Language',
+          style: AppTextStyle.black16Bold,
         ),
         const Spacer(),
-        const TextNormal(
-          text: 'English',
-          textSize: 12,
-          color: 0x61000000,
+        Text(
+          'English',
+          style: AppTextStyle.black12W,
         ),
         const SizedBox(width: 10),
         SvgPicture.asset(
@@ -96,10 +93,9 @@ class SettingOption extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 15),
-        const TextBold(
-          text: 'Notification',
-          textSize: 16,
-          color: 0xff000000,
+        Text(
+          'Notification',
+          style: AppTextStyle.black16Bold,
         ),
         const Spacer(),
         const CustomSwitch(),
@@ -124,16 +120,14 @@ class SettingOption extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 15),
-        const TextBold(
-          text: 'Dark Mood',
-          textSize: 16,
-          color: 0xff000000,
+        Text(
+          'Dark Mood',
+          style: AppTextStyle.black16Bold,
         ),
         const Spacer(),
-        const TextNormal(
-          text: 'off',
-          textSize: 12,
-          color: 0x61000000,
+        Text(
+          'off',
+          style: AppTextStyle.black12W,
         ),
         const SizedBox(width: 10),
         const CustomSwitch(),
@@ -158,10 +152,9 @@ class SettingOption extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 15),
-        const TextBold(
-          text: 'Help Center',
-          textSize: 16,
-          color: 0xff000000,
+        Text(
+          'Help Center',
+          style: AppTextStyle.black16Bold,
         ),
         const Spacer(),
         SvgPicture.asset(

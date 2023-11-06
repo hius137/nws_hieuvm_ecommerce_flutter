@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_text_styles.dart';
 
 class ItemOnboarding extends StatelessWidget {
   final String text1;
@@ -35,16 +35,14 @@ class ItemOnboarding extends StatelessWidget {
           ),
         ),
         const Spacer(),
-        TextBold(
-          text: text1,
-          textSize: 30,
-          color: 0xff000000,
+        Text(
+          text1,
+          style: AppTextStyle.black28Bold,
         ),
         const SizedBox(height: 10),
-        TextNormal(
-          text: text2,
-          textSize: 18,
-          color: 0x73000000,
+        Text(
+          text2,
+          style: AppTextStyle.black18W,
         ),
       ],
     );

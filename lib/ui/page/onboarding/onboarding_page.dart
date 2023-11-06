@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_colors.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/onboarding/onboarding_navigator.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/onboarding/widget/item_onboarding.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/database/share_preferences_helper.dart';
@@ -138,8 +139,8 @@ class _OnboardingPageBodyState extends State<OnboardingPageBody> {
       effect: const ExpandingDotsEffect(
         dotHeight: 8,
         dotWidth: 8,
-        activeDotColor: Colors.black,
-        dotColor: Color(0xFFdddddd),
+        activeDotColor: AppColors.black,
+        dotColor: AppColors.dot,
       ),
     );
   }

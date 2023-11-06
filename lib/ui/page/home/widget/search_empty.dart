@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_text_styles.dart';
 
 class SearchEmpty extends StatelessWidget {
   const SearchEmpty({super.key});
@@ -11,10 +11,9 @@ class SearchEmpty extends StatelessWidget {
       child: Column(
         children: [
           Image.asset(AppImages.imgSearchEmpty),
-          const TextNormal(
-            text: 'File not found, Try search again',
-            textSize: 14,
-            color: 0x73000000,
+          Text(
+            'File not found, Try search again',
+            style: AppTextStyle.blackS14W,
           ),
         ],
       ),

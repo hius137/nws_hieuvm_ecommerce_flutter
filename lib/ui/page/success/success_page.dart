@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_colors.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/success/success_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/success/success_navigator.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_button.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 
 class SuccessPage extends StatelessWidget {
   const SuccessPage({super.key});
@@ -53,21 +53,16 @@ class _AuthPageBodyState extends State<AuthPageBody> {
             width: 50,
             height: 50,
           ),
-          const TextBold(
-            text: 'Successful!',
-            textSize: 20,
-            color: 0xff000000,
+          Text(
+            'Successful!',
+            style: AppTextStyle.black18Bold,
           ),
           const SizedBox(height: 10),
           Text(
             'You have successfully registered in our app and start working in it',
             textAlign: TextAlign.center,
-            style: GoogleFonts.poppins(
-              fontSize: 18,
-              fontWeight: FontWeight.normal,
-              color: Colors.black,
+            style: AppTextStyle.black18W,
             ),
-          ),
           const Spacer(),
           BlocBuilder<SuccessfulCubit, SuccessfulState>(
             builder: (context, state) {
@@ -77,8 +72,8 @@ class _AuthPageBodyState extends State<AuthPageBody> {
                 },
                 child: const Button(
                   textButton: 'Start Shopping',
-                  colorButton: 0xff000000,
-                  colorText: 0xffffffff,
+                  colorButton: AppColors.black,
+                  colorText: AppColors.white,
                 ),
               );
             },

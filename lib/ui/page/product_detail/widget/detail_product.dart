@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_colors.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/product_detail/product_detail_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/product_detail/widget/button.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_button.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 
 class DetailProduct extends StatefulWidget {
   final String title;
@@ -44,7 +45,7 @@ class _DetailProductState extends State<DetailProduct> {
   @override
   Widget build(BuildContext context) {
     List<String> sizes = ['S', 'M', 'L', 'XL', 'XXL'];
-    List<int> colors = [0xffffffff, 0xff000000, 0xffCADCA8, 0xfff7a01f];
+    List<Color> colors = [AppColors.white, AppColors.black, AppColors.green, AppColors.orange];
     Size size = MediaQuery.of(context).size;
 
     return Column(
@@ -69,16 +70,14 @@ class _DetailProductState extends State<DetailProduct> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextBold(
-                      text: widget.title,
-                      textSize: 18,
-                      color: 0xff000000,
+                    Text(
+                      widget.title,
+                      style: AppTextStyle.black18Bold,
                     ),
                     const SizedBox(height: 5),
-                    TextNormal(
-                      text: widget.title,
-                      textSize: 11,
-                      color: 0x73000000,
+                    Text(
+                      widget.title,
+                        style: AppTextStyle.black12W,
                     ),
                     const SizedBox(height: 5),
                     Row(
@@ -89,39 +88,34 @@ class _DetailProductState extends State<DetailProduct> {
                           height: 10,
                         ),
                         const SizedBox(width: 10),
-                        const TextNormal(
-                          text: '(320 Review)',
-                          textSize: 11,
-                          color: 0x73000000,
+                        Text(
+                          '(320 Review)',
+                          style: AppTextStyle.black12W,
                         ),
                       ],
                     ),
                     const Spacer(),
-                    const TextBold(
-                      text: 'Size',
-                      textSize: 16,
-                      color: 0xff000000,
+                    Text(
+                      'Size',
+                      style: AppTextStyle.black16Bold,
                     ),
                     const SizedBox(height: 10),
                     _listSize(sizes),
                     const Spacer(),
-                    const TextBold(
-                      text: 'Description',
-                      textSize: 16,
-                      color: 0xff000000,
+                    Text(
+                      'Description',
+                      style: AppTextStyle.black16Bold,
                     ),
                     const SizedBox(height: 10),
-                    TextNormal(text: widget.description, textSize: 11, color: 0x73000000,),
+                    Text(widget.description, style: AppTextStyle.black12W,),
                     const Spacer(),
-                    const TextNormal(
-                      text: 'Total Price',
-                      textSize: 9,
-                      color: 0x73000000,
+                    Text(
+                      'Total Price',
+                      style: AppTextStyle.black9W,
                     ),
-                    TextBold(
-                      text: '\$${widget.totalPrice}.00',
-                      textSize: 18,
-                      color: 0xff000000,
+                    Text(
+                      '\$${widget.totalPrice}.00',
+                      style: AppTextStyle.black18Bold,
                     ),
                   ],
                 ),
@@ -144,10 +138,9 @@ class _DetailProductState extends State<DetailProduct> {
                         ),
                         child: _changeTotalProduct(),
                       ),
-                      const TextBold(
-                        text: 'Available in stock',
-                        textSize: 14,
-                        color: 0xff000000,
+                      Text(
+                        'Available in stock',
+                        style: AppTextStyle.black14Bold,
                       ),
                       _listColors(colors),
                     ],
@@ -192,10 +185,9 @@ class _DetailProductState extends State<DetailProduct> {
             ),
           ),
         ),
-        TextBold(
-          text: '${widget.quantity}',
-          textSize: 16,
-          color: 0xff000000,
+        Text(
+          '${widget.quantity}',
+          style: AppTextStyle.black16Bold,
         ),
         InkWell(
           onTap: () {
@@ -233,7 +225,7 @@ class _DetailProductState extends State<DetailProduct> {
     );
   }
 
-  Widget _listColors(List<int> colors) {
+  Widget _listColors(List<Color> colors) {
     return Container(
       height: 132,
       padding: const EdgeInsets.all(10),

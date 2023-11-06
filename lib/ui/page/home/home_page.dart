@@ -6,7 +6,7 @@ import 'package:nws_hieuvm_ecommerce_flutter/ui/page/home/home_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/home/home_state.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/home/widget/item_search.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/home/widget/list_categories.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/component/search_empty.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/page/home/widget/search_empty.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

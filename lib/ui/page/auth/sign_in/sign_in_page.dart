@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/app_cubit.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/common/app_image.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_colors.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/auth/sign_in/sign_in_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/auth/sign_in/sign_in_navigator.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_button.dart';
-import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/app_text.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text_field/email_text_field.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/widget/text_field/password_text_field.dart';
 
@@ -76,27 +77,24 @@ class _SignInPageBodyState extends State<SignInPageBody> {
                 )
               : Container(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                      const EdgeInsets.all(20),
                   child: Column(
                     children: [
                       const Image(image: AssetImage(AppImages.icLogoBlack)),
                       const Spacer(),
                       Container(
                         alignment: Alignment.centerLeft,
-                        child: const Column(
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            TextBold(
-                              text: 'Welcome!',
-                              textSize: 18,
-                              color: 0xff000000,
+                            Text(
+                              'Welcome!',
+                              style: AppTextStyle.black18Bold,
                             ),
-                            SizedBox(height: 5),
-                            TextNormal(
-                              text:
-                                  'please login or sign up to continue our app',
-                              textSize: 16,
-                              color: 0x73000000,
+                            const SizedBox(height: 5),
+                            Text(
+                              'please login or sign up to continue our app',
+                              style: AppTextStyle.black16W,
                             ),
                           ],
                         ),
@@ -122,8 +120,8 @@ class _SignInPageBodyState extends State<SignInPageBody> {
                         },
                         child: const Button(
                           textButton: 'Login',
-                          colorButton: 0xFF000000,
-                          colorText: 0xffffffff,
+                          colorButton: AppColors.black,
+                          colorText: AppColors.white,
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -134,25 +132,25 @@ class _SignInPageBodyState extends State<SignInPageBody> {
                           width: 350,
                           textButton: 'Continue with Facebook',
                           iconButton: AppImages.icFacebook,
-                          colorBorderButton: 0,
-                          colorButton: 0xFF3b5999,
-                          colorText: 0xffffffff),
+                          colorBorderButton: AppColors.white,
+                          colorButton: AppColors.blue,
+                          colorText: AppColors.white,),
                       const SizedBox(height: 10),
                       const IconBorderButton(
                           width: 350,
                           textButton: 'Continue with Google',
                           iconButton: AppImages.icGoogle,
-                          colorBorderButton: 0xff000000,
-                          colorButton: 0,
-                          colorText: 0xff000000),
+                          colorBorderButton: AppColors.black,
+                          colorButton: AppColors.white,
+                          colorText: AppColors.black,),
                       const SizedBox(height: 10),
                       const IconBorderButton(
                           width: 350,
                           textButton: 'Continue with Apple',
                           iconButton: AppImages.icApple,
-                          colorBorderButton: 0xff000000,
-                          colorButton: 0,
-                          colorText: 0xff000000),
+                          colorBorderButton: AppColors.black,
+                          colorButton: AppColors.non,
+                          colorText:AppColors.black),
                     ],
                   ),
                 );
