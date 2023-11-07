@@ -6,37 +6,12 @@ class AppNavigator {
 
   AppNavigator({required this.context});
 
-  Future<bool> onWillPop() async {
-    bool? exitResult = await showDialog(
-      context: context,
-      builder: (context) => buildExitDialog(),
-    );
-    return exitResult ?? false;
-  }
-
-  AlertDialog buildExitDialog() {
-    return AlertDialog(
-      title: const Text('Please confirm'),
-      content: const Text('Do you want to exit the app?'),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(false),
-          child: const Text('No'),
-        ),
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(true),
-          child: const Text('Yes'),
-        ),
-      ],
-    );
-  }
-
   Future<void> showSimpleDialog({
     String title = "Alert",
     String message = "",
     String? textConfirm = "Yes",
     String? textCancel = "No",
-    barrierDismissible = false,
+    barrierDismissible = true,
     VoidCallback? onConfirm,
     VoidCallback? onCancel,
   }) {

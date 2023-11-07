@@ -25,7 +25,7 @@ class AppTextStyle {
       fontSize: 14,
       color: const Color(0xff000000),
       fontWeight: FontWeight.bold);
-  static final blackS14W = GoogleFonts.poppins(
+  static final black14W = GoogleFonts.poppins(
       fontSize: 14,
       color: const Color(0xff000000),
       fontWeight: FontWeight.normal);

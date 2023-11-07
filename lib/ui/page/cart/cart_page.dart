@@ -79,7 +79,7 @@ class _CartPageBodyState extends State<CartPageBody>
             return Column(
               children: [
                 SizedBox(
-                  height: size.height * 0.7,
+                  height: size.height * 0.68,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -153,19 +153,20 @@ class _CartPageBodyState extends State<CartPageBody>
                         Expanded(
                           child: Center(
                             child: SizedBox(
-                              width: size.width * 0.5,
+                              width: size.width * 0.4,
                               child: Column(
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Expanded(
-                                    child: Image.asset(
-                                      AppImages.imgEmptyCart,
-                                    ),
+                                  Image.asset(
+                                    AppImages.imgEmptyCart,
                                   ),
+                                  const SizedBox(height: 20),
                                   Text(
                                     'Opps!...Your cart is empty.',
-                                    style: AppTextStyle.black16Bold,
+                                    textAlign: TextAlign.center,
+                                    style: AppTextStyle.black16W,
                                   ),
-                                  const SizedBox(height: 40),
+                                  const SizedBox(height: 20),
                                   InkWell(
                                     onTap: () {
                                       cartCubit.navigator.navMain();

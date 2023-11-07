@@ -46,7 +46,16 @@ class ItemNotification extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(message, style: AppTextStyle.blackS14W,),
+                  Text(
+                    message,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTextStyle.black14W,
+                  ),
+                  Text(
+                    timeOrder,
+                    style: AppTextStyle.black12W,
+                  ),
                 ],
               ),
             ),

@@ -11,9 +11,8 @@ class ProfileNavigator extends AppNavigator {
           builder: (context) => const SignInPage(),
         ),
         (Route<dynamic> route) => false);
-
-    // Navigator.of(context).pushReplacement(
-    //
-    // );
+  }
+  void closeDialog() {
+    Navigator.of(context).pop(context);
   }
 }

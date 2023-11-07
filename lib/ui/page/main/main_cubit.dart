@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/main/main_navigator.dart';
+
 part 'main_state.dart';
 
 class MainCubit extends Cubit<MainState> {
@@ -20,6 +21,7 @@ class MainCubit extends Cubit<MainState> {
       ),
     );
   }
+
   void onIndexChange(int index) {
     int currentIndex = index;
     emit(
@@ -29,7 +31,11 @@ class MainCubit extends Cubit<MainState> {
     );
   }
 
-  void onWillPop(){
-    navigator.onWillPop();
+  void onWillPop() {
+    navigator.showSimpleDialog(
+      message: 'Do you want to exit app?',
+      onConfirm: () => navigator.exit(),
+      onCancel: () => navigator.closeDialog(),
+    );
   }
 }

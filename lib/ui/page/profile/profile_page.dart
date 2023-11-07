@@ -80,6 +80,7 @@ class _ProfilePageBodyState extends State<ProfilePageBody>
       onTap: () {
         profileCubit.navigator.showSimpleDialog(
           message: 'Do you want to log out?',
+          onCancel: () => profileCubit.navigator.closeDialog(),
           onConfirm: () => profileCubit.signOut(),
         );
       },

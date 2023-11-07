@@ -20,7 +20,7 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: colorButton,
         borderRadius: BorderRadius.circular(25),

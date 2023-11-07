@@ -13,7 +13,7 @@ class SearchEmpty extends StatelessWidget {
           Image.asset(AppImages.imgSearchEmpty),
           Text(
             'File not found, Try search again',
-            style: AppTextStyle.blackS14W,
+            style: AppTextStyle.black14W,
           ),
         ],
       ),
