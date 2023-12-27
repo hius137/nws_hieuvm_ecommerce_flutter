@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/cart/cart_page.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/page/categories/categories_page.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/home/home_page.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/main/main_cubit.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/main/main_navigator.dart';
@@ -83,7 +84,7 @@ class _MainPageBodyState extends State<MainPageBody> {
             mainCubit.onIndexChange(value);
           },
           children: const [
-            HomePage(),
+            CategoriesPage(),
             CartPage(),
             NotificationPage(),
             ProfilePage(),

@@ -48,7 +48,7 @@ Future<List<CategoriesEntity>?> requestCategories() async {
   try {
     final dio = Dio();
     final response = await dio
-        .get('https://api.escuelajs.co/api/v1/categories/?offset=0&limit=20');
+        .get('https://v41l7.wiremockapi.cloud/api/v1/categories');
     if (response.statusCode == 200) {
       final List<dynamic> responseData = response.data;
       List<CategoriesEntity> listCategories =
@@ -75,7 +75,7 @@ Future<int?> requestTotalProduct(int idCategory) async {
   try {
     final dio = Dio();
     final response = await dio.get(
-        'https://api.escuelajs.co/api/v1/categories/$idCategory/products?offset=0&limit=50');
+        'https://v41l7.wiremockapi.cloud/api/v1/categories/$idCategory/products');
     if (response.statusCode == 200) {
       final List<dynamic> responseData = response.data;
       List<ProductEntity> listProduct =
@@ -94,7 +94,7 @@ Future<List<ProductEntity>?> requestListProduct(int idCategory) async {
   try {
     final dio = Dio();
     final response = await dio.get(
-        'https://api.escuelajs.co/api/v1/categories/$idCategory/products?offset=0&limit=50');
+        'https://v41l7.wiremockapi.cloud/api/v1/categories/$idCategory/products');
     if (response.statusCode == 200) {
       final List<dynamic> responseData = response.data;
       List<ProductEntity> listProduct =

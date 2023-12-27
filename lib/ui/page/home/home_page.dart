@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_images.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/database/firebase_firestore_service.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/model/enums/load_status.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/home/home_cubit.dart';
+import 'package:nws_hieuvm_ecommerce_flutter/ui/page/home/home_navigator.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/home/home_state.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/home/widget/item_search.dart';
 import 'package:nws_hieuvm_ecommerce_flutter/ui/page/home/widget/list_categories.dart';
@@ -14,7 +18,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<HomeCubit>(
-      create: (context) => HomeCubit(),
+      create: (context) {
+        final navigator = HomeNavigator(context: context);
+        return HomeCubit(navigator: navigator);
+      },
       child: const HomePageBody(),
     );
   }
@@ -30,47 +37,67 @@ class HomePageBody extends StatefulWidget {
 class _HomePageBodyState extends State<HomePageBody>
     with AutomaticKeepAliveClientMixin {
   late HomeCubit homeCubit;
-  late FireStoreService fireStoreService = FireStoreService();
-  final searchCategoriesController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     homeCubit = BlocProvider.of(context);
-    homeCubit.getCategories();
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 20),
-          SearchTextField(searchCategoriesController: searchCategoriesController, onChange: homeCubit.searchCategories,),
-          const SizedBox(height: 20),
-          Expanded(
-            child: BlocBuilder<HomeCubit, HomeState>(
-              buildWhen: (previous, current) =>
-              previous.currentCategories != current.currentCategories,
-              builder: (context, state) {
-                if (state.categoriesStatus == LoadStatus.loading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state.categoriesStatus == LoadStatus.success) {
-                  return state.currentCategories!.isNotEmpty
-                      ? ListCategoriesView(listCategories: state.currentCategories)
-                      : const SearchEmpty();
-                } else {
-                  return const Center(child: CircularProgressIndicator());
-                }
-              },
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: 40,
+                  height: 40,
+                  child: SvgPicture.asset(
+                    AppImages.icMenu,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: const Image(
+                      image: AssetImage(
+                        AppImages.icAvatar,
+                      ),
+                      fit: BoxFit.fill,
+                    )),
+              ],
             ),
-          ),
-        ],
+            const SizedBox(
+              height: 15,
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Welcome,",
+                  style: AppTextStyle.black18Bold,
+                ),
+                Text(
+                  "Our Fashions App",
+                  style: AppTextStyle.black16W,
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

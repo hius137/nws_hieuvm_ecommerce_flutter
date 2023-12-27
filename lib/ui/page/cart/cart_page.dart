@@ -153,7 +153,7 @@ class _CartPageBodyState extends State<CartPageBody>
                         Expanded(
                           child: Center(
                             child: SizedBox(
-                              width: size.width * 0.4,
+                              width: size.width * 0.5,
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [

@@ -48,5 +48,7 @@ class AppImages {
   static const icCartWhite= 'assets/icons/ic_cart_white.svg';
   static const icNotificationWhite= 'assets/icons/ic_notification_white.svg';
   static const icProfileWhite= 'assets/icons/ic_profile_white.svg';
+  static const icMenu= 'assets/icons/ic_menu.svg';
+  static const icAvatar= 'assets/icons/ic_avatar.jpeg';
 
 }
